@@ -1,8 +1,8 @@
 # www.analogstudios.net
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6758148c-5c38-44d8-b908-ca0a1dad0f7c/deploy-status)](https://app.netlify.com/sites/elastic-blackwell-3aef44/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3fa92afb-5d4d-4e27-a483-7eb64cdbe181/deploy-status)](https://app.netlify.com/sites/practical-fermat-fa2c48/deploys)
 [![GitHub release](https://img.shields.io/github/tag/Analog-Studios/www.analogstudios.net.svg)](https://github.com/Analog-Studios/www.analogstudios.net/tags)
-![GitHub Actions status](https://github.com/Analog-Studios/www.analogstudios.net/workflows/Master%20Integration/badge.svg)
+![GitHub Actions status](https://github.com/Analog-Studios/www.analogstudios.net/workflows/Main%20Integration/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues-pr-raw/Analog-Studios/www.analogstudios.net.svg)](https://github.com/Analog-Studios/www.analogstudios.net/issues)
 [![GitHub license](https://img.shields.io/badge/license-Apache2.0-blue.svg)](https://raw.githubusercontent.com/Analog-Studios/www.analogstudios.net/master/LICENSE.md)
 
