@@ -1,0 +1,4 @@
+**/.greenwood/**
+**/public/**
+**/node_modules/**
+!.eslintrc.js
