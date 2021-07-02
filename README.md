@@ -8,7 +8,7 @@
 
 
 ## Overview
-Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.analogstudios.net).  It is built using Github Actions and deployed to Netlify.  The backend is (currently) hosted in AWS.
+Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io).  It is built using Github Actions and deployed to Netlify.  The backend is (currently) hosted in AWS.
 
 
 ## Contributing
