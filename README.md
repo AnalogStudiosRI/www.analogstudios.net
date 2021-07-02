@@ -13,7 +13,7 @@ Frontend website for [www.analogstudios.net](https://www.analogstudios.net) base
 
 ## Contributing
 
-### Prerquisties
+### Setup
 You'll need the following installed to run and contribute to this project.
 
 1. [NodeJS LTS](https://nodejs.org/)
