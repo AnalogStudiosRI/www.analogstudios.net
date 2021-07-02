@@ -1,0 +1,38 @@
+{
+  "name": "www.analogstudios.net",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Frontend website for www.analogstudios.net.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Analog-Studios/www.analogstudios.net.git"
+  },
+  "engines": {
+    "node": ">=14.x"
+  },
+  "keywords": [
+    "Analog Studios",
+    "Analog",
+    "Rhode Island"
+  ],
+  "homepage": "https://github.com/Analog-Studios/www.analogstudios.net#readme",
+  "author": "Owen Buckley <analogstudiosri@gmail.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "clean": "rimraf .greenwood/ public/",
+    "lint": "eslint \"*.js\" \"./src/**/*.js\" && ls-lint && stylelint \"./src/**/*.css\"",
+    "develop": "greenwood develop",
+    "build": "greenwood build",
+    "start": "yarn develop",
+    "serve": "greenwood serve"
+  },
+  "devDependencies": {
+    "@greenwood/cli": "^0.13.0",
+    "@ls-lint/ls-lint": "^1.9.2",
+    "eslint": "^6.8.0",
+    "rimraf": "^2.6.3",
+    "stylelint": "^13.8.0",
+    "stylelint-a11y": "^1.2.3",
+    "stylelint-config-standard": "^20.0.0"
+  }
+}
