@@ -5,7 +5,7 @@
   "description": "Frontend website for www.analogstudios.net.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Analog-Studios/www.analogstudios.net.git"
+    "url": "git+https://github.com/AnalogStudiosRI/www.analogstudios.net.git"
   },
   "engines": {
     "node": ">=14.x"
@@ -15,7 +15,7 @@
     "Analog",
     "Rhode Island"
   ],
-  "homepage": "https://github.com/Analog-Studios/www.analogstudios.net#readme",
+  "homepage": "https://github.com/AnalogStudiosRI/www.analogstudios.net#readme",
   "author": "Owen Buckley <analogstudiosri@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
