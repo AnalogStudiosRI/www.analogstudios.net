@@ -24,7 +24,7 @@
     "develop": "greenwood develop",
     "build": "greenwood build",
     "start": "yarn develop",
-    "serve": "greenwood serve",
+    "serve": "yarn clean && greenwood serve",
     "storybook:develop": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
     "storybook:serve": "yarn clean && yarn storybook:build && npx http-server ./storybook-static",
