@@ -37,5 +37,6 @@ After installing the above, you can run the following commands:
 - `yarn lint` - Lint all files in the project (JS , CSS, naming)
 - `yarn start` - starts the locaol development server
 - `yarn build` - generate a procuction build
+- `yarn test:tdd` - runs unit tests in watch mode
 
 > _See other [supported commands](https://www.greenwoodjs.io/docs/#cli) in Greenwood's CLI documentation._
