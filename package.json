@@ -27,7 +27,7 @@
     "serve": "greenwood serve",
     "storybook:develop": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
-    "storybook:serve": "yarn storybook:build && npx http-server ./storybook-static",
+    "storybook:serve": "yarn clean && yarn storybook:build && npx http-server ./storybook-static",
     "test": "wtr",
     "test:tdd": "yarn test --watch"
   },
