@@ -5,7 +5,7 @@ module.exports = {
   files: './src/**/*.spec.js',
   nodeResolve: true,
   reporters: [
-    defaultReporter({ reportTestResults: false, reportTestProgress: true }),
+    defaultReporter({ reportTestResults: true, reportTestProgress: true }),
     junitReporter({
       outputPath: './reports/test-results.xml'
     })

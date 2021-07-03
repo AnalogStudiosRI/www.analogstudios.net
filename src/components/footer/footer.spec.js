@@ -30,7 +30,7 @@ describe('Footer Component', () => {
     });
 
     it('should have expected copyright text', () => {
-      const text = footer.shadowRoot.querySelectorAll('h5')[0].innerHTML.replace(/<!--[\s\S]*?-->/g, '');
+      const text = footer.shadowRoot.querySelectorAll('h5')[0].textContent;
       const currentYear = new Date().getFullYear();
 
       expect(text).equal(`© 2007 - ${currentYear} Analog Studios`);
