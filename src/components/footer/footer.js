@@ -11,11 +11,9 @@ class FooterComponent extends LitElement {
   static get styles() {
     return css`
       h5 {
-        color: #020202; /* $black */
         text-decoration: underline;
         text-align: center;
-      }
-    `;
+      }`;
   }
 
   render() {

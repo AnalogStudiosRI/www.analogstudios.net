@@ -1,5 +1,5 @@
 * {
-  background-color: #a48f65;
+  background-color: var(--secondary);
 }
 
 main {

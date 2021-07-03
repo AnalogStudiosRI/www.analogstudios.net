@@ -8,10 +8,9 @@ class HeaderComponent extends LitElement {
   static get styles() {
     return css`
       h1 {
-        color: grey; /* $black */
+        color: var(--primary);
         text-align: center;
-      }
-    `;
+      }`;
   }
 
   render() {

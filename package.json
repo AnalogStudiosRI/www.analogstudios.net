@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rimraf .greenwood/ public/ reports/ storybook-static/",
-    "lint": "eslint \"*.js\" \"./src/**/*.js\" && ls-lint && stylelint \"./src/**/*.css\"",
+    "lint": "eslint \"*.js\" \"./src/**/*.js\" && ls-lint && stylelint \"./src/**/*.css\" \"./src/**/*.js\"",
     "develop": "greenwood develop",
     "build": "greenwood build",
     "start": "yarn develop",
