@@ -1,8 +1,8 @@
 * {
-  color: blue;
+  background-color: #a48f65;
 }
 
-.container {
+main {
   margin: 0 auto;
   width: 80%;
   text-align: center;

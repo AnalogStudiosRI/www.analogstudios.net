@@ -13,6 +13,7 @@ class FooterComponent extends LitElement {
       h5 {
         color: #020202; /* $black */
         text-decoration: underline;
+        text-align: center;
       }
     `;
   }

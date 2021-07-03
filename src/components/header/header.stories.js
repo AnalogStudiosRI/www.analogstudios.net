@@ -1,10 +1,10 @@
 import { html } from 'lit';
-import './footer.js';
+import './header.js';
 
 export default {
-  title: 'Components/Footer'
+  title: 'Components/Header'
 };
 
 export const Primary = () => html`
-  <app-footer></app-footer>
+  <app-header></app-header>
 `;
