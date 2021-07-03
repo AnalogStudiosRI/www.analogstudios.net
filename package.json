@@ -24,14 +24,19 @@
     "develop": "greenwood develop",
     "build": "greenwood build",
     "start": "yarn develop",
-    "serve": "greenwood serve"
+    "serve": "greenwood serve",
+    "test": "web-test-runner \"src/**/*.spec.js\" --node-resolve",
+    "test:tdd": "yarn test --watch"
   },
   "dependencies": {
     "lit": "^2.0.0-rc.2"
   },
   "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4",
     "@greenwood/cli": "^0.13.0",
     "@ls-lint/ls-lint": "^1.9.2",
+    "@web/test-runner": "^0.13.13",
+    "@web/test-runner-puppeteer": "^0.10.0",
     "eslint": "^6.8.0",
     "rimraf": "^2.6.3",
     "stylelint": "^13.8.0",
