@@ -35,7 +35,9 @@ Then run `yarn install` to install the project's dependencies.
 After installing the above, you can run the following commands:
 
 - `yarn lint` - Lint all files in the project (JS , CSS, naming)
-- `yarn start` - starts the locaol development server
-- `yarn build` - generate a procuction build
+- `yarn start` - Starts **Greenwood**'s local development server
+- `yarn build` - Runs **Greenwood** to generate a production build
+- `yarn storybook:deveop` - Runs [**Storybook**](https://storybook.js.org/) in development mode
+- `yarn test:tdd` - Runs unit tests in `watch` mode using [**@web/test-runner**](https://modern-web.dev/docs/test-runner/overview/)
 
-> _See other [supported commands](https://www.greenwoodjs.io/docs/#cli) in Greenwood's CLI documentation._
+> _See `package.json#scripts` for a full list of available commands._

@@ -1,7 +1,7 @@
 <html>
   
   <head>
-    <title>Analog Studios</title>
+    <title>Analog Studios - Music and Recordings</title>
 
     <meta name="description" content="A project for helping connect open source with the open source community." />
     <meta property="og:title" content="Analog Studios" />
@@ -12,12 +12,28 @@
     <link rel="shortcut icon" href="/assets/favicon-bg-fill.png"/>
     <link rel="icon" href="/assets/favicon-bg-fill.png"/> -->
 
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./components/footer/footer.js"></script>
+    <script type="module" src="./components/header/header.js"></script>
+
+    <link rel="stylesheet" href="./theme.css"></script>
     <link rel="stylesheet" href="./styles.css"></script>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+
+      <section>
+        <app-header></app-header>
+      </section>
+
+      <section>
+        <main>
+          <h2>Coming Soon!</h2>
+        </main>
+      </section>
+
+      <section>
+        <app-footer></app-footer>
+      </section>
+
   </body>
-  
 </html>

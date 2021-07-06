@@ -2,3 +2,5 @@
 .greenwood/
 node_modules/
 public/
+reports/
+storybook-static/
