@@ -1,3 +1,8 @@
 module.exports = {
-  mode: 'spa'
+  mode: 'spa',
+  devServer: {
+    proxy: {
+      '/api': 'https://www.analogstudios.net'
+    }
+  }
 };

@@ -7,3 +7,13 @@
 
 [build.environment]
   NODE_VERSION = "14.16.0"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://www.analogstudios.net/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
