@@ -1229,10 +1229,10 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
-"@greenwood/cli@^0.14.1":
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/@greenwood/cli/-/cli-0.14.1.tgz#41ed6c2d425ea9a81e2c1875380c5036b507a353"
-  integrity sha512-3IjCATHcsvGO/B6Wu+9+xAtSJM3P35O1hd9Da74/dqEWHFC0kTfMc49PvyyVhTVaJwgSXezdEB9BJ4Hh5Gn1Bw==
+"@greenwood/cli@^0.14.2":
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/@greenwood/cli/-/cli-0.14.2.tgz#ae0c10e630c648af00c6a1a7a90bbf9805584809"
+  integrity sha512-wX2QcbFQSy59R19GU3Md0NzIODTJvlHaRO82ojFj3+mrWjw79R8UUax5lgkRazAPW9Tl8dRoovpuLdz/3iZmaQ==
   dependencies:
     "@rollup/plugin-node-resolve" "^9.0.0"
     "@rollup/plugin-replace" "^2.3.4"
