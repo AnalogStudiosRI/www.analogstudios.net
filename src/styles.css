@@ -37,20 +37,20 @@ main {
   letter-spacing: 1px;
   text-transform: uppercase;
   background-color: transparentize(var(----color-secondary) 0.0375);
-  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.5);
   min-height: 1000px;
 
-  a {
+  & a {
     color: var(--creme);
   }
 
-  .as-link {
+  & .as-link {
     cursor: pointer;
     text-decoration: underline;
-    color: var(--color-dark)
+    color: var(--color-dark);
   }
 
-  .router-outlet {
+  & .router-outlet {
     margin-top: 20px;
     display: block;
   }
