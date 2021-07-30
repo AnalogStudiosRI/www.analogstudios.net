@@ -32,7 +32,7 @@ describe('Header Component', () => {
     it('should have expected greeting text', () => {
       const text = header.shadowRoot.querySelector('h1').textContent;
 
-      expect(text).equal('Welcome to Analog Studios!');
+      expect(text).equal('Welcome to Analog Studios');
     });
   });
 
