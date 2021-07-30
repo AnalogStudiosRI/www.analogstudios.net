@@ -8,7 +8,7 @@ class HeaderComponent extends LitElement {
   static get styles() {
     return css`
       h1 {
-        color: var(--primary);
+        color: var(--color-font-secondary);
         text-align: center;
       }`;
   }
@@ -16,7 +16,7 @@ class HeaderComponent extends LitElement {
   render() {
     return html`
       <header>
-        <h1>Welcome to Analog Studios!</h1>
+        <h1>Welcome to Analog Studios</h1>
       </header>
     `;
   }

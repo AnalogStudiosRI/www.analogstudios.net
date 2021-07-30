@@ -1,4 +1,21 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
 :root {
-  --primary: gray;
-  --secondary: #a48f65;
+  /* raw tokens */
+  --white: #efefef;
+  --black: #1a1a1a;
+  --gold: #a48f65;
+  --creme: #f1e7d3;
+  --blue: #316291;
+
+  /* design system - colors */
+  --color-primary: var(--black);
+  --color-secondary: var(--gold);
+  --color-light: var(--white);
+  --color-dark: var(--black);
+  --color-font-primary: var(--color-primary);
+  --color-font-secondary: var(--blue);
+
+  /* design system - typography */
+  --font-family-primary: 'Montserrat', sans-serif;
 }
