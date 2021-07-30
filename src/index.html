@@ -7,6 +7,8 @@
     <meta property="og:title" content="Analog Studios" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.analogstudios.nety/" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+
     <!-- <meta property="og:image" content="https://s3.amazonaws.com/hosted.contributary.community/media/contributary-logo-invert.png" /> -->
     <!-- <meta property="og:description" content="A project for helping connect open source with the open source community." />
     <link rel="shortcut icon" href="/assets/favicon-bg-fill.png"/>
@@ -22,12 +24,13 @@
 
   <body>
 
+    <div class="container">
       <section>
         <app-header></app-header>
       </section>
 
       <section>
-        <main>
+        <main class="router-outlet">
           <app-router-outlet></app-router-outlet>
         </main>
       </section>
@@ -35,6 +38,7 @@
       <section>
         <app-footer></app-footer>
       </section>
+    </div>
 
   </body>
 </html>

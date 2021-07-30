@@ -32,6 +32,7 @@
     "test:tdd": "yarn test --watch"
   },
   "dependencies": {
+    "bootstrap": "4.0.0-alpha.4",
     "lit": "^2.0.0-rc.2",
     "lit-redux-router": "~0.19.0",
     "pwa-helpers": "^0.9.1",
@@ -42,6 +43,7 @@
     "@babel/core": "^7.14.6",
     "@esm-bundle/chai": "^4.3.4",
     "@greenwood/cli": "^0.14.2",
+    "@greenwood/plugin-postcss": "^0.14.2",
     "@ls-lint/ls-lint": "^1.9.2",
     "@storybook/addon-actions": "^6.3.2",
     "@storybook/addon-essentials": "^6.3.2",
@@ -53,6 +55,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "eslint": "^6.8.0",
+    "postcss-nested": "^4.1.2",
     "rimraf": "^2.6.3",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-visualizer": "^5.5.2",
