@@ -18,12 +18,55 @@ class PostsListComponent extends LitElement {
     this.posts = [];
   }
 
+  // @import "../../components/bootstrap/bootstrap";
   static get styles() {
     return css`
-      h1 {
-        color: var(--color-font-secondary);
-        text-align: center;
-      }`;
+      :host img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      
+      .as-posts-list {
+        padding: 30px 15px;
+        background-color: $black;
+        color: $gold;
+      
+        @include media-breakpoint-down(md) {
+          margin-bottom: 30px;
+        }
+      
+        @include media-breakpoint-up(lg) {
+          min-height: 387px;
+        }
+      
+        .as-posts-list__heading {
+          margin: 0;
+          color: $creme;
+        }
+      
+        .post {
+          margin-top: 30px;
+        }
+      
+        .post__heading {
+          margin-bottom: 7.5px;
+          color: $creme;
+        }
+      
+        .post__time {
+          margin-bottom: 7.5px;
+        }
+      
+        .post__summary {
+          cursor: pointer;
+      
+          &:focus {
+            outline: 0;
+          }
+        }
+      }
+    `;
   }
 
   async connectedCallback() {
