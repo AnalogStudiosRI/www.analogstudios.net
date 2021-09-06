@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { css, html, LitElement } from 'lit';
 import { getEvents } from '../services/events-service.js';
-import { getPosts } from '../services/posts-service.js';
+import '../components/posts-list/posts-list.js';
 
 class HomeRouteComponent extends LitElement {
 
@@ -9,7 +9,6 @@ class HomeRouteComponent extends LitElement {
     super();
 
     this.events = [];
-    this.posts = [];
   }
 
   // @import "../../theme.css";
@@ -78,8 +77,6 @@ class HomeRouteComponent extends LitElement {
     super.connectedCallback();
 
     this.events = await getEvents();
-    this.posts = await getPosts();
-    console.debug(this.posts);
     console.debug(this.events);
   }
 
@@ -90,8 +87,8 @@ class HomeRouteComponent extends LitElement {
           <div class="col-xs-12">
       
             <div class="as-media-carousel">
-              <!-- TODO if loading from cloudfront works (TGH-171), remove this??? -->
-              <img src="//d34k5cjnk2rcze.cloudfront.net/images/website/home-banner.jpg" class="img-fluid">
+              <!-- TODO if loading from cloudfront works (TGH-171), remove this??? 
+              <img src="//d34k5cjnk2rcze.cloudfront.net/images/website/home-banner.jpg" class="img-fluid"> -->
       
               <span class="as-media-carousel__label">
                 Welcome to Analog Studios!
@@ -107,7 +104,7 @@ class HomeRouteComponent extends LitElement {
       
         <div class="row">
           <div class="col-xs-12 col-lg-7">
-            <as-posts-list></as-posts-list>
+            <app-posts-list max="2"></app-posts-list>
           </div>
       
           <div class="col-xs-12 col-lg-5">
