@@ -1,15 +1,9 @@
 /* eslint-disable max-len */
 import { css, html, LitElement } from 'lit';
-import { getEvents } from '../services/events-service.js';
+import '../components/events-calendar/events-calendar.js';
 import '../components/posts-list/posts-list.js';
 
 class HomeRouteComponent extends LitElement {
-
-  constructor() {
-    super();
-
-    this.events = [];
-  }
 
   // @import "../../theme.css";
   static styles = css`
@@ -73,13 +67,6 @@ class HomeRouteComponent extends LitElement {
     }
   `
 
-  async connectedCallback() {
-    super.connectedCallback();
-
-    this.events = await getEvents();
-    console.debug(this.events);
-  }
-
   render() {
     return html`
       <div class="as-view-home">
@@ -108,7 +95,7 @@ class HomeRouteComponent extends LitElement {
           </div>
       
           <div class="col-xs-12 col-lg-5">
-            <as-events-calendar></as-events-calendar>
+            <app-events-calendar></app-events-calendar>
           </div>
         </div>
       </div>
