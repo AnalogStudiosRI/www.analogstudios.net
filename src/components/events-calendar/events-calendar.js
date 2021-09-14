@@ -2,6 +2,7 @@
 import { css, html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../services/events-service.js';
+// import themeCss from '../../theme.css?type=css';
 
 class EventsCalendarComponent extends LitElement {
   constructor() {
@@ -41,6 +42,7 @@ class EventsCalendarComponent extends LitElement {
   }
 
   // @import '../../components/bootstrap/bootstrap';
+  // ${unsafeCss(themeCss)}
   static get styles() {
     return css`
       .as-events-calendar {
@@ -199,7 +201,7 @@ class EventsCalendarComponent extends LitElement {
   }
 
   render() {
-    return html`
+    return html`      
       <div class="as-events-calendar">
         <div class="as-events-calendar__header">
           <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1">
@@ -224,37 +226,37 @@ class EventsCalendarComponent extends LitElement {
         </div>
 
         <div class="as-events-calendar__week">
-          ${
-            this.currentMonthData.map((week) => {
-              return week.map((day) => {
-                const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
-                const dayInMonthContent = day.date && !day.hasEvents 
-                  ? day.date
-                  : '';
-                const eventsInDayContent = day.hasEvents
-                  ? day.events.map((event) => {
-                    return html`
-                      <a href="/events/${event.id}" title="${event.title}">
-                        ${event.title}
-                        <i class="fa fa-calendar-check-o"></i>
-                      </span>
-                    `;
-                  })
-                  : '';
+        ${
+          this.currentMonthData.map((week) => {
+            return week.map((day) => {
+              const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
+              const dayInMonthContent = day.date && !day.hasEvents 
+                ? day.date
+                : '';
+              const eventsInDayContent = day.hasEvents
+                ? day.events.map((event) => {
+                  return html`
+                    <a href="/events/${event.id}" title="${event.title}">
+                      ${event.title}
+                      <i class="fa fa-calendar-check-o"></i>
+                    </span>
+                  `;
+                })
+                : '';
 
-                return html`
-                  <!--day not in month-->
-                  ${dayNotInMonthContent}
-            
-                  <!--day in month without event-->
-                  ${dayInMonthContent}
-            
-                  <!--day with event if there's an event-->
-                  ${eventsInDayContent}
-                `;
-              });
-            })
-          }
+              return html`
+                <!--day not in month-->
+                ${dayNotInMonthContent}
+          
+                <!--day in month without event-->
+                ${dayInMonthContent}
+          
+                <!--day with event if there's an event-->
+                ${eventsInDayContent}
+              `;
+            });
+          })
+        }
         </div>
       </div>
     `;
