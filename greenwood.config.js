@@ -1,4 +1,5 @@
 const rollupPluginAnalyzer = require('rollup-plugin-analyzer');
+const pluginImportCss = require('@greenwood/plugin-import-css');
 const pluginPostCss = require('@greenwood/plugin-postcss');
 const rollupPluginVisualizer = require('rollup-plugin-visualizer').default;
 
@@ -11,6 +12,7 @@ module.exports = {
   },
   plugins: [
     pluginPostCss(),
+    ...pluginImportCss(),
     {
       type: 'rollup',
       name: 'rollup-plugin-analyzer',
