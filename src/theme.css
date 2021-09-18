@@ -1,6 +1,6 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
-:root {
+:root, :host {
   /* raw tokens */
   --white: #efefef;
   --black: #1a1a1a;
@@ -11,6 +11,7 @@
   /* design system - colors */
   --color-primary: var(--black);
   --color-secondary: var(--gold);
+  --color-tertiary: var(--creme);
   --color-light: var(--white);
   --color-dark: var(--black);
   --color-font-primary: var(--color-primary);

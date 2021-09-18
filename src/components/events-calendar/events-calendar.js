@@ -1,8 +1,9 @@
 /* eslint-disable max-depth */
-import { css, html, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { getEvents } from '../services/events-service.js';
-// import themeCss from '../../theme.css?type=css';
+import { getEvents } from '../../services/events-service.js';
+
+import eventsCalendarCss from './events-calendar.css?type=css';
 
 class EventsCalendarComponent extends LitElement {
   constructor() {
@@ -39,69 +40,6 @@ class EventsCalendarComponent extends LitElement {
       currentMonthIndex: { type: Number },
       currentYear: { type: Number }
     };
-  }
-
-  // @import '../../components/bootstrap/bootstrap';
-  // ${unsafeCss(themeCss)}
-  static get styles() {
-    return css`
-      .as-events-calendar {
-        .as-events-calendar__header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 15px;
-        }
-      
-        .as-events-calendar__header-text {
-          margin: 0;
-          text-align: center;
-        }
-      
-        .as-events-calendar__month {
-          font-size: 1.25rem;
-          font-weight: 700;
-        }
-      
-        .as-events-calendar__btn {
-          background-color: $black;
-          color: $creme;
-        }
-      
-        .as-events-calendar__days {
-          display: flex;
-          justify-content: space-between;
-        }
-      
-        .as-events-calendar__week {
-          display: flex;
-          height: 60px;
-        }
-      
-        .as-events-calendar__day-name {
-          display: flex;
-          justify-content: center;
-          width: 14.285%;
-        }
-      
-        .as-events-calendar__day {
-          display: flex;
-          width: 14.285%;
-          align-items: center;
-          justify-content: center;
-          border: 1px solid $gold;
-          background-color: $black;
-          color: $creme;
-          font-size: 1rem;
-        }
-      
-        .as-events-calendar__day-event {
-          color: $gold;
-          font-size: 2rem;
-          cursor: pointer;
-        }
-      }
-    `;
   }
 
   async connectedCallback() {
@@ -201,7 +139,11 @@ class EventsCalendarComponent extends LitElement {
   }
 
   render() {
-    return html`      
+    return html`
+      <style>
+        ${eventsCalendarCss}
+      </style>
+        
       <div class="as-events-calendar">
         <div class="as-events-calendar__header">
           <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1">
@@ -225,36 +167,44 @@ class EventsCalendarComponent extends LitElement {
           <div class="as-events-calendar__day-name">Sat</div>
         </div>
 
-        <div class="as-events-calendar__week">
         ${
           this.currentMonthData.map((week) => {
-            return week.map((day) => {
-              const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
-              const dayInMonthContent = day.date && !day.hasEvents 
-                ? day.date
-                : '';
-              const eventsInDayContent = day.hasEvents
-                ? day.events.map((event) => {
-                  return html`
-                    <a href="/events/${event.id}" title="${event.title}">
-                      ${event.title}
-                      <i class="fa fa-calendar-check-o"></i>
-                    </span>
-                  `;
-                })
-                : '';
+            return html`
+              <div class="as-events-calendar__week">
+                ${
+                  week.map((day) => {
+                    const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
+                    const dayInMonthContent = day.date && !day.hasEvents 
+                      ? day.date
+                      : '';
+                    const eventsInDayContent = day.hasEvents
+                      ? day.events.map((event) => {
+                        return html`
+                          <span class="as-events-calendar__day-event">
+                            <a class="as-events-calendar__day-event" href="/events/${event.id}" title="${event.title}">
+                              <i class="fa fa-calendar-check-o"></i>
+                            </a>
+                          </span>
+                        `;
+                      })
+                      : '';
 
-              return html`
-                <!--day not in month-->
-                ${dayNotInMonthContent}
-          
-                <!--day in month without event-->
-                ${dayInMonthContent}
-          
-                <!--day with event if there's an event-->
-                ${eventsInDayContent}
-              `;
-            });
+                    return html`
+                      <div class="as-events-calendar__day">
+                        <!--day not in month-->
+                        ${dayNotInMonthContent}
+                  
+                        <!--day in month without event-->
+                        ${dayInMonthContent}
+                  
+                        <!--day with event if there's an event-->
+                        ${eventsInDayContent}
+                      </div>
+                    `;
+                  })
+                }
+              </div>
+            `;
           })
         }
         </div>

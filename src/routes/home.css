@@ -1,0 +1,60 @@
+@import '../theme.css';
+
+:host {
+  & .as-view-home {
+    margin-bottom: 15px;
+
+    & .as-media-carousel {
+      @include media-breakpoint-down(xs) {
+        margin-top: -30px;
+      }
+
+      @include media-breakpoint-only(sm) {
+        margin-top: 0;
+      }
+
+      position: relative;
+      margin: 0 -15px 30px -15px;
+    }
+
+    & .as-media-carousel__label {
+      position: absolute;
+      bottom: 45px;
+      width: 100%;
+      padding: 15px;
+      background-color: var(--color-tertiary); /*transparentize($creme, .1);*/
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+
+      @include media-breakpoint-between(sm, md) {
+        font-size: 1rem;
+        text-align: center;
+      }
+    }
+
+    & .as-media-carousel__attribution-label {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      padding: 2px 4px;
+      background: var(--color-dark); /* transparentize($black, .5); */
+      font-size: .5rem;
+    }
+
+    & .as-media-carousel__attribution-label,
+    & .as-media-carousel__attribution-label-link {
+      color: var(--color-tertiary);
+    }
+
+    & .as-media-carousel__label,
+    & .as-media-carousel__attribution-label {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    & .as-welcome {
+      margin-bottom: 45px;
+    }
+  }
+}

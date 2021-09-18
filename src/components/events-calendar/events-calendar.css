@@ -1,0 +1,59 @@
+@import '../../theme.css';
+
+:host {
+  
+  & .as-events-calendar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  & .as-events-calendar__header-text {
+    margin: 0;
+    text-align: center;
+  }
+
+  & .as-events-calendar__month {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  & .as-events-calendar__btn {
+    background-color: var(--color-dark);
+    color: var(--tertiary);
+  }
+
+  & .as-events-calendar__days {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .as-events-calendar__week {
+    display: flex;
+    height: 60px;
+  }
+
+  & .as-events-calendar__day-name {
+    display: flex;
+    justify-content: center;
+    width: 14.285%;
+  }
+
+  & .as-events-calendar__day {
+    display: flex;
+    width: 14.285%;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-secondary);
+    background-color: var(--color-dark);
+    color: var(--color-tertiary);
+    font-size: 1rem;
+  }
+
+  & .as-events-calendar__day-event {
+    color: var(--color-secondary);
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
