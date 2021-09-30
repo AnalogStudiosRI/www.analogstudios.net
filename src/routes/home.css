@@ -1,4 +1,5 @@
 @import '../theme.css';
+@import '../styles.css';
 
 :host {
   & .as-view-home {

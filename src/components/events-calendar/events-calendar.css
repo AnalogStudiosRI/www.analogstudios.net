@@ -21,7 +21,7 @@
 
   & .as-events-calendar__btn {
     background-color: var(--color-dark);
-    color: var(--tertiary);
+    color: var(--color-tertiary);
   }
 
   & .as-events-calendar__days {

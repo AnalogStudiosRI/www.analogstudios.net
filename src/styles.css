@@ -41,7 +41,7 @@ main {
   min-height: 1000px;
 
   & a {
-    color: var(--creme);
+    color: var(--color-tertiary);
   }
 
   & .as-link {
@@ -54,4 +54,8 @@ main {
     margin-top: 20px;
     display: block;
   }
+}
+
+.row {
+  display: flex;
 }

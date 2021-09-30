@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.4",
+    "font-awesome": "4.6.3",
     "lit": "^2.0.0-rc.2",
     "lit-redux-router": "~0.19.0",
     "pwa-helpers": "^0.9.1",

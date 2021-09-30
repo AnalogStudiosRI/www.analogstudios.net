@@ -10,6 +10,7 @@
   padding: 30px 15px;
   background-color: var(--color-dark);
   color: var(--gold);
+  min-height: 387px;
 
   @include media-breakpoint-down(md) {
     margin-bottom: 30px;
