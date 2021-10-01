@@ -1,27 +1,32 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, unsafeCSS } from 'lit';
+import footerCss from './footer.css?type=css';
 
 class FooterComponent extends LitElement {
   constructor() {
     super();
 
-    this.startingYear = 2007;
+    this.STARTING_YEAR = 2007;
     this.currentYear = new Date().getFullYear(); 
   }
 
   static get styles() {
     return css`
-      h5 {
-        text-decoration: underline;
-        text-align: center;
-      }`;
+      ${unsafeCSS(footerCss)}
+    `;
   }
 
   render() {
-    const { currentYear, startingYear } = this;
+    const { currentYear, STARTING_YEAR } = this;
 
     return html`
-      <footer>
-        <h5 class="copyright-text">&copy; ${startingYear} - ${currentYear} Analog Studios</h5>
+      <footer class="container as-footer">
+        <div class="row">
+      
+          <div class="col-xs-12">
+            <p class="copyright-text">&copy; ${STARTING_YEAR} - ${currentYear} Analog Studios</p>
+          </div>
+      
+        </div>
       </footer>
     `;
   }
