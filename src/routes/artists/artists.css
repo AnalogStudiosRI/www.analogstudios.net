@@ -1,0 +1,14 @@
+@import '../../theme.css';
+@import '../../styles.css';
+
+.as-route-artists {
+  color: var(--color-dark);
+}
+
+.as-route-artist-details {
+
+  & img {
+    max-width: var(--img-width-mobile);
+  }
+
+}

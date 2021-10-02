@@ -14,12 +14,17 @@ class App extends LitElement {
 
   render() {
     return html`
-      <div>        
+      <div>
         <main class="cc-page app-content">
-          <lit-route 
-            path="/" 
+          <lit-route
+            path="/artists"
+            component="as-route-artists"
+            .resolve="${() => import('/routes/artists/artists.js')}"
+          ></lit-route>
+          <lit-route
+            path="/"
             component="as-route-home"
-            .resolve="${() => import('/routes/home.js')}"
+            .resolve="${() => import('/routes/home/home.js')}"
           ></lit-route>
           <lit-route><h1>TODO</h1></lit-route>
         </main>
@@ -28,4 +33,4 @@ class App extends LitElement {
   }
 }
 
-customElements.define('app-router-outlet', App); 
+customElements.define('app-router-outlet', App);
