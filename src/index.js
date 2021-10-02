@@ -17,6 +17,11 @@ class App extends LitElement {
       <div>
         <main class="cc-page app-content">
           <lit-route
+            path="/albums"
+            component="as-route-albums"
+            .resolve="${() => import('/routes/albums/albums.js')}"
+          ></lit-route>
+          <lit-route
             path="/artists"
             component="as-route-artists"
             .resolve="${() => import('/routes/artists/artists.js')}"
