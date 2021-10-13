@@ -1,6 +1,7 @@
-const rollupPluginAnalyzer = require('rollup-plugin-analyzer');
+const path = require('path');
 const pluginImportCss = require('@greenwood/plugin-import-css');
 const pluginPostCss = require('@greenwood/plugin-postcss');
+const rollupPluginAnalyzer = require('rollup-plugin-analyzer');
 const rollupPluginVisualizer = require('rollup-plugin-visualizer').default;
 
 module.exports = {
@@ -13,6 +14,19 @@ module.exports = {
   plugins: [
     pluginPostCss(),
     ...pluginImportCss(),
+    {
+      type: 'copy',
+      name: 'plugin-copy-font-awesome',
+      provider: (compilation) => {
+        const { outputDir, projectDirectory } = compilation.context;
+
+        return [{
+          // can only copy a directory to a directory
+          from: path.join(projectDirectory, 'node_modules/font-awesome/fonts'),
+          to: path.join(outputDir, 'fonts')
+        }];
+      }
+    },
     {
       type: 'rollup',
       name: 'rollup-plugin-analyzer',
