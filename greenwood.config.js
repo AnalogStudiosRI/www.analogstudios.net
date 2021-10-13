@@ -49,6 +49,19 @@ module.exports = {
       provider: (compilation, options) => new FontAwesomeResource(compilation, options)
     }],
     {
+      type: 'copy',
+      name: 'plugin-copy-font-awesome',
+      provider: (compilation) => {
+        const { outputDir, projectDirectory } = compilation.context;
+
+        return [{
+          // can only copy a directory to a directory
+          from: path.join(projectDirectory, 'node_modules/font-awesome/fonts'),
+          to: path.join(outputDir, 'fonts')
+        }];
+      }
+    },
+    {
       type: 'rollup',
       name: 'rollup-plugin-analyzer',
       provider: () => {
