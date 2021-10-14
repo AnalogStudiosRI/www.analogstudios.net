@@ -29,6 +29,6 @@ jobs:
     - name: Build
       run: |
         yarn clean && yarn build
-    - name: Storybook
-      run: |
-        yarn storybook:build
+    # - name: Storybook
+    #   run: |
+    #     yarn storybook:build
