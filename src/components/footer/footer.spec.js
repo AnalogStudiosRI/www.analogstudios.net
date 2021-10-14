@@ -24,13 +24,13 @@ describe('Footer Component', () => {
     });
 
     it('should have expected copyright elements', () => {
-      const elements = footer.shadowRoot.querySelectorAll('h5');
+      const elements = footer.shadowRoot.querySelectorAll('p');
 
       expect(elements.length).equal(1);
     });
 
     it('should have expected copyright text', () => {
-      const text = footer.shadowRoot.querySelector('h5').textContent;
+      const text = footer.shadowRoot.querySelector('p').textContent;
       const currentYear = new Date().getFullYear();
 
       expect(text).equal(`© 2007 - ${currentYear} Analog Studios`);
