@@ -6,8 +6,6 @@ import eventsCss from './events.css?type=css';
 class EventsRouteComponent extends LitElement {
 
   render() {
-    const { artists } = this;
-
     return html`
       <style>
         ${eventsCss}

@@ -24,12 +24,13 @@ class ArtistsRouteComponent extends LitElement {
     this.artists = await getArtists();
   }
 
-  onArtistSelected(id) {
+  onArtistSelected() {
     const selectedArtistId = this.shadowRoot.querySelector('select').value;
 
     alert(`onArtistSelected => ${selectedArtistId}`);
   }
 
+  /* eslint-disable indent */
   render() {
     const { artists } = this;
 
@@ -71,6 +72,7 @@ class ArtistsRouteComponent extends LitElement {
       </div>
     `;
   }
+  /* eslint-enable indent */
 }
 
 customElements.define('as-route-artists', ArtistsRouteComponent);

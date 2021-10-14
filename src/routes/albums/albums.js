@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
 import { getAlbums } from '../../services/albums-service.js';
-import { modelAlbum, modelArtist } from '../../components/card/card.js';
+import { modelAlbum } from '../../components/card/card.js';
 import albumsCss from './albums.css?type=css';
 
 class AlbumsRouteComponent extends LitElement {
@@ -30,6 +30,7 @@ class AlbumsRouteComponent extends LitElement {
     alert(`onAlbumSelected => ${selectedAlbumId}`);
   }
 
+  /* eslint-disable indent */
   render() {
     const { albums } = this;
 
@@ -71,6 +72,7 @@ class AlbumsRouteComponent extends LitElement {
       </div>
     `;
   }
+  /* eslint-enable indent */
 }
 
 customElements.define('as-route-albums', AlbumsRouteComponent);

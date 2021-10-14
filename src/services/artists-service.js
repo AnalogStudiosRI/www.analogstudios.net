@@ -6,10 +6,9 @@ function getArtists() {
 }
 
 function getArtistById(id) {
-    return fetch(`${ARTISTS_API_URL}/${id}`)
-      .then(resp => resp.json());
-  }
-
+  return fetch(`${ARTISTS_API_URL}/${id}`)
+    .then(resp => resp.json());
+}
   
 export { 
   getArtists,

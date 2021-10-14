@@ -9,7 +9,7 @@ function modelAlbum(album) {
     bodyText: album ? album.description : '',
     imageAltText: album ? album.title : '',
     link: album ? '/albums/' + album.id : ''
-  }
+  };
 }
 
 function modelArtist(artist) {
@@ -19,7 +19,7 @@ function modelArtist(artist) {
     bodyText: artist ? artist.bio : '',
     imageAltText: artist ? artist.name : '',
     link: artist ? '/artists/' + artist.id : ''
-  }
+  };
 }
 
 class CardComponent extends LitElement {
@@ -83,6 +83,6 @@ class CardComponent extends LitElement {
 export {
   modelAlbum,
   modelArtist
-}
+};
 
 customElements.define('app-card', CardComponent);

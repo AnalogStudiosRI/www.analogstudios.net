@@ -6,10 +6,9 @@ function getAlbums() {
 }
 
 function getAlbumById(id) {
-    return fetch(`${ALBUMS_API_URL}/${id}`)
-      .then(resp => resp.json());
-  }
-
+  return fetch(`${ALBUMS_API_URL}/${id}`)
+    .then(resp => resp.json());
+}
 
 export {
   getAlbums,
