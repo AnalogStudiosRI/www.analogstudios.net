@@ -43,9 +43,9 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@esm-bundle/chai": "^4.3.4",
-    "@greenwood/cli": "^0.17.0",
-    "@greenwood/plugin-import-css": "^0.17.0",
-    "@greenwood/plugin-postcss": "^0.17.0",
+    "@greenwood/cli": "^0.18.0-alpha.0",
+    "@greenwood/plugin-import-css": "^0.18.0-alpha.0",
+    "@greenwood/plugin-postcss": "^0.18.0-alpha.0",
     "@ls-lint/ls-lint": "^1.10.0",
     "@storybook/addon-actions": "^6.3.2",
     "@storybook/addon-essentials": "^6.3.2",
