@@ -55,7 +55,6 @@ module.exports = {
         const { outputDir, projectDirectory } = compilation.context;
 
         return [{
-          // can only copy a directory to a directory
           from: path.join(projectDirectory, 'node_modules/font-awesome/fonts'),
           to: path.join(outputDir, 'fonts')
         }];
