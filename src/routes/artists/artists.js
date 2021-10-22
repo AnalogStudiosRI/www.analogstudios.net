@@ -2,6 +2,8 @@
 import { html, LitElement } from 'lit';
 import { getArtists } from '../../services/artists-service.js';
 import { modelArtist } from '../../components/card/card.js';
+import { navigate } from 'lit-redux-router';
+import store from '../../store.js';
 import artistsCss from './artists.css?type=css';
 
 class ArtistsRouteComponent extends LitElement {
@@ -25,9 +27,9 @@ class ArtistsRouteComponent extends LitElement {
   }
 
   onArtistSelected() {
-    const selectedArtistId = this.shadowRoot.querySelector('select').value;
+    const selectedAristId = this.shadowRoot.querySelector('select').value;
 
-    alert(`onArtistSelected => ${selectedArtistId}`);
+    store.dispatch(navigate(`/artists/${selectedAristId}`));
   }
 
   /* eslint-disable indent */

@@ -2,6 +2,8 @@
 import { html, LitElement } from 'lit';
 import { getAlbums } from '../../services/albums-service.js';
 import { modelAlbum } from '../../components/card/card.js';
+import { navigate } from 'lit-redux-router';
+import store from '../../store.js';
 import albumsCss from './albums.css?type=css';
 
 class AlbumsRouteComponent extends LitElement {
@@ -27,7 +29,7 @@ class AlbumsRouteComponent extends LitElement {
   onAlbumSelected() {
     const selectedAlbumId = this.shadowRoot.querySelector('select').value;
 
-    alert(`onAlbumSelected => ${selectedAlbumId}`);
+    store.dispatch(navigate(`/albums/${selectedAlbumId}`));
   }
 
   /* eslint-disable indent */
