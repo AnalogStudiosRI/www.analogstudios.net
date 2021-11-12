@@ -21,6 +21,7 @@ class App extends LitElement {
             component="as-route-home"
             .resolve="${() => import('/routes/home.js')}"
           ></lit-route>
+          <lit-route><h1>TODO</h1></lit-route>
         </main>
       </div>
     `;

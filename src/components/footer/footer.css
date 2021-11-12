@@ -1,0 +1,11 @@
+@import '../../theme.css';
+
+:host {
+  .copyright-text {
+    margin: 10px auto;
+    text-align: center;
+    color: var(--color-dark);
+    text-transform: uppercase;
+    font-family: var(--font-family-primary);
+  }
+}

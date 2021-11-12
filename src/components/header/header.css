@@ -1,0 +1,40 @@
+@import "../../theme.css";
+
+.as-header {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+
+  @include media-breakpoint-only(xs) {
+    /* Override to make mobile nav display full-width */
+    margin: 0 (-$grid-gutter-width/2);
+  }
+
+  @include media-breakpoint-up(lg) {
+    flex-direction: row;
+    align-items: center;
+    padding: 45px 0 30px 0;
+    margin: 0;
+  }
+
+  & .as-header__logo {
+    flex-grow: 1;
+    align-self: center;
+    margin-bottom: 15px;
+    color: $black;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 2rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      align-self: auto;
+      margin: 0;
+    }
+  }
+}

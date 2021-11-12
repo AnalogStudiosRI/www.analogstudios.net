@@ -1,4 +1,6 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, unsafeCSS } from 'lit';
+import '../navigation/navigation.js';
+import headerCss from './header.css?type=css';
 
 class HeaderComponent extends LitElement {
   constructor() {
@@ -7,16 +9,15 @@ class HeaderComponent extends LitElement {
 
   static get styles() {
     return css`
-      h1 {
-        color: var(--color-font-secondary);
-        text-align: center;
-      }`;
+      ${unsafeCSS(headerCss)}`;
   }
 
   render() {
     return html`
-      <header>
-        <h1>Welcome to Analog Studios</h1>
+      <header class="as-header">
+        <h1 class="as-header__logo"><a title="Home Page" href="/">Analog Studios</a></h1>
+
+        <app-navigation></app-navigation>
       </header>
     `;
   }
