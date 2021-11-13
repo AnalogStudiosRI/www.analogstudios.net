@@ -58,7 +58,7 @@ class CardComponent extends LitElement {
                   <div class="media-body">
                     <!-- TODO anchor link here (click)="onArtistClicked(artist)" -->
                     <h4 class="media-heading">${details.headingText}</h4>
-                    <p>${unsafeHTML(details.bodyText)}</p>
+                    <p>${unsafeHTML(details.bodyText || '')}</p>
                   </div>
 
                 </div>
