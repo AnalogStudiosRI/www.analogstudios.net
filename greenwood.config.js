@@ -16,18 +16,6 @@ module.exports = {
     ...pluginImportCss(),
     ...greenwoodPluginFontAwesome(),
     {
-      type: 'copy',
-      name: 'plugin-copy-font-awesome',
-      provider: (compilation) => {
-        const { outputDir, projectDirectory } = compilation.context;
-
-        return [{
-          from: path.join(projectDirectory, 'node_modules/font-awesome/fonts'),
-          to: path.join(outputDir, 'fonts')
-        }];
-      }
-    },
-    {
       type: 'rollup',
       name: 'rollup-plugin-analyzer',
       provider: () => {
