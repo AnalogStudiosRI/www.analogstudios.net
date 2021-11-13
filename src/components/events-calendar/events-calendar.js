@@ -2,7 +2,6 @@
 import { html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../../services/events-service.js';
-
 import eventsCalendarCss from './events-calendar.css?type=css';
 
 class EventsCalendarComponent extends LitElement {
@@ -81,11 +80,6 @@ class EventsCalendarComponent extends LitElement {
 
   shiftToNextMonth() {
     this.calculateNextMonth();
-  }
-
-  selectEvent(selectedEvent) {
-    console.debug('selectedEvent TODO!!!', selectedEvent);
-    // this.Router.navigate(['events', selectedEvent.id]);
   }
 
   calculateCurrentMonthData() {

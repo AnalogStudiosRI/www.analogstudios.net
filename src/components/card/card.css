@@ -1,0 +1,24 @@
+@import "../../theme.css";
+
+.as-card {
+
+  & a {
+    text-decoration: none;
+    color: var(--color-dark)
+  }
+
+  & img {
+    max-width: var(--img-width-mobile);
+    cursor: pointer;
+  }
+
+  & .card-row {
+    padding-bottom: 20px;
+
+    h4 {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+}
