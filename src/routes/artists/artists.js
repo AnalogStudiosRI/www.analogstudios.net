@@ -6,7 +6,6 @@ import { navigate } from 'lit-redux-router';
 import store from '../../store.js';
 import artistsCss from './artists.css?type=css';
 
-
 class ArtistsRouteComponent extends LitElement {
 
   static get properties() {
