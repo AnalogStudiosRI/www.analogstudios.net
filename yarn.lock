@@ -6552,6 +6552,11 @@ gray-matter@^2.1.0:
     js-yaml "^3.8.1"
     toml "^2.3.2"
 
+greenwood-plugin-font-awesome@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.1.0.tgz#fbd0ad12821991f6ee46fbdee0792f94dd3afb57"
+  integrity sha512-FMZvfduhLQjyqfstO+4+1HkYicukHrtj3uX39OGgehFAu7RcqpTfxSM8E7FtoirPcMY6ALlOBeKkxvNQO6WasA==
+
 gud@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
