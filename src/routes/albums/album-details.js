@@ -20,7 +20,7 @@ class AlbumDetailsRouteComponent extends LitElement {
   }
 
   getDownloadLink(album) {
-    if(!album.downloadUrl) {
+    if (!album.downloadUrl) {
       return html``;
     } else {
       return html`
@@ -33,11 +33,9 @@ class AlbumDetailsRouteComponent extends LitElement {
   render() {
     const { album } = this;
 
-    if(!album) {
+    if (!album) {
       return html``;
     } else {
-      const modeledAlbum = modelAlbum(album);
-
       return html`
         <style>
           ${albumsCss}

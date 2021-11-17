@@ -24,7 +24,7 @@ class ArtistDetailsRouteComponent extends LitElement {
   }
 
   getAlbumsForArtist(artist) {
-    if(!this.albums || this.albums.length === 0) {
+    if (!this.albums || this.albums.length === 0) {
       return html``;
     } else {
       return html`
@@ -32,7 +32,7 @@ class ArtistDetailsRouteComponent extends LitElement {
 
         ${
           this.albums.map((album) => {
-            return html`<app-card .details="${modelAlbum(album)}"></app-card>`
+            return html`<app-card .details="${modelAlbum(album)}"></app-card>`;
           })
         }
       `;
@@ -43,11 +43,9 @@ class ArtistDetailsRouteComponent extends LitElement {
   render() {
     const { artist } = this;
 
-    if(!artist) {
+    if (!artist) {
       return html``;
     } else {
-      const modeledArtist = modelArtist(artist);
-
       return html`
         <style>
           ${artistsCss}
@@ -68,7 +66,7 @@ class ArtistDetailsRouteComponent extends LitElement {
 
               <div class="card-row hidden-md-up" >
                 <h4>${artist.name}</h4>
-                <img src="${artist.imageUrl}" alt="${modeledArtist.name}"/>
+                <img src="${artist.imageUrl}" alt="${artist.name}"/>
                 <p>${unsafeHTML(artist.bio)}</p>
               </div>
 
