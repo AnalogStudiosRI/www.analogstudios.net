@@ -2,11 +2,11 @@
 
 .as-route-event-details {
 
-  .cal-icon {
+  & .cal-icon {
     font-size: 5rem;
   }
 
-  img {
+  & img {
     display: block!important;
     height: 100%!important;
     width: 100%!important;
