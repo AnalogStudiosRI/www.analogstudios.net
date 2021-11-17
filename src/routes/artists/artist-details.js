@@ -53,7 +53,7 @@ class ArtistDetailsRouteComponent extends LitElement {
           ${artistsCss}
         </style>
 
-        <div class="container-flex as-view-artist-details">
+        <div class="container-flex as-route-artist-details">
           <div class="row">
 
             <div class="col-xs-4 hidden-sm-down">
