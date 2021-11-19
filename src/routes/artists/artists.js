@@ -42,7 +42,7 @@ class ArtistsRouteComponent extends LitElement {
 
   /* eslint-disable indent */
   render() {
-    const { artists, displayArtists, analog } = this;
+    const { displayArtists, analog } = this;
 
     return html`
       <style>
