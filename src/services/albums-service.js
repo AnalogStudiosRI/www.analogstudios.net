@@ -11,7 +11,13 @@ function getAlbumById(id) {
     .then(resp => resp[0]);
 }
 
+function getAlbumsByArtistId(id) {
+  return fetch(`${ALBUMS_API_URL}?artistId=${id}`)
+    .then(resp => resp.json());
+}
+
 export {
   getAlbums,
-  getAlbumById
+  getAlbumById,
+  getAlbumsByArtistId
 };

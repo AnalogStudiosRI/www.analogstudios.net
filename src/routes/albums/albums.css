@@ -10,6 +10,7 @@
 .as-routes-album-details {
 
   & .download-url {
+    color: var(--color-dark);
     padding-left: 20px;
   }
 
