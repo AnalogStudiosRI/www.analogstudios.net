@@ -17,13 +17,21 @@ class ArtistsRouteComponent extends LitElement {
   constructor() {
     super();
 
+    this.ANALOG_ID = '1';
     this.artists = [];
+    this.displayArtists = [];
+    this.analog = {};
   }
 
   async connectedCallback() {
     super.connectedCallback();
 
     this.artists = await getArtists();
+    
+    // make sure "newer" artists are at the top
+    // and keep Analog at the top of the list
+    this.displayArtists = this.artists.reverse().filter(artist => artist.id !== this.ANALOG_ID);
+    this.analog = this.artists.filter(artist => artist.id === this.ANALOG_ID)[0];
   }
 
   onArtistSelected() {
@@ -34,7 +42,7 @@ class ArtistsRouteComponent extends LitElement {
 
   /* eslint-disable indent */
   render() {
-    const { artists } = this;
+    const { displayArtists, analog } = this;
 
     return html`
       <style>
@@ -50,7 +58,7 @@ class ArtistsRouteComponent extends LitElement {
 
             <select class="hidden-sm-down" @change="${this.onArtistSelected}">
               <option .value="Select Artist">Select Artist</option>
-              ${artists.map((artist) => {
+              ${[analog, ...displayArtists].map((artist) => {
                 return html`
                   <option .value="${artist.id}">${artist.name}</option>
                 `;
@@ -61,13 +69,15 @@ class ArtistsRouteComponent extends LitElement {
           </div>
 
           <div class="col-xs-7">
-            ${artists.map((artist) => {
-              return html`
-                <div class="artist-cards-list">
+            <div class="artist-cards-list">
+              <app-card .details="${modelArtist(analog)}"></app-card>
+
+              ${displayArtists.map((artist) => {
+                return html`
                   <app-card .details="${modelArtist(artist)}"></app-card>
-                </div>
-              `;
-            })}
+                `;
+              })};
+            </div>
           </div>
 
         </div>
