@@ -42,7 +42,7 @@ class ArtistsRouteComponent extends LitElement {
 
   /* eslint-disable indent */
   render() {
-    const { displayArtists, analog } = this;
+    const { artists, displayArtists, analog } = this;
 
     return html`
       <style>
@@ -58,7 +58,7 @@ class ArtistsRouteComponent extends LitElement {
 
             <select class="hidden-sm-down" @change="${this.onArtistSelected}">
               <option .value="Select Artist">Select Artist</option>
-              ${displayArtists.map((artist) => {
+              ${[analog, ...displayArtists].map((artist) => {
                 return html`
                   <option .value="${artist.id}">${artist.name}</option>
                 `;
