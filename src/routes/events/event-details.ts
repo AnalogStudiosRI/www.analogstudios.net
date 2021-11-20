@@ -5,20 +5,14 @@ import { getEventById } from '../../services/events/events-service.ts';
 import { Event } from '../../services/events/event.model.ts';
 import eventsCss from './events.css?type=css';
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
 @customElement('as-route-event-details')
 export class EventDetailsRouteComponent extends LitElement {
 
-  @property() event: Event;
+  private MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  private DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  static properties() {
-    return {
-      id: String,
-      event: Object
-    };
-  }
+  @property() id: string;
+  @property() event: Event;
 
   async connectedCallback() {
     super.connectedCallback();
@@ -30,8 +24,8 @@ export class EventDetailsRouteComponent extends LitElement {
   // SATURDAY, FEBRUARY 6, 2016, 9:00 PM
   private formatEventTime(timestamp: number): string {
     const dateObj = new Date(timestamp * 1000);
-    const day = DAYS[dateObj.getDay()].toUpperCase();
-    const month = MONTHS[dateObj.getMonth()].toUpperCase();
+    const day = this.DAYS[dateObj.getDay()].toUpperCase();
+    const month = this.MONTHS[dateObj.getMonth()].toUpperCase();
     const date = dateObj.getDate();
     const year = dateObj.getFullYear();
     const hours = dateObj.getHours();

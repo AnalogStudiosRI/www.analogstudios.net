@@ -10,14 +10,8 @@ import albumsCss from './albums.css?type=css';
 @customElement('as-route-album-details')
 export class AlbumDetailsRouteComponent extends LitElement {
 
+  @property() id: string;
   @property() album: Album;
-
-  static properties() {
-    return {
-      id: String,
-      album: Object
-    };
-  }
 
   async connectedCallback() {
     super.connectedCallback();

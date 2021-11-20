@@ -12,16 +12,11 @@ import artistsCss from './artists.css?type=css';
 @customElement('as-route-artists')
 export class ArtistsRouteComponent extends LitElement {
 
-  @property() ANALOG_ID = '1';
-  @property() artists: Array<Artist> = [];
-  @property() displayArtists: Array<Artist> = [];
-  @property() analog: Artist = {};
+  private ANALOG_ID = '1';
+  private displayArtists: Array<Artist> = [];
+  private analog: Artist = {};
 
-  static properties() {
-    return {
-      artists: { type: Array }
-    };
-  }
+  @property() artists: Array<Artist> = [];
 
   async connectedCallback() {
     super.connectedCallback();
