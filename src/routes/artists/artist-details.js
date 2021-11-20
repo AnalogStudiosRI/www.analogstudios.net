@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { getArtistById } from '../../services/artists-service.js';
-import { getAlbumsByArtistId } from '../../services/albums-service.js';
+import { getArtistById } from '../../services/artists/artists-service.ts';
+import { getAlbumsByArtistId } from '../../services/albums/albums-service.ts';
 import { modelArtist, modelAlbum } from '../../components/card/card.model.ts';
 import '../../components/card/card.ts';
 import artistsCss from './artists.css?type=css';

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
-import { getAlbums } from '../../services/albums-service.js';
+import { getAlbums } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
 import { navigate } from 'lit-redux-router';
 import store from '../../store.js';

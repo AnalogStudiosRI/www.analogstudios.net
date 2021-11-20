@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { getAlbumById } from '../../services/albums-service.js';
+import { getAlbumById } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
 import '../../components/card/card.ts';
 import albumsCss from './albums.css?type=css';
