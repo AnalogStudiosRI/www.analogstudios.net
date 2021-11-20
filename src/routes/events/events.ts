@@ -1,11 +1,13 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import '../../components/events-calendar/events-calendar.ts';
 import eventsCss from './events.css?type=css';
 
+@customElement('as-route-events')
 class EventsRouteComponent extends LitElement {
 
-  render() {
+  protected render() {
     return html`
       <style>
         ${eventsCss}
@@ -15,9 +17,7 @@ class EventsRouteComponent extends LitElement {
         <div class="row">
 
           <div class="col-md-12">
-
             <app-events-calendar></app-events-calendar>
-
           </div>
 
         </div>
@@ -25,5 +25,3 @@ class EventsRouteComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('as-route-events', EventsRouteComponent);

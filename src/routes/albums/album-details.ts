@@ -1,13 +1,19 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getAlbumById } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
+import { Album } from '../../services/albums/album.model.ts';
 import '../../components/card/card.ts';
 import albumsCss from './albums.css?type=css';
 
+@customElement('as-route-album-details')
 class AlbumDetailsRouteComponent extends LitElement {
 
-  static get properties() {
+  @property()
+  album: Album;
+
+  static properties() {
     return {
       id: String,
       album: Object
@@ -20,7 +26,7 @@ class AlbumDetailsRouteComponent extends LitElement {
     this.album = await getAlbumById(this.id);
   }
 
-  getDownloadLink(album) {
+  private getDownloadLink(album: Album): TemplateResult {
     if (!album.downloadUrl) {
       return html``;
     } else {
@@ -31,7 +37,7 @@ class AlbumDetailsRouteComponent extends LitElement {
   }
 
   /* eslint-disable indent */
-  render() {
+  protected render(): TemplateResult {
     const { album } = this;
 
     if (!album) {
@@ -71,5 +77,3 @@ class AlbumDetailsRouteComponent extends LitElement {
   }
   /* eslint-enable indent */
 }
-
-customElements.define('as-route-album-details', AlbumDetailsRouteComponent);
