@@ -16,6 +16,7 @@
 
     <script type="module" src="./components/footer/footer.js"></script>
     <script type="module" src="./components/header/header.js"></script>
+    <script type="module" src="./components/greeting/greeting.ts"></script>
     <script type="module" src="./index.js"></script>
 
     <link rel="stylesheet" href="./theme.css"></script>
@@ -29,6 +30,9 @@
     <div class="container">
       <section>
         <main class="router-outlet">
+          <app-greeting></app-greeting>
+          <app-greeting name="Owen"></app-greeting>
+
           <app-router-outlet></app-router-outlet>
         </main>
       </section>
