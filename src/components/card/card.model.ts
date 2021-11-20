@@ -1,4 +1,7 @@
-function modelAlbum(album) {
+import { Artist } from '../../services/artists/artist.model';
+import { Album } from '../../services/albums/album.model';
+
+function modelAlbum(album: Album) {
   return {
     imagePath: album ? album.imageUrl : '',
     headingText: album ? album.title : '',
@@ -8,7 +11,7 @@ function modelAlbum(album) {
   };
 }
 
-function modelArtist(artist) {
+function modelArtist(artist: Artist) {
   return {
     imagePath: artist ? artist.imageUrl : '',
     headingText: artist ? artist.name : '',
@@ -18,7 +21,16 @@ function modelArtist(artist) {
   };
 }
 
+interface Details {
+  imagePath: string,
+  headingText: string,
+  bodyText: string,
+  imageAltText: string,
+  link: string
+}
+
 export {
   modelAlbum,
-  modelArtist
+  modelArtist,
+  Details
 };

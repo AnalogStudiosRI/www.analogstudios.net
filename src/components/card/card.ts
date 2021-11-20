@@ -1,12 +1,15 @@
 import { css, html, LitElement, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { Artist } from '../../services/artists/artist.model';
+import { Album } from '../../services/albums/album.model';
+import { Details } from './card.model.ts';
 import cardCss from './card.css?type=css';
 
 @customElement('app-card')
 class CardComponent extends LitElement {
   @property()
-  details;
+  details: Details;
 
   static properties() {
     return {
