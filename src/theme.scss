@@ -1,0 +1,26 @@
+@import "../node_modules/font-awesome/css/font-awesome.css";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+:root, :host {
+  /* raw tokens */
+  --white: #efefef;
+  --black: #1a1a1a;
+  --gold: #a48f65;
+  --creme: #f1e7d3;
+  --blue: #316291;
+
+  /* design system - colors */
+  --color-primary: var(--black);
+  --color-secondary: var(--gold);
+  --color-tertiary: var(--creme);
+  --color-light: var(--white);
+  --color-dark: var(--black);
+  --color-font-primary: var(--color-primary);
+  --color-font-secondary: var(--blue);
+
+  /* design system - typography */
+  --font-family-primary: 'Montserrat', sans-serif;
+
+  /* misc */
+  --img-width-mobile: 200px;
+}
