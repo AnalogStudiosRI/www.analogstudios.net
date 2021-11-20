@@ -1,16 +1,11 @@
 import { css, html, LitElement, unsafeCSS } from 'lit';
-import '../navigation/navigation.js';
+import { customElement, property } from 'lit/decorators.js';
+import '../navigation/navigation.ts';
 import headerCss from './header.css?type=css';
 
+@customElement('app-header')
 class HeaderComponent extends LitElement {
-  constructor() {
-    super();
-  }
-
-  static get styles() {
-    return css`
-      ${unsafeCSS(headerCss)}`;
-  }
+  static styles = css`${unsafeCSS(headerCss)}`;
 
   render() {
     return html`
@@ -22,5 +17,3 @@ class HeaderComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('app-header', HeaderComponent);
