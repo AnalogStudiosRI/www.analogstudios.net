@@ -41,11 +41,6 @@ class App extends LitElement {
             .resolve="${() => import('/routes/events/events.js')}">
           </lit-route>
           <lit-route
-            path="/events"
-            component="as-route-events"
-            .resolve="${() => import('/routes/events/events.js')}"
-          ></lit-route>
-          <lit-route
             path="/"
             component="as-route-home"
             .resolve="${() => import('/routes/home/home.js')}">
