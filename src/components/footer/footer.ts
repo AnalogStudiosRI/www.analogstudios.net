@@ -1,35 +1,30 @@
 import { css, html, LitElement, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import footerCss from './footer.css?type=css';
 
-class FooterComponent extends LitElement {
-  constructor() {
-    super();
+@customElement('app-footer')
+export class FooterComponent extends LitElement {
+  static styles = css`${unsafeCSS(footerCss)}`;
 
-    this.STARTING_YEAR = 2007;
-    this.currentYear = new Date().getFullYear(); 
-  }
+  @property()
+  private STARTING_YEAR = 2007;
 
-  static get styles() {
-    return css`
-      ${unsafeCSS(footerCss)}
-    `;
-  }
+  @property()
+  private currentYear = new Date().getFullYear();
 
-  render() {
+  protected render() {
     const { currentYear, STARTING_YEAR } = this;
 
     return html`
       <footer class="container as-footer">
         <div class="row">
-      
+
           <div class="col-xs-12">
             <p class="copyright-text">&copy; ${STARTING_YEAR} - ${currentYear} Analog Studios</p>
           </div>
-      
+
         </div>
       </footer>
     `;
   }
 }
-
-customElements.define('app-footer', FooterComponent);

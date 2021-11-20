@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import './footer.js';
+import './footer.ts';
 
 describe('Footer Component', () => {
   let footer;
