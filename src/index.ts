@@ -6,7 +6,7 @@ import store from './store.ts';
 connectRouter(store);
 
 @customElement('app-router-outlet')
-class App extends LitElement {
+export class App extends LitElement {
 
   render() {
     return html`

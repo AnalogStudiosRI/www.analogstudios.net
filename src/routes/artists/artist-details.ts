@@ -11,15 +11,12 @@ import '../../components/card/card.ts';
 import artistsCss from './artists.css?type=css';
 
 @customElement('as-route-artist-details')
-class ArtistDetailsRouteComponent extends LitElement {
+export class ArtistDetailsRouteComponent extends LitElement {
 
-  @property()
-  artist: Artist;
+  @property() artist: Artist;
+  @property() albums: Array<Album>;
 
-  @property()
-  albums: Array<Album>;
-
-  static  properties() {
+  static properties() {
     return {
       id: Number,
       artist: Object,

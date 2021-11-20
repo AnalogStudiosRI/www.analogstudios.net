@@ -5,7 +5,7 @@ import { getPosts } from '../../services/posts/posts-service.ts';
 import postsListCss from './posts-list.css?type=css';
 
 @customElement('app-posts-list')
-class PostsListComponent extends LitElement {
+export class PostsListComponent extends LitElement {
   static properties() {
     return {
       max: { type: Number },
@@ -13,11 +13,8 @@ class PostsListComponent extends LitElement {
     };
   }
 
-  @property()
-  max = null;
-
-  @property()
-  posts = [];
+  @property() max;
+  @property() posts = [];
 
   async connectedCallback() {
     super.connectedCallback();

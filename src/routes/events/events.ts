@@ -5,7 +5,7 @@ import '../../components/events-calendar/events-calendar.ts';
 import eventsCss from './events.css?type=css';
 
 @customElement('as-route-events')
-class EventsRouteComponent extends LitElement {
+export class EventsRouteComponent extends LitElement {
 
   protected render() {
     return html`

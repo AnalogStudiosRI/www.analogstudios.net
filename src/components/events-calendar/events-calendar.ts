@@ -1,21 +1,16 @@
 /* eslint-disable max-depth */
 import { html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../../services/events/events-service.ts';
 import eventsCalendarCss from './events-calendar.css?type=css';
 
 @customElement('app-events-calendar')
-class EventsCalendarComponent extends LitElement {
+export class EventsCalendarComponent extends LitElement {
 
-  @property()
-  DAYS_IN_WEEK = 7;
-
-  @property()
-  MAX_CALENDAR_SPACES = 35;
-
-  @property()
-  CALENDAR = [
+  @property() DAYS_IN_WEEK = 7;
+  @property() MAX_CALENDAR_SPACES = 35;
+  @property() CALENDAR = [
     { NAME: 'January', DAYS: 31 },
     { NAME: 'February', DAYS: 28 },
     { NAME: 'March', DAYS: 31 },
@@ -29,24 +24,12 @@ class EventsCalendarComponent extends LitElement {
     { NAME: 'November', DAYS: 30 },
     { NAME: 'December', DAYS: 31 }
   ];
-
-  @property()
-  events = [];
-
-  @property()
-  hasEvents = false;
-
-  @property()
-  currentEventIndex = 0;
-
-  @property()
-  currentMonthData = [];
-
-  @property()
-  currentMonthIndex;
-
-  @property()
-  currentYear;
+  @property() events = [];
+  @property() hasEvents = false;
+  @property() currentEventIndex = 0;
+  @property() currentMonthData = [];
+  @property() currentMonthIndex;
+  @property() currentYear;
 
   static properties() {
     return {
@@ -63,7 +46,6 @@ class EventsCalendarComponent extends LitElement {
     this.currentMonthIndex = now.getMonth();
     this.currentYear = now.getFullYear();
   }
-
 
   async connectedCallback() {
     super.connectedCallback();
@@ -127,7 +109,6 @@ class EventsCalendarComponent extends LitElement {
 
         // check if day has an event
         for (let k = 0, m = this.events.length; k < m; k += 1) {
-          // TODO any https://thegreenhouse.atlassian.net/browse/AS-246
           let event = this.events[k];
           let eventStartTimeTimestamp = event.startTime;
           let currentDayStartTimestamp = new Date(this.currentYear, this.currentMonthIndex, monthDateCounter, 0, 0, 0).getTime() / 1000;
@@ -135,7 +116,6 @@ class EventsCalendarComponent extends LitElement {
 
           if (eventStartTimeTimestamp >= currentDayStartTimestamp &&
              eventStartTimeTimestamp <= currentDayEndTimestamp) {
-            // TODO support multiple events on same day https://thegreenhouse.atlassian.net/browse/AS-260
             if (!day.hasEvents) {
               day.events.push(event);
               day.hasEvents = true;

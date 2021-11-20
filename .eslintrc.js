@@ -1,5 +1,6 @@
 module.exports = {
-  parser: 'babel-eslint',
+  root: true,
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
@@ -8,6 +9,9 @@ module.exports = {
     browser: true,
     node: false
   },
+  plugins: [
+    '@typescript-eslint'
+  ],
   rules: {
     'comma-dangle': [2, 'never'],
     'no-cond-assign': 2,
@@ -93,7 +97,7 @@ module.exports = {
     'no-unused-expressions': 0,
     'no-useless-call': 0,
     'no-void': 0,
-    'no-warning-comments': [1, { 
+    'no-warning-comments': [1, {
       'terms': [
         'todo',
         ' fixme',
