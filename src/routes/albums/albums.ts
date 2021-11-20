@@ -14,12 +14,6 @@ export class AlbumsRouteComponent extends LitElement {
 
   @property() albums: Array<Album> = [];
 
-  static properties() {
-    return {
-      albums: { type: Array }
-    };
-  }
-
   async connectedCallback() {
     super.connectedCallback();
 

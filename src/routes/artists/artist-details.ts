@@ -13,16 +13,9 @@ import artistsCss from './artists.css?type=css';
 @customElement('as-route-artist-details')
 export class ArtistDetailsRouteComponent extends LitElement {
 
+  @property() id: string;
   @property() artist: Artist;
   @property() albums: Array<Album>;
-
-  static properties() {
-    return {
-      id: Number,
-      artist: Object,
-      albums: Array
-    };
-  }
 
   async connectedCallback() {
     super.connectedCallback();

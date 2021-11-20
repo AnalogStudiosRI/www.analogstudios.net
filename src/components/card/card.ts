@@ -8,12 +8,6 @@ import cardCss from './card.css?type=css';
 export class CardComponent extends LitElement {
   @property() details: Details;
 
-  static properties() {
-    return {
-      details: { type: Object }
-    };
-  }
-
   static styles = css`${unsafeCSS(cardCss)}`;
 
   protected render() {

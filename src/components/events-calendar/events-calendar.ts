@@ -8,9 +8,9 @@ import eventsCalendarCss from './events-calendar.css?type=css';
 @customElement('app-events-calendar')
 export class EventsCalendarComponent extends LitElement {
 
-  @property() DAYS_IN_WEEK = 7;
-  @property() MAX_CALENDAR_SPACES = 35;
-  @property() CALENDAR = [
+  private DAYS_IN_WEEK = 7;
+  private MAX_CALENDAR_SPACES = 35;
+  private CALENDAR = [
     { NAME: 'January', DAYS: 31 },
     { NAME: 'February', DAYS: 28 },
     { NAME: 'March', DAYS: 31 },
@@ -24,20 +24,11 @@ export class EventsCalendarComponent extends LitElement {
     { NAME: 'November', DAYS: 30 },
     { NAME: 'December', DAYS: 31 }
   ];
+  private currentMonthData = [];
+
   @property() events = [];
-  @property() hasEvents = false;
-  @property() currentEventIndex = 0;
-  @property() currentMonthData = [];
   @property() currentMonthIndex;
   @property() currentYear;
-
-  static properties() {
-    return {
-      events: { type: Array },
-      currentMonthIndex: { type: Number },
-      currentYear: { type: Number }
-    };
-  }
 
   constructor() {
     super();

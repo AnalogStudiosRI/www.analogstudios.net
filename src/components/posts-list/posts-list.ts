@@ -6,14 +6,7 @@ import postsListCss from './posts-list.css?type=css';
 
 @customElement('app-posts-list')
 export class PostsListComponent extends LitElement {
-  static properties() {
-    return {
-      max: { type: Number },
-      posts: { type: Array }
-    };
-  }
-
-  @property() max;
+  @property() max = 0;
   @property() posts = [];
 
   async connectedCallback() {
