@@ -5,7 +5,7 @@ import '../../components/posts-list/posts-list.ts';
 import homeCss from './home.css?type=css';
 
 @customElement('as-route-home')
-class HomeRouteComponent extends LitElement {
+export class HomeRouteComponent extends LitElement {
 
   protected render() {
     return html`

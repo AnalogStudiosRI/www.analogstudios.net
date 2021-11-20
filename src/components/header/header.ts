@@ -4,7 +4,7 @@ import '../navigation/navigation.ts';
 import headerCss from './header.css?type=css';
 
 @customElement('app-header')
-class HeaderComponent extends LitElement {
+export class HeaderComponent extends LitElement {
   static styles = css`${unsafeCSS(headerCss)}`;
 
   protected render() {

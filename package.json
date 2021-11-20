@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rimraf .greenwood/ public/ reports/ storybook-static/",
-    "lint": "eslint \"*.js\" \"./.storybook/*.js\" \"./src/**/*.js\" && ls-lint \"./src/**/*.js\"",
+    "lint": "eslint \"*.js\" \"./.storybook/*.js\" \"./src/**/*.js\" \"./src/**/*.ts\" && ls-lint \"./src/**/*.js\"",
     "develop": "greenwood develop",
     "build": "greenwood build",
     "start": "yarn develop",
@@ -41,7 +41,6 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
     "@esm-bundle/chai": "^4.3.4",
     "@greenwood/cli": "^0.19.2",
     "@greenwood/plugin-import-css": "^0.19.2",
@@ -53,12 +52,12 @@
     "@storybook/addon-links": "^6.3.2",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/web-components": "^6.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "@web/test-runner": "^0.13.13",
     "@web/test-runner-junit-reporter": "^0.4.4",
     "@web/test-runner-puppeteer": "^0.10.2",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.2.2",
-    "eslint": "^6.8.0",
+    "eslint": "^8.2.0",
     "greenwood-plugin-font-awesome": "^0.1.0",
     "postcss-nested": "^4.1.2",
     "rimraf": "^2.6.3",
@@ -66,6 +65,7 @@
     "rollup-plugin-visualizer": "^5.5.2",
     "stylelint": "^13.8.0",
     "stylelint-a11y": "^1.2.3",
-    "stylelint-config-standard": "^20.0.0"
+    "stylelint-config-standard": "^20.0.0",
+    "typescript": "^4.5.2"
   }
 }

@@ -9,10 +9,9 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 @customElement('as-route-event-details')
-class EventDetailsRouteComponent extends LitElement {
+export class EventDetailsRouteComponent extends LitElement {
 
-  @property()
-  event: Event;
+  @property() event: Event;
 
   static properties() {
     return {

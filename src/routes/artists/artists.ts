@@ -10,19 +10,12 @@ import '../../components/card/card.ts';
 import artistsCss from './artists.css?type=css';
 
 @customElement('as-route-artists')
-class ArtistsRouteComponent extends LitElement {
+export class ArtistsRouteComponent extends LitElement {
 
-  @property()
-  artists: Array<Artist> = [];
-
-  @property()
-  ANALOG_ID = "1";
-
-  @property()
-  displayArtists: Array<Artist> = [];
-
-  @property()
-  analog: Artist = {};
+  @property() ANALOG_ID = '1';
+  @property() artists: Array<Artist> = [];
+  @property() displayArtists: Array<Artist> = [];
+  @property() analog: Artist = {};
 
   static properties() {
     return {
@@ -48,7 +41,7 @@ class ArtistsRouteComponent extends LitElement {
   }
 
   /* eslint-disable indent */
-  render() {
+  protected render(): TemplateResult {
     const { displayArtists, analog } = this;
 
     return html`

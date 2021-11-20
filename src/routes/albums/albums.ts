@@ -10,10 +10,9 @@ import '../../components/card/card.ts';
 import albumsCss from './albums.css?type=css';
 
 @customElement('as-route-albums')
-class AlbumsRouteComponent extends LitElement {
+export class AlbumsRouteComponent extends LitElement {
 
-  @property()
-  albums: Array<Album> = [];
+  @property() albums: Array<Album> = [];
 
   static properties() {
     return {
