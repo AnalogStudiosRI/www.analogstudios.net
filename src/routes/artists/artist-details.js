@@ -3,7 +3,8 @@ import { html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getArtistById } from '../../services/artists-service.js';
 import { getAlbumsByArtistId } from '../../services/albums-service.js';
-import { modelArtist, modelAlbum } from '../../components/card/card.js';
+import { modelArtist, modelAlbum } from '../../components/card/card.model.ts';
+import '../../components/card/card.ts';
 import artistsCss from './artists.css?type=css';
 
 class ArtistDetailsRouteComponent extends LitElement {

@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
 import { getArtists } from '../../services/artists-service.js';
-import { modelArtist } from '../../components/card/card.js';
+import { modelArtist } from '../../components/card/card.model.ts';
 import { navigate } from 'lit-redux-router';
 import store from '../../store.js';
+import '../../components/card/card.ts';
 import artistsCss from './artists.css?type=css';
 
 class ArtistsRouteComponent extends LitElement {
@@ -27,7 +28,7 @@ class ArtistsRouteComponent extends LitElement {
     super.connectedCallback();
 
     this.artists = await getArtists();
-    
+
     // make sure "newer" artists are at the top
     // and keep Analog at the top of the list
     this.displayArtists = this.artists.reverse().filter(artist => artist.id !== this.ANALOG_ID);

@@ -1,44 +1,22 @@
 import { css, html, LitElement, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import cardCss from './card.css?type=css';
 
-function modelAlbum(album) {
-  return {
-    imagePath: album ? album.imageUrl : '',
-    headingText: album ? album.title : '',
-    bodyText: album ? album.description : '',
-    imageAltText: album ? album.title : '',
-    link: album ? '/albums/' + album.id : ''
-  };
-}
-
-function modelArtist(artist) {
-  return {
-    imagePath: artist ? artist.imageUrl : '',
-    headingText: artist ? artist.name : '',
-    bodyText: artist ? artist.bio : '',
-    imageAltText: artist ? artist.name : '',
-    link: artist ? '/artists/' + artist.id : ''
-  };
-}
-
+@customElement('app-card')
 class CardComponent extends LitElement {
-  static get properties() {
+  @property()
+  details;
+
+  static properties() {
     return {
       details: { type: Object }
     };
   }
 
-  static get styles() {
-    return css`
-      ${unsafeCSS(cardCss)}`;
-  }
+  static styles = css`${unsafeCSS(cardCss)}`;
 
-  constructor() {
-    super();
-  }
-
-  render() {
+  protected render() {
     const { details } = this;
 
     return html`
@@ -79,10 +57,3 @@ class CardComponent extends LitElement {
     `;
   }
 }
-
-export {
-  modelAlbum,
-  modelArtist
-};
-
-customElements.define('app-card', CardComponent);
