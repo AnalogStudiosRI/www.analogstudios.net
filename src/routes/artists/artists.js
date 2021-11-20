@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
-import { getArtists } from '../../services/artists-service.js';
+import { getArtists } from '../../services/artists/artists-service.ts';
 import { modelArtist } from '../../components/card/card.model.ts';
 import { navigate } from 'lit-redux-router';
 import store from '../../store.js';

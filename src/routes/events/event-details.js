@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { getEventById } from '../../services/events-service.js';
+import { getEventById } from '../../services/events/events-service.ts';
 import eventsCss from './events.css?type=css';
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
