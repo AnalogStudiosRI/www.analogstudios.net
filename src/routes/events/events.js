@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
-import '../../components/events-calendar/events-calendar.js';
+import '../../components/events-calendar/events-calendar.ts';
 import eventsCss from './events.css?type=css';
 
 class EventsRouteComponent extends LitElement {
