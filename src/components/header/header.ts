@@ -7,7 +7,7 @@ import headerCss from './header.css?type=css';
 class HeaderComponent extends LitElement {
   static styles = css`${unsafeCSS(headerCss)}`;
 
-  render() {
+  protected render() {
     return html`
       <header class="as-header">
         <h1 class="as-header__logo"><a title="Home Page" href="/">Analog Studios</a></h1>

@@ -6,7 +6,7 @@ import navigationCss from './navigation.css?type=css';
 export class NavigationComponent extends LitElement {
   static styles = css`${unsafeCSS(navigationCss)}`;
 
-  render() {
+  protected render() {
     return html`
       <nav class="as-navigation">
         <ul class="list-unstyled as-navigation__list">
