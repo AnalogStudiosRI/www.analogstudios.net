@@ -1,32 +1,32 @@
 import { html, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getPosts } from '../../services/posts-service.js';
 
 import postsListCss from './posts-list.css?type=css';
 
+@customElement('app-posts-list')
 class PostsListComponent extends LitElement {
-
-  static get properties() {
+  static properties() {
     return {
       max: { type: Number },
       posts: { type: Array }
     };
   }
 
-  constructor() {
-    super();
+  @property()
+  max = null;
 
-    this.max = null;
-    this.posts = [];
-  }
+  @property()
+  posts = [];
 
   async connectedCallback() {
     super.connectedCallback();
-    
+
     this.posts = (await getPosts()).reverse();
   }
 
-  getFormateDate(timestamp) {
+  private getFormateDate(timestamp) {
     // SUNDAY, FEBRUARY 12, 2017, 8:47 AM
     const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCOTOBER', 'NOVEMBER', 'DECEMBER'];
@@ -38,7 +38,7 @@ class PostsListComponent extends LitElement {
     return `${days[dateObj.getDay()]}, ${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}, ${hours}:${dateObj.getMinutes()} ${amPm}`;
   }
 
-  render() {
+  protected render() {
     const maxDisplay = !this.max ? this.posts.length : this.max; // : this.max;
     const maxPosts = this.posts.slice(0, maxDisplay);
 
@@ -47,7 +47,7 @@ class PostsListComponent extends LitElement {
         ${postsListCss}
       </style>
       <div class="as-posts-list">
-        
+
         <h3 class="as-posts-list__heading">Latest Posts</h3>
         <div class="posts">
           ${
@@ -57,9 +57,9 @@ class PostsListComponent extends LitElement {
               return html`
                 <div class="post">
                   <div class="post__time">Posted: ${formattedDate}</div>
-      
+
                   <h4 class="post__heading">${post.title}</h4>
-            
+
                   <details class="post__summary">${unsafeHTML(post.summary)}</details>
                 </div>
               `;
@@ -71,5 +71,3 @@ class PostsListComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('app-posts-list', PostsListComponent);

@@ -1,45 +1,69 @@
 /* eslint-disable max-depth */
 import { html, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../../services/events-service.js';
 import eventsCalendarCss from './events-calendar.css?type=css';
 
+@customElement('app-events-calendar')
 class EventsCalendarComponent extends LitElement {
-  constructor() {
-    super();
-    const now = new Date();
 
-    this.DAYS_IN_WEEK = 7;
-    this.MAX_CALENDAR_SPACES = 35;
-    this.CALENDAR = [
-      { NAME: 'January', DAYS: 31 },
-      { NAME: 'February', DAYS: 28 },
-      { NAME: 'March', DAYS: 31 },
-      { NAME: 'April', DAYS: 30 },
-      { NAME: 'May', DAYS: 31 },
-      { NAME: 'June', DAYS: 30 },
-      { NAME: 'July', DAYS: 31 },
-      { NAME: 'August', DAYS: 31 },
-      { NAME: 'September', DAYS: 30 },
-      { NAME: 'October', DAYS: 31 },
-      { NAME: 'November', DAYS: 30 },
-      { NAME: 'December', DAYS: 31 }
-    ];
-    this.events = [];
-    this.currentMonthIndex = now.getMonth();
-    this.currentYear = now.getFullYear();
-    this.currentEventIndex = 0;
-    this.hasEvents = false;
-    this.currentMonthData = [];
-  }
+  @property()
+  DAYS_IN_WEEK = 7;
 
-  static get properties() {
+  @property()
+  MAX_CALENDAR_SPACES = 35;
+
+  @property()
+  CALENDAR = [
+    { NAME: 'January', DAYS: 31 },
+    { NAME: 'February', DAYS: 28 },
+    { NAME: 'March', DAYS: 31 },
+    { NAME: 'April', DAYS: 30 },
+    { NAME: 'May', DAYS: 31 },
+    { NAME: 'June', DAYS: 30 },
+    { NAME: 'July', DAYS: 31 },
+    { NAME: 'August', DAYS: 31 },
+    { NAME: 'September', DAYS: 30 },
+    { NAME: 'October', DAYS: 31 },
+    { NAME: 'November', DAYS: 30 },
+    { NAME: 'December', DAYS: 31 }
+  ];
+
+  @property()
+  events = [];
+
+  @property()
+  hasEvents = false;
+
+  @property()
+  currentEventIndex = 0;
+
+  @property()
+  currentMonthData = [];
+
+  @property()
+  currentMonthIndex;
+
+  @property()
+  currentYear;
+
+  static properties() {
     return {
       events: { type: Array },
       currentMonthIndex: { type: Number },
       currentYear: { type: Number }
     };
   }
+
+  constructor() {
+    super();
+    const now = new Date();
+
+    this.currentMonthIndex = now.getMonth();
+    this.currentYear = now.getFullYear();
+  }
+
 
   async connectedCallback() {
     super.connectedCallback();
@@ -48,7 +72,7 @@ class EventsCalendarComponent extends LitElement {
     this.calculateCurrentMonthData();
   }
 
-  calculatePreviousMonth() {
+  private calculatePreviousMonth() {
     if (this.currentMonthIndex === 0) {
       this.currentMonthIndex = 11;
       this.currentYear -= 1;
@@ -59,7 +83,7 @@ class EventsCalendarComponent extends LitElement {
     this.calculateCurrentMonthData();
   }
 
-  calculateNextMonth() {
+  private calculateNextMonth() {
     if (this.currentMonthIndex === 11) {
       this.currentMonthIndex = 0;
       this.currentYear += 1;
@@ -70,19 +94,19 @@ class EventsCalendarComponent extends LitElement {
     this.calculateCurrentMonthData();
   }
 
-  getHeaderText() {
+  private getHeaderText() {
     return this.CALENDAR[this.currentMonthIndex].NAME + ' ' + this.currentYear;
   }
 
-  shiftToPreviousMonth() {
+  private shiftToPreviousMonth() {
     this.calculatePreviousMonth();
   }
 
-  shiftToNextMonth() {
+  private shiftToNextMonth() {
     this.calculateNextMonth();
   }
 
-  calculateCurrentMonthData() {
+  private calculateCurrentMonthData() {
     this.currentMonthData = [];
     let week = [];
     let monthDateCounter = 1;
@@ -132,25 +156,25 @@ class EventsCalendarComponent extends LitElement {
     }
   }
 
-  render() {
+  protected render() {
     return html`
       <style>
         ${eventsCalendarCss}
       </style>
-        
+
       <div class="as-events-calendar">
         <div class="as-events-calendar__header">
           <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1">
             <i class="fa fa-arrow-left"></i>
           </button>
-      
+
           <h3 class="as-events-calendar__header-text">Event Calendar<br><span class="as-events-calendar__month">${this.getHeaderText()}</span></h3>
-      
+
           <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToNextMonth}" tabindex="-1">
             <i class="fa fa-arrow-right"></i>
           </button>
         </div>
-      
+
         <div class="as-events-calendar__days">
           <div class="as-events-calendar__day-name">Sun</div>
           <div class="as-events-calendar__day-name">Mon</div>
@@ -168,7 +192,7 @@ class EventsCalendarComponent extends LitElement {
                 ${
                   week.map((day) => {
                     const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
-                    const dayInMonthContent = day.date && !day.hasEvents 
+                    const dayInMonthContent = day.date && !day.hasEvents
                       ? day.date
                       : '';
                     const eventsInDayContent = day.hasEvents
@@ -187,10 +211,10 @@ class EventsCalendarComponent extends LitElement {
                       <div class="as-events-calendar__day">
                         <!--day not in month-->
                         ${dayNotInMonthContent}
-                  
+
                         <!--day in month without event-->
                         ${dayInMonthContent}
-                  
+
                         <!--day with event if there's an event-->
                         ${eventsInDayContent}
                       </div>
@@ -206,5 +230,3 @@ class EventsCalendarComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('app-events-calendar', EventsCalendarComponent);

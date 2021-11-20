@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
-import '../../components/events-calendar/events-calendar.js';
-import '../../components/posts-list/posts-list.js';
+import '../../components/events-calendar/events-calendar.ts';
+import '../../components/posts-list/posts-list.ts';
 
 import homeCss from './home.css?type=css';
 
