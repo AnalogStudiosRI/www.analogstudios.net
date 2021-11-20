@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 import { html, LitElement } from 'lit';
 import { getAlbums } from '../../services/albums-service.js';
-import { modelAlbum } from '../../components/card/card.js';
+import { modelAlbum } from '../../components/card/card.model.ts';
 import { navigate } from 'lit-redux-router';
 import store from '../../store.js';
+import '../../components/card/card.ts';
 import albumsCss from './albums.css?type=css';
 
 class AlbumsRouteComponent extends LitElement {
