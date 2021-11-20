@@ -1,12 +1,13 @@
 import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import '../../components/events-calendar/events-calendar.ts';
 import '../../components/posts-list/posts-list.ts';
-
 import homeCss from './home.css?type=css';
 
+@customElement('as-route-home')
 class HomeRouteComponent extends LitElement {
 
-  render() {
+  protected render() {
     return html`
       <style>
         ${homeCss}
@@ -44,5 +45,3 @@ class HomeRouteComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('as-route-home', HomeRouteComponent);

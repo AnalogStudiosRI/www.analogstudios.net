@@ -1,14 +1,20 @@
 import { html, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { customElement, property } from 'lit/decorators.js';
 import { getEventById } from '../../services/events/events-service.ts';
+import { Event } from '../../services/events/event.model.ts';
 import eventsCss from './events.css?type=css';
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+@customElement('as-route-event-details')
 class EventDetailsRouteComponent extends LitElement {
 
-  static get properties() {
+  @property()
+  event: Event;
+
+  static properties() {
     return {
       id: String,
       event: Object
@@ -23,7 +29,7 @@ class EventDetailsRouteComponent extends LitElement {
 
   // EEEE, MMMM d, yyyy, h:mm a
   // SATURDAY, FEBRUARY 6, 2016, 9:00 PM
-  formatEventTime(timestamp) {
+  private formatEventTime(timestamp: number): string {
     const dateObj = new Date(timestamp * 1000);
     const day = DAYS[dateObj.getDay()].toUpperCase();
     const month = MONTHS[dateObj.getMonth()].toUpperCase();
@@ -39,7 +45,7 @@ class EventDetailsRouteComponent extends LitElement {
   }
 
   /* eslint-disable indent */
-  render() {
+  protected render() {
     const { event } = this;
 
     if (!event) {
@@ -68,5 +74,3 @@ class EventDetailsRouteComponent extends LitElement {
   }
   /* eslint-enable indent */
 }
-
-customElements.define('as-route-event-details', EventDetailsRouteComponent);

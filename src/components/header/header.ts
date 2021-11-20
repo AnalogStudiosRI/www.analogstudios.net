@@ -18,5 +18,3 @@ class HeaderComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('app-header', HeaderComponent);
