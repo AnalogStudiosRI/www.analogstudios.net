@@ -32,7 +32,7 @@
     "test:tdd": "yarn test --watch"
   },
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.4",
+    "bootstrap": "^4.0.0",
     "font-awesome": "4.6.3",
     "lit": "^2.0.0-rc.2",
     "lit-redux-router": "~0.19.0",
@@ -63,6 +63,8 @@
     "rimraf": "^2.6.3",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-visualizer": "^5.5.2",
+    "rollup-plugin-sass": "^1.2.2",
+    "sass": "^1.36.0",
     "stylelint": "^13.8.0",
     "stylelint-a11y": "^1.2.3",
     "stylelint-config-standard": "^20.0.0"
