@@ -6,6 +6,7 @@
     "./**/*.ts"
   ],
   "compilerOptions": {
+    "esModuleInterop": true,
     "experimentalDecorators": true
   }
 }
