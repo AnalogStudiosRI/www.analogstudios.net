@@ -2,7 +2,7 @@
 
   <head>
     <title>Analog Studios - Music and Recordings</title>
-
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="description" content="Analog Studios is a local and independent studio providing services for artists and musicians." />
     <meta property="og:title" content="Analog Studios" />
     <meta property="og:type" content="website" />
@@ -23,18 +23,15 @@
   </head>
 
   <body>
-
+    <section>
+      <app-header></app-header>
+    </section>
     <div class="container">
-      <section>
-        <app-header></app-header>
-      </section>
-
       <section>
         <main class="router-outlet">
           <app-router-outlet></app-router-outlet>
         </main>
       </section>
-
       <section>
         <app-footer></app-footer>
       </section>
