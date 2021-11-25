@@ -1,7 +1,7 @@
 @import "../../theme.css";
 
 .as-header {
-  background-color: var(--color-tertiary);
+  background-color: var(--color-secondary);
   opacity: 0.95;
   padding: 1rem 0;
 

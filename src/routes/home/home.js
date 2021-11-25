@@ -13,8 +13,8 @@ class HomeRouteComponent extends LitElement {
       </style>
 
       <div class="as-view-home">
-        <div class="row">
-          <div class="col-xs-12">
+        <div>
+          <div>
 
             <div class="as-media-carousel">
               <img src="/assets/home-banner.jpg" class="img-fluid">
@@ -31,12 +31,12 @@ class HomeRouteComponent extends LitElement {
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-xs-12 col-lg-7">
+        <div class="as-info-container">
+          <div class="as-info-content">
             <app-posts-list max="2"></app-posts-list>
           </div>
 
-          <div class="col-xs-12 col-lg-5">
+          <div class="as-info-content">
             <app-events-calendar></app-events-calendar>
           </div>
         </div>
