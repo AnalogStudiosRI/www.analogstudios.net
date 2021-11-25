@@ -11,16 +11,8 @@ class EventsRouteComponent extends LitElement {
         ${eventsCss}
       </style>
 
-      <div class="container as-route-events">
-        <div class="row">
-
-          <div class="col-md-12">
-
-            <app-events-calendar></app-events-calendar>
-
-          </div>
-
-        </div>
+      <div class="as-events-container">
+        <app-events-calendar></app-events-calendar>
       </div>
     `;
   }
