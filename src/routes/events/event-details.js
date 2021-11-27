@@ -50,25 +50,18 @@ class EventDetailsRouteComponent extends LitElement {
           ${eventsCss}
         </style>
 
-        <div class="container-flex as-route-event-details">
-          <div class="row">
+        <div class="as-events-container">
 
-            <div class="col-xs-4 hidden-sm-down">
-              <as-social-share></as-social-share>
-            </div>
-
-            <div class="col-xs-1 hidden-sm-down">
-              <i class="cal-icon fa fa-calendar-o"></i>
-            </div>
-
-            <div class="col-xs-5">
+          <div id="as-event-detail-container">
+            <i class="cal-icon fa fa-calendar-o" style="font-size: 5rem;width:20%"></i>
+            <div id="as-event-info">
               <p>Event Title: ${event.title}</p>
               <p>Event Date: ${this.formatEventTime(event.startTime)}</p>
               <p>Event Info:</p>
-              <p>${unsafeHTML(event.description)}</p>
+              <p style="color: var(--color-primary)">${unsafeHTML(event.description)}</p>
             </div>
-
           </div>
+          <as-social-share></as-social-share>
         </div>
       `;
     }
