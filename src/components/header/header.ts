@@ -1,4 +1,4 @@
-import { css, html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../navigation/navigation.ts';
 import headerCss from './header.css?type=css';
@@ -7,7 +7,7 @@ import headerCss from './header.css?type=css';
 export class HeaderComponent extends LitElement {
   static styles = css`${unsafeCSS(headerCss)}`;
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <header class="as-header">
         <div id="as-inner-header">

@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../../components/events-calendar/events-calendar.ts';
 import '../../components/posts-list/posts-list.ts';
@@ -7,7 +7,7 @@ import homeCss from './home.css?type=css';
 @customElement('as-route-home')
 export class HomeRouteComponent extends LitElement {
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <style>
         ${homeCss}

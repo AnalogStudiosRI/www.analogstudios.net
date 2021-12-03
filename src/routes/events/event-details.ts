@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { customElement, property } from 'lit/decorators.js';
 import { getEventById } from '../../services/events/events-service.ts';
@@ -38,7 +38,7 @@ export class EventDetailsRouteComponent extends LitElement {
   }
 
   /* eslint-disable indent */
-  protected render() {
+  protected render(): TemplateResult {
     const { event } = this;
 
     if (!event) {

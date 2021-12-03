@@ -1,4 +1,4 @@
-import { css, html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Details } from './card.model.ts';
@@ -10,7 +10,7 @@ export class CardComponent extends LitElement {
 
   static styles = css`${unsafeCSS(cardCss)}`;
 
-  protected render() {
+  protected render():TemplateResult {
     const { details } = this;
 
     return html`

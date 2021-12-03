@@ -7,4 +7,6 @@ function getPosts(): Promise<[Post]> {
     .then(resp => resp.json());
 }
 
-export { getPosts };
+export { 
+  getPosts
+};

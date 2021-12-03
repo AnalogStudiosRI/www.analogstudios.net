@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { html, LitElement } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../../components/events-calendar/events-calendar.ts';
 import eventsCss from './events.css?type=css';
@@ -7,7 +7,7 @@ import eventsCss from './events.css?type=css';
 @customElement('as-route-events')
 export class EventsRouteComponent extends LitElement {
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <style>
         ${eventsCss}

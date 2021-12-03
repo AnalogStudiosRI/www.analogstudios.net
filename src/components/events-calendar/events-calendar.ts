@@ -1,5 +1,5 @@
 /* eslint-disable max-depth */
-import { html, LitElement } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../../services/events/events-service.ts';
@@ -24,7 +24,7 @@ export class EventsCalendarComponent extends LitElement {
     { NAME: 'November', DAYS: 30 },
     { NAME: 'December', DAYS: 31 }
   ];
-  private currentMonthData = [];
+  private currentMonthData = [[Event]];
 
   @property() events = [];
   @property() currentMonthIndex;
@@ -45,7 +45,7 @@ export class EventsCalendarComponent extends LitElement {
     this.calculateCurrentMonthData();
   }
 
-  private calculatePreviousMonth() {
+  private calculatePreviousMonth(): void {
     if (this.currentMonthIndex === 0) {
       this.currentMonthIndex = 11;
       this.currentYear -= 1;
@@ -56,7 +56,7 @@ export class EventsCalendarComponent extends LitElement {
     this.calculateCurrentMonthData();
   }
 
-  private calculateNextMonth() {
+  private calculateNextMonth(): void {
     if (this.currentMonthIndex === 11) {
       this.currentMonthIndex = 0;
       this.currentYear += 1;
@@ -67,19 +67,19 @@ export class EventsCalendarComponent extends LitElement {
     this.calculateCurrentMonthData();
   }
 
-  private getHeaderText() {
+  private getHeaderText(): string {
     return this.CALENDAR[this.currentMonthIndex].NAME + ' ' + this.currentYear;
   }
 
-  private shiftToPreviousMonth() {
+  private shiftToPreviousMonth(): void {
     this.calculatePreviousMonth();
   }
 
-  private shiftToNextMonth() {
+  private shiftToNextMonth(): void {
     this.calculateNextMonth();
   }
 
-  private calculateCurrentMonthData() {
+  private calculateCurrentMonthData(): void {
     this.currentMonthData = [];
     let week = [];
     let monthDateCounter = 1;
@@ -123,11 +123,10 @@ export class EventsCalendarComponent extends LitElement {
         this.currentMonthData.push(week);
         week = [];
       }
-
     }
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     return html`
       <style>
         ${eventsCalendarCss}

@@ -1,4 +1,4 @@
-import { css, html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import footerCss from './footer.css?type=css';
 
@@ -9,7 +9,7 @@ export class FooterComponent extends LitElement {
   @property() private STARTING_YEAR = 2007;
   @property() private currentYear = new Date().getFullYear();
 
-  protected render() {
+  protected render(): TemplateResult {
     const { currentYear, STARTING_YEAR } = this;
 
     return html`

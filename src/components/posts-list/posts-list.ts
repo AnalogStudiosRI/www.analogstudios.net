@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getPosts } from '../../services/posts/posts-service.ts';
@@ -15,7 +15,7 @@ export class PostsListComponent extends LitElement {
     this.posts = (await getPosts()).reverse();
   }
 
-  private getFormateDate(timestamp) {
+  private getFormateDate(timestamp: number): string {
     // SUNDAY, FEBRUARY 12, 2017, 8:47 AM
     const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCOTOBER', 'NOVEMBER', 'DECEMBER'];
@@ -27,7 +27,7 @@ export class PostsListComponent extends LitElement {
     return `${days[dateObj.getDay()]}, ${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}, ${hours}:${dateObj.getMinutes()} ${amPm}`;
   }
 
-  protected render() {
+  protected render(): TemplateResult {
     const maxDisplay = !this.max ? this.posts.length : this.max; // : this.max;
     const maxPosts = this.posts.slice(0, maxDisplay);
 

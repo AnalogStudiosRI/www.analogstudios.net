@@ -29,7 +29,7 @@ export class ArtistsRouteComponent extends LitElement {
     this.analog = this.artists.filter((artist: Artist) => artist.id === this.ANALOG_ID)[0];
   }
 
-  private onArtistSelected() {
+  private onArtistSelected(): void {
     const selectedAristId = this.shadowRoot.querySelector('select').value;
 
     store.dispatch(navigate(`/artists/${selectedAristId}`));

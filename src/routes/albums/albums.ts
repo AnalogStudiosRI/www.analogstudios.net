@@ -20,7 +20,7 @@ export class AlbumsRouteComponent extends LitElement {
     this.albums = await getAlbums();
   }
 
-  private onAlbumSelected() {
+  private onAlbumSelected(): void {
     const selectedAlbumId = this.shadowRoot.querySelector('select').value;
 
     store.dispatch(navigate(`/albums/${selectedAlbumId}`));
