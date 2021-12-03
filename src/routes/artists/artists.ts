@@ -1,47 +1,42 @@
 /* eslint-disable max-len */
-import { html, LitElement } from 'lit';
-import { getArtists } from '../../services/artists-service.js';
-import { modelArtist } from '../../components/card/card.js';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
-import store from '../../store.js';
+import { getArtists } from '../../services/artists/artists-service.ts';
+import { modelArtist } from '../../components/card/card.model.ts';
+import { Artist } from '../../services/artists/artist.model.ts';
+import store from '../../store.ts';
+import '../../components/card/card.ts';
 import artistsCss from './artists.css?type=css';
 
-class ArtistsRouteComponent extends LitElement {
+@customElement('as-route-artists')
+export class ArtistsRouteComponent extends LitElement {
 
-  static get properties() {
-    return {
-      artists: { type: Array }
-    };
-  }
+  private ANALOG_ID = '1';
+  private displayArtists: Array<Artist> = [];
+  private analog: Artist = {};
 
-  constructor() {
-    super();
-
-    this.ANALOG_ID = '1';
-    this.artists = [];
-    this.displayArtists = [];
-    this.analog = {};
-  }
+  @property() artists: Array<Artist> = [];
 
   async connectedCallback() {
     super.connectedCallback();
 
     this.artists = await getArtists();
-    
+
     // make sure "newer" artists are at the top
     // and keep Analog at the top of the list
-    this.displayArtists = this.artists.reverse().filter(artist => artist.id !== this.ANALOG_ID);
-    this.analog = this.artists.filter(artist => artist.id === this.ANALOG_ID)[0];
+    this.displayArtists = this.artists.reverse().filter((artist: Artist) => artist.id !== this.ANALOG_ID);
+    this.analog = this.artists.filter((artist: Artist) => artist.id === this.ANALOG_ID)[0];
   }
 
-  onArtistSelected() {
+  private onArtistSelected(): void {
     const selectedAristId = this.shadowRoot.querySelector('select').value;
 
     store.dispatch(navigate(`/artists/${selectedAristId}`));
   }
 
   /* eslint-disable indent */
-  render() {
+  protected render(): TemplateResult {
     const { displayArtists, analog } = this;
 
     return html`
@@ -58,7 +53,7 @@ class ArtistsRouteComponent extends LitElement {
 
             <select class="hidden-sm-down" @change="${this.onArtistSelected}">
               <option .value="Select Artist">Select Artist</option>
-              ${[analog, ...displayArtists].map((artist) => {
+              ${[analog, ...displayArtists].map((artist: Artist) => {
                 return html`
                   <option .value="${artist.id}">${artist.name}</option>
                 `;
@@ -72,7 +67,7 @@ class ArtistsRouteComponent extends LitElement {
             <div class="artist-cards-list">
               <app-card .details="${modelArtist(analog)}"></app-card>
 
-              ${displayArtists.map((artist) => {
+              ${displayArtists.map((artist: Artist) => {
                 return html`
                   <app-card .details="${modelArtist(artist)}"></app-card>
                 `;
@@ -86,5 +81,3 @@ class ArtistsRouteComponent extends LitElement {
   }
   /* eslint-enable indent */
 }
-
-customElements.define('as-route-artists', ArtistsRouteComponent);

@@ -1,12 +1,13 @@
-import { html, LitElement } from 'lit';
-import '../../components/events-calendar/events-calendar.js';
-import '../../components/posts-list/posts-list.js';
-
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import '../../components/events-calendar/events-calendar.ts';
+import '../../components/posts-list/posts-list.ts';
 import homeCss from './home.css?type=css';
 
-class HomeRouteComponent extends LitElement {
+@customElement('as-route-home')
+export class HomeRouteComponent extends LitElement {
 
-  render() {
+  protected render(): TemplateResult {
     return html`
       <style>
         ${homeCss}
@@ -44,5 +45,3 @@ class HomeRouteComponent extends LitElement {
     `;
   }
 }
-
-customElements.define('as-route-home', HomeRouteComponent);

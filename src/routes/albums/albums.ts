@@ -1,24 +1,18 @@
 /* eslint-disable max-len */
-import { html, LitElement } from 'lit';
-import { getAlbums } from '../../services/albums-service.js';
-import { modelAlbum } from '../../components/card/card.js';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
-import store from '../../store.js';
+import { getAlbums } from '../../services/albums/albums-service.ts';
+import { modelAlbum } from '../../components/card/card.model.ts';
+import { Album } from '../../services/albums/album.model.ts';
+import store from '../../store.ts';
+import '../../components/card/card.ts';
 import albumsCss from './albums.css?type=css';
 
-class AlbumsRouteComponent extends LitElement {
+@customElement('as-route-albums')
+export class AlbumsRouteComponent extends LitElement {
 
-  static get properties() {
-    return {
-      albums: { type: Array }
-    };
-  }
-
-  constructor() {
-    super();
-
-    this.albums = [];
-  }
+  @property() albums: Array<Album> = [];
 
   async connectedCallback() {
     super.connectedCallback();
@@ -26,14 +20,14 @@ class AlbumsRouteComponent extends LitElement {
     this.albums = await getAlbums();
   }
 
-  onAlbumSelected() {
+  private onAlbumSelected(): void {
     const selectedAlbumId = this.shadowRoot.querySelector('select').value;
 
     store.dispatch(navigate(`/albums/${selectedAlbumId}`));
   }
 
   /* eslint-disable indent */
-  render() {
+  protected render(): TemplateResult {
     const { albums } = this;
 
     return html`
@@ -50,7 +44,7 @@ class AlbumsRouteComponent extends LitElement {
 
             <select class="hidden-sm-down" @change="${this.onAlbumSelected}">
               <option .value="Select Artist">Select Album</option>
-              ${albums.map((album) => {
+              ${albums.map((album: Album) => {
                 return html`
                   <option .value="${album.id}">${album.title}</option>
                 `;
@@ -61,7 +55,7 @@ class AlbumsRouteComponent extends LitElement {
           </div>
 
           <div class="col-xs-7">
-            ${albums.map((album) => {
+            ${albums.map((album: Album) => {
               return html`
                 <div class="album-cards-list">
                   <app-card .details="${modelAlbum(album)}"></app-card>
@@ -76,5 +70,3 @@ class AlbumsRouteComponent extends LitElement {
   }
   /* eslint-enable indent */
 }
-
-customElements.define('as-route-albums', AlbumsRouteComponent);

@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import './header.js';
+import './header.ts';
 
 describe('Header Component', () => {
   let header;

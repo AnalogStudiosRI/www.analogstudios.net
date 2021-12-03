@@ -1,4 +1,5 @@
 const greenwoodPluginFontAwesome = require('greenwood-plugin-font-awesome');
+const greenwoodPluginTypeScript = require('@greenwood/plugin-typescript');
 const pluginImportCss = require('@greenwood/plugin-import-css');
 const pluginPostCss = require('@greenwood/plugin-postcss');
 const rollupPluginAnalyzer = require('rollup-plugin-analyzer');
@@ -15,6 +16,7 @@ module.exports = {
     pluginPostCss(),
     ...pluginImportCss(),
     ...greenwoodPluginFontAwesome(),
+    ...greenwoodPluginTypeScript(),
     {
       type: 'rollup',
       name: 'rollup-plugin-analyzer',
