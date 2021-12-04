@@ -18,18 +18,15 @@ export class ContactRouteComponent extends LitElement {
         <p>Analog Studios is located in Newport RI and run by Owen Buckley and Dave Flamand.  Please use the contact form below to send us a message!</p>
         
         <form name="contact" method="post">
+
           <label for="subject">Subject</label>
-          <br/>
           <input name="subject" type="text" required/>
 
-          <br/>
-          <br/>
+          <label for="email">Email</label>
+          <input name="email" type="email" required/>
 
           <label for="message">Message:</label>
-          <br/>
           <textarea name="message" required></textarea>
-
-          <br/>
 
           <!-- Netlify hidden form for the contact page -->
           <input type="hidden" name="form-name" value="contact" />
