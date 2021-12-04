@@ -20,14 +20,14 @@ export class ContactRouteComponent extends LitElement {
         <form name="contact" method="post">
           <label for="subject">Subject</label>
           <br/>
-          <input id="subject" name="subject" type="text" required/>
+          <input name="subject" type="text" required/>
 
           <br/>
           <br/>
 
           <label for="message">Message:</label>
           <br/>
-          <textarea id="message" name="message" required></textarea>
+          <textarea name="message" required></textarea>
 
           <br/>
 
