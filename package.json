@@ -39,7 +39,8 @@
     "lit-redux-router": "~0.19.0",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "web-social-share": "^7.2.0"
   },
   "devDependencies": {
     "@analogstudiosri/greenwood-plugin-font-awesome": "^0.2.0",

@@ -3,6 +3,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { customElement, property } from 'lit/decorators.js';
 import { getEventById } from '../../services/events/events-service.ts';
 import { Event } from '../../services/events/event.model.ts';
+import '../../components/social-share/social-share.ts';
 import eventsCss from './events.css?type=css';
 
 @customElement('as-route-event-details')
@@ -60,7 +61,7 @@ export class EventDetailsRouteComponent extends LitElement {
               <p style="color: var(--color-primary)">${unsafeHTML(event.description)}</p>
             </div>
           </div>
-          <as-social-share></as-social-share>
+          <app-social-share></app-social-share>
         </div>
       `;
     }

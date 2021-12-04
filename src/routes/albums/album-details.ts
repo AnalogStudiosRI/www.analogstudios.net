@@ -5,6 +5,7 @@ import { getAlbumById } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
 import { Album } from '../../services/albums/album.model.ts';
 import '../../components/card/card.ts';
+import '../../components/social-share/social-share.ts';
 import albumsCss from './albums.css?type=css';
 
 @customElement('as-route-album-details')
@@ -45,7 +46,7 @@ export class AlbumDetailsRouteComponent extends LitElement {
           <div class="row">
 
             <div class="col-xs-4 hidden-sm-down">
-              <as-social-share></as-social-share>
+              <app-social-share></app-social-share>
             </div>
 
             <div class="col-xs-6">

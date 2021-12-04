@@ -12672,6 +12672,11 @@ web-namespaces@^1.0.0:
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.4.tgz#bc98a3de60dadd7faefc403d1076d529f5e030ec"
   integrity sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
 
+web-social-share@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/web-social-share/-/web-social-share-7.2.0.tgz#0490a315b5532d4033528be5fcda0f76efe82948"
+  integrity sha512-PZ737Bgla7maguIe8g8C2N2odq+JALbaG0pMmhDYmjqDwvXY7IRg1XIJmqEMKthN5j11O/MmmV2nQkKnP0crxw==
+
 webidl-conversions@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
