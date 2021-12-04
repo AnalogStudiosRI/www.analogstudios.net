@@ -1,0 +1,28 @@
+@import '../../theme.css';
+
+.as-route-contact {
+
+  p {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  & .header {
+    text-align: center;
+  }
+
+  & form {
+    margin: 20px auto;
+    width: 500px;
+  }
+
+  & input{
+    width: 70%;
+  }
+
+  & textarea {
+    width: 100%;
+    height: 200px;
+  }
+
+}

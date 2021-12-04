@@ -23,19 +23,28 @@
   </head>
 
   <body>
+
     <section>
       <app-header></app-header>
     </section>
+
     <div class="container">
       <section>
         <main class="router-outlet">
           <app-router-outlet></app-router-outlet>
         </main>
       </section>
+
       <section>
         <app-footer></app-footer>
       </section>
     </div>
+
+    <!-- Netlify hidden form for the contact page -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" id="subject" name="name" />
+      <textarea id="message" name="message"></textarea>
+    </form>
 
   </body>
 </html>

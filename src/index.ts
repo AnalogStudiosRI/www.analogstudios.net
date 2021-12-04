@@ -33,6 +33,11 @@ export class App extends LitElement {
             .resolve="${() => import('/routes/artists/artists.ts')}">
           </lit-route>
           <lit-route
+            path="/contact"
+            component="as-route-contact"
+            .resolve="${() => import('/routes/contact/contact.ts')}">
+          </lit-route>
+          <lit-route
             path="/events/:id"
             component="as-route-event-details"
             .resolve="${() => import('/routes/events/event-details.ts')}">
