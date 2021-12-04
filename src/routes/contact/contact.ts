@@ -32,7 +32,7 @@ export class ContactRouteComponent extends LitElement {
           <br/>
 
           <!-- Netlify hidden form for the contact page -->
-          <input type="hidden" name="contact" value="contact" />
+          <input type="hidden" name="form-name" value="contact" />
 
           <button class="btn" type="submit">Send</button>
         </form>
