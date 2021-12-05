@@ -1480,6 +1480,11 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@stencil/core@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.11.0.tgz#8accc2791e2c34cce2d2aa8b40864dd40be4e10c"
+  integrity sha512-/IubCWhVXCguyMUp/3zGrg3c882+RJNg/zpiKfyfJL3kRCOwe+/MD8OoAXVGdd+xAohZKIi1Ik+EHFlsptsjLg==
+
 "@storybook/addon-actions@6.3.6", "@storybook/addon-actions@^6.3.2":
   version "6.3.6"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.3.6.tgz#691d61d6aca9c4b3edba50c531cbe4d4139ed451"
@@ -12673,9 +12678,9 @@ web-namespaces@^1.0.0:
   integrity sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
 
 web-social-share@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/web-social-share/-/web-social-share-7.2.0.tgz#0490a315b5532d4033528be5fcda0f76efe82948"
-  integrity sha512-PZ737Bgla7maguIe8g8C2N2odq+JALbaG0pMmhDYmjqDwvXY7IRg1XIJmqEMKthN5j11O/MmmV2nQkKnP0crxw==
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/web-social-share/-/web-social-share-7.3.0.tgz#cc1248831846caf32208b4f0dca7316c23e606ba"
+  integrity sha512-bDuNy7NX3MiuGj6qBAJTM2K1rHgKuqfb7BmbhL37dZTB4MQFyvzhuJU8d4CyfDoudllHa6JfcGXURQWvlA05dQ==
 
 webidl-conversions@^6.1.0:
   version "6.1.0"
