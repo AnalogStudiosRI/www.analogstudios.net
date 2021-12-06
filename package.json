@@ -33,7 +33,6 @@
     "test:tdd": "yarn test --watch"
   },
   "dependencies": {
-    "@stencil/core": "^2.11.0",
     "bootstrap": "4.0.0-alpha.4",
     "font-awesome": "4.6.3",
     "lit": "^2.0.0-rc.2",
