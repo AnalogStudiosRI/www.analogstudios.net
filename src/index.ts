@@ -47,7 +47,7 @@ export class App extends LitElement {
             component="as-route-home"
             .resolve="${() => import('/routes/home/home.ts')}">
           </lit-route>
-          <lit-route><h1>Not Found (404) Page - TODO</h1></lit-route>
+          <lit-route><h1 style="padding: 3rem; margin: 0;">Not Found (404) Page - TODO</h1></lit-route>
         </main>
       </div>
     `;
