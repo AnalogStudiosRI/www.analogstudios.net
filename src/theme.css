@@ -6,6 +6,7 @@
   --white: #efefef;
   --black: #1a1a1a;
   --gold: #a48f65;
+  --gold-95-opacity: #a48f65f2;
   --creme: #f1e7d3;
   --blue: #316291;
 
@@ -17,6 +18,7 @@
   --color-dark: var(--black);
   --color-font-primary: var(--color-primary);
   --color-font-secondary: var(--blue);
+  --color-background-opacity-95: var(--gold-95-opacity);
 
   /* design system - typography */
   --font-family-primary: 'Montserrat', sans-serif;

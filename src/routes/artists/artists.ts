@@ -47,10 +47,8 @@ export class ArtistsRouteComponent extends LitElement {
       <div class="container-flex as-route-artists">
         <div class="row">
 
-          <div class="hidden-sm-down col-xs-3">
-
+          <div class="as-selector-container">
             <p>Quick Links</p>
-
             <select class="hidden-sm-down" @change="${this.onArtistSelected}">
               <option .value="Select Artist">Select Artist</option>
               ${[analog, ...displayArtists].map((artist: Artist) => {
@@ -60,21 +58,17 @@ export class ArtistsRouteComponent extends LitElement {
               })}
               <!-- <option *ngFor="let artist of getArtists()" value="artist.id">{{artist.name | ellipsis: 15}}</option> -->
             </select>
-
           </div>
 
-          <div class="col-xs-7">
-            <div class="artist-cards-list">
-              <app-card .details="${modelArtist(analog)}"></app-card>
+          <div class="as-cards-list">
+            <app-card .details="${modelArtist(analog)}"></app-card>
 
-              ${displayArtists.map((artist: Artist) => {
-                return html`
-                  <app-card .details="${modelArtist(artist)}"></app-card>
-                `;
-              })};
-            </div>
+            ${displayArtists.map((artist: Artist) => {
+              return html`
+                <app-card .details="${modelArtist(artist)}"></app-card>
+              `;
+            })};
           </div>
-
         </div>
       </div>
     `;

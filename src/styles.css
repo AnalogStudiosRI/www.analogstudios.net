@@ -33,14 +33,23 @@ h4 {
   letter-spacing: 2px;
 }
 
+.container {
+  overflow-y: hidden;
+  padding: 0 10px 10px 10px;
+  margin: auto;
+
+  & section {
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+
 main {
   color: var(--color-dark);
   font-family: var(--font-family-primary);
   font-size: 0.85rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background-color: transparentize(var(----color-secondary) 0.0375);
-  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.5);
+  background-color: var(--color-background-opacity-95);
   min-height: 1000px;
 
   & a {
@@ -61,4 +70,23 @@ main {
 
 .row {
   display: flex;
+}
+
+.as-selector-container {
+  padding: 1rem;
+  margin-left: 1rem;
+
+  @media(max-width: 768px) {
+    display: none;
+  }
+}
+
+.as-cards-list {
+  margin: 1rem;
+  width: 60%;
+
+  @media(max-width: 768px) {
+    width: 100%;
+    margin: 1rem;
+  }
 }
