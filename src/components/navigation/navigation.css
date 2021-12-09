@@ -1,10 +1,10 @@
-@import '../../theme.css';
-
-:host {
+.host {
   flex-grow: 1;
 }
 
 .as-navigation {
+  flex-grow: 1;
+
   & .as-navigation__list {
     display: flex;
     align-items: center;
@@ -17,9 +17,9 @@
   }
 
   & .as-navigation__list-item {
-      width: 100%;
-      text-align: center;
-      padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
   }
 
   & .as-navigation__link {

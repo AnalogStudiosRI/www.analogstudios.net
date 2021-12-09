@@ -1,6 +1,4 @@
-@import '../../theme.css';
-
-:host {
+.host {
   
   & .as-events-calendar__header {
     display: flex;

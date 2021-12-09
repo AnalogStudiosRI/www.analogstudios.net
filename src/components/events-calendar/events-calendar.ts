@@ -7,7 +7,6 @@ import eventsCalendarCss from './events-calendar.css?type=css';
 
 @customElement('app-events-calendar')
 export class EventsCalendarComponent extends LitElement {
-
   private DAYS_IN_WEEK = 7;
   private MAX_CALENDAR_SPACES = 35;
   private CALENDAR = [
@@ -126,75 +125,81 @@ export class EventsCalendarComponent extends LitElement {
     }
   }
 
+  createRenderRoot(): Element | ShadowRoot {
+    return this;
+  }
+  
   protected render(): TemplateResult {
     return html`
       <style>
         ${eventsCalendarCss}
       </style>
+      
+      <div class="host">
+        <div class="as-events-calendar">
+          <div class="as-events-calendar__header">
+            <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1">
+              <i class="fa fa-arrow-left"></i>
+            </button>
 
-      <div class="as-events-calendar">
-        <div class="as-events-calendar__header">
-          <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1">
-            <i class="fa fa-arrow-left"></i>
-          </button>
+            <h3 class="as-events-calendar__header-text">Event Calendar<br><span class="as-events-calendar__month">${this.getHeaderText()}</span></h3>
 
-          <h3 class="as-events-calendar__header-text">Event Calendar<br><span class="as-events-calendar__month">${this.getHeaderText()}</span></h3>
+            <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToNextMonth}" tabindex="-1">
+              <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
 
-          <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToNextMonth}" tabindex="-1">
-            <i class="fa fa-arrow-right"></i>
-          </button>
-        </div>
+          <div class="as-events-calendar__days">
+            <div class="as-events-calendar__day-name">Sun</div>
+            <div class="as-events-calendar__day-name">Mon</div>
+            <div class="as-events-calendar__day-name">Tue</div>
+            <div class="as-events-calendar__day-name">Wed</div>
+            <div class="as-events-calendar__day-name">Thu</div>
+            <div class="as-events-calendar__day-name">Fri</div>
+            <div class="as-events-calendar__day-name">Sat</div>
+          </div>
 
-        <div class="as-events-calendar__days">
-          <div class="as-events-calendar__day-name">Sun</div>
-          <div class="as-events-calendar__day-name">Mon</div>
-          <div class="as-events-calendar__day-name">Tue</div>
-          <div class="as-events-calendar__day-name">Wed</div>
-          <div class="as-events-calendar__day-name">Thu</div>
-          <div class="as-events-calendar__day-name">Fri</div>
-          <div class="as-events-calendar__day-name">Sat</div>
-        </div>
+          ${
+            this.currentMonthData.map((week) => {
+              return html`
+                <div class="as-events-calendar__week">
+                  ${
+                    week.map((day) => {
+                      const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
+                      const dayInMonthContent = day.date && !day.hasEvents
+                        ? day.date
+                        : '';
+                      const eventsInDayContent = day.hasEvents
+                        ? day.events.map((event) => {
+                          return html`
+                            <span class="as-events-calendar__day-event">
+                              <a class="as-events-calendar__day-event" href="/events/${event.id}" title="${event.title}">
+                                <i class="fa fa-calendar-check-o"></i>
+                              </a>
+                            </span>
+                          `;
+                        })
+                        : '';
 
-        ${
-          this.currentMonthData.map((week) => {
-            return html`
-              <div class="as-events-calendar__week">
-                ${
-                  week.map((day) => {
-                    const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
-                    const dayInMonthContent = day.date && !day.hasEvents
-                      ? day.date
-                      : '';
-                    const eventsInDayContent = day.hasEvents
-                      ? day.events.map((event) => {
-                        return html`
-                          <span class="as-events-calendar__day-event">
-                            <a class="as-events-calendar__day-event" href="/events/${event.id}" title="${event.title}">
-                              <i class="fa fa-calendar-check-o"></i>
-                            </a>
-                          </span>
-                        `;
-                      })
-                      : '';
+                      return html`
+                        <div class="as-events-calendar__day">
+                          <!--day not in month-->
+                          ${dayNotInMonthContent}
 
-                    return html`
-                      <div class="as-events-calendar__day">
-                        <!--day not in month-->
-                        ${dayNotInMonthContent}
+                          <!--day in month without event-->
+                          ${dayInMonthContent}
 
-                        <!--day in month without event-->
-                        ${dayInMonthContent}
-
-                        <!--day with event if there's an event-->
-                        ${eventsInDayContent}
-                      </div>
-                    `;
-                  })
-                }
-              </div>
-            `;
-          })
-        }
+                          <!--day with event if there's an event-->
+                          ${eventsInDayContent}
+                        </div>
+                      `;
+                    })
+                  }
+                </div>
+              `;
+            })
+          }
+          </div>
         </div>
       </div>
     `;
