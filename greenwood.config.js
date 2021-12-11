@@ -1,4 +1,4 @@
-// TODO import greenwoodPluginFontAwesome from 'greenwood-plugin-font-awesome';
+import { greenwoodPluginFontAwesome } from '@analogstudiosri/greenwood-plugin-font-awesome';
 import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css';
 import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
@@ -15,7 +15,7 @@ export default {
   plugins: [
     greenwoodPluginPostCss(),
     ...greenwoodPluginImportCss(),
-    // ...greenwoodPluginFontAwesome(),
+    ...greenwoodPluginFontAwesome(),
     ...greenwoodPluginTypeScript(),
     {
       type: 'rollup',

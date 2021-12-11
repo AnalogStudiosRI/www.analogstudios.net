@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@analogstudiosri/greenwood-plugin-font-awesome@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@analogstudiosri/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.2.0.tgz#a098a939e8de3b358996694f4318b5637177db20"
+  integrity sha512-YWzlb2+Tqre0WYN1TNMnjBpFNi+5Jc6wT95jHNQvGYk36DVLJw4etGEFbcGqs8xPzd7I8VdHOlgv5cB79iWIJw==
+
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -6535,11 +6540,6 @@ gray-matter@^2.1.0:
     extend-shallow "^2.0.1"
     js-yaml "^3.8.1"
     toml "^2.3.2"
-
-greenwood-plugin-font-awesome@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.1.0.tgz#fbd0ad12821991f6ee46fbdee0792f94dd3afb57"
-  integrity sha512-FMZvfduhLQjyqfstO+4+1HkYicukHrtj3uX39OGgehFAu7RcqpTfxSM8E7FtoirPcMY6ALlOBeKkxvNQO6WasA==
 
 gud@^1.0.0:
   version "1.0.0"
