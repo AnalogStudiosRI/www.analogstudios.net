@@ -1,11 +1,11 @@
 import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-// import navigationCss from './navigation.css?type=css';
-import 'web-social-share';
+import socialShareCss from './social-share.css?type=css';
+import '@analogstudiosri/web-social-share';
 
 @customElement('app-social-share')
 export class NavigationComponent extends LitElement {
-  // static styles = css`${unsafeCSS(navigationCss)}`;
+  static styles = css`${unsafeCSS(socialShareCss)}`;
 
   protected render(): TemplateResult {
     const share = {
@@ -26,7 +26,10 @@ export class NavigationComponent extends LitElement {
         <div class="row">
 
           <h2 class="header">Interact + Share</h2>
-          <web-social-share show="true" share=${share}></web-social-share>
+          <web-social-share show="true" .share=${share}>
+            <i class="fa fa-facebook" slot="facebook" style="color: #00aced; width: 1.4rem;"></i>
+            <i class="fa fa-twitter" slot="twitter" style="color: #00aced; width: 1.4rem;"></i>
+          </web-social-share>
           <!--
           <a class="btn btn-social-icon btn-facebook">
             <button ceiboShare  [facebook]="{u: getCurrentPageUrl()}"></button>
