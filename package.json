@@ -50,6 +50,7 @@
     "@greenwood/plugin-postcss": "^0.20.0",
     "@greenwood/plugin-typescript": "^0.20.0",
     "@ls-lint/ls-lint": "^1.10.0",
+    "@rollup/plugin-dynamic-import-vars": "^1.4.1",
     "@storybook/addon-actions": "^6.3.2",
     "@storybook/addon-essentials": "^6.3.2",
     "@storybook/addon-links": "^6.3.2",
