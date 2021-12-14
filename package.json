@@ -29,7 +29,8 @@
     "storybook:build": "build-storybook",
     "storybook:serve": "yarn clean && yarn storybook:build && npx http-server ./storybook-static",
     "test": "wtr",
-    "test:tdd": "yarn test --watch"
+    "test:tdd": "yarn test --watch",
+    "preinstall": "test \"$(node -v)\" != \"$(cat .nvmrc)\" && { unset npm_package_scripts_preinstall npm_config_prefix npm_lifecycle_script && . ~/.nvm/nvm.sh && nvm install $(cat .nvmrc) --reinstall-packages-from=current --skip-default-packages && nvm use; } || echo"
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.4",
