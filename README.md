@@ -17,7 +17,6 @@ Frontend website for [www.analogstudios.net](https://www.analogstudios.net) base
 You'll need the following installed to run and contribute to this project.
 
 1. [NodeJS LTS](https://nodejs.org/)
-1. [Node Version Manager](https://github.com/nvm-sh/nvm)
 1. [Yarn 1.x](https://classic.yarnpkg.com/)
 
 You can confirm by running the following
@@ -28,10 +27,6 @@ v14.16.0
 
 $ yarn -v
 1.12.3
-
-$ nvm use
-Found '/Users/<directory_location>/www.analogstudios.net/.nvmrc' with version <14.17.0>
-Now using node v14.17.0 (npm v6.14.13)
 ```
 
 Then run `yarn install` to install the project's dependencies.
