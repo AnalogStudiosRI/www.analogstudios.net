@@ -6,20 +6,21 @@
 [![GitHub issues](https://img.shields.io/github/issues-pr-raw/AnalogStudiosRI/www.analogstudios.net.svg)](https://github.com/AnalogStudiosRI/www.analogstudios.net/issues)
 [![GitHub license](https://img.shields.io/badge/license-Apache2.0-blue.svg)](https://raw.githubusercontent.com/AnalogStudiosRI/www.analogstudios.net/master/LICENSE.md)
 
-
 ## Overview
-Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io).  It is built using Github Actions and deployed to Netlify.  The backend is (currently) hosted in AWS.
 
+Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io). It is built using Github Actions and deployed to Netlify. The backend is (currently) hosted in AWS.
 
 ## Contributing
 
 ### Setup
+
 You'll need the following installed to run and contribute to this project.
 
 1. [NodeJS LTS](https://nodejs.org/)
 1. [Yarn 1.x](https://classic.yarnpkg.com/)
 
-You can confirm by running the following 
+You can confirm by running the following
+
 ```sh
 $ node -v
 v14.16.0
