@@ -7,13 +7,6 @@
   resolved "https://registry.yarnpkg.com/@analogstudiosri/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.2.1.tgz#fb7774846278a2005370088b3b718a1c50ee7d41"
   integrity sha512-4GYUUYNcn60yQNHyB4p7GQKEaxdhaNkSPWCpw+hhjTEgudQ1Ij4sAAeDn453iL+bpiadw2MFyCMUu/Zmdyd8og==
 
-"@analogstudiosri/web-social-share@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@analogstudiosri/web-social-share/-/web-social-share-8.0.0.tgz#5e7040ac84113fdfd7c37859ffe3376b5a8d6fec"
-  integrity sha512-AJeN6TXNzHjpecwsCm3zQY8VbrpDw51ms4qXXtw/j3Y1W80GeBfWnG2UBeYTqpWO4K6nfYai5gDcL0RU2waCIA==
-  dependencies:
-    "@stencil/core" "^2.11.0"
-
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -1496,11 +1489,6 @@
     "@types/estree" "0.0.39"
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
-
-"@stencil/core@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.11.0.tgz#8accc2791e2c34cce2d2aa8b40864dd40be4e10c"
-  integrity sha512-/IubCWhVXCguyMUp/3zGrg3c882+RJNg/zpiKfyfJL3kRCOwe+/MD8OoAXVGdd+xAohZKIi1Ik+EHFlsptsjLg==
 
 "@storybook/addon-actions@6.3.6", "@storybook/addon-actions@^6.3.2":
   version "6.3.6"
@@ -12698,6 +12686,11 @@ web-namespaces@^1.0.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.4.tgz#bc98a3de60dadd7faefc403d1076d529f5e030ec"
   integrity sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
+
+web-social-share@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/web-social-share/-/web-social-share-8.0.1.tgz#460fc6120f97371a840bec2b87e2a7a5bed26360"
+  integrity sha512-SdYm76yaFDRbAm+2n+mVi7q/tgg+UqX8BDKwvIWTymssfB9CfyH9uyXPzh2o3Kfa1SIeIGY0lmExxVLdYdGueA==
 
 webidl-conversions@^6.1.0:
   version "6.1.0"
