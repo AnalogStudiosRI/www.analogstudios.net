@@ -3,9 +3,9 @@
 
 
 "@analogstudiosri/greenwood-plugin-font-awesome@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@analogstudiosri/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.2.0.tgz#a098a939e8de3b358996694f4318b5637177db20"
-  integrity sha512-YWzlb2+Tqre0WYN1TNMnjBpFNi+5Jc6wT95jHNQvGYk36DVLJw4etGEFbcGqs8xPzd7I8VdHOlgv5cB79iWIJw==
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@analogstudiosri/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.2.1.tgz#fb7774846278a2005370088b3b718a1c50ee7d41"
+  integrity sha512-4GYUUYNcn60yQNHyB4p7GQKEaxdhaNkSPWCpw+hhjTEgudQ1Ij4sAAeDn453iL+bpiadw2MFyCMUu/Zmdyd8og==
 
 "@babel/code-frame@7.10.4":
   version "7.10.4"
