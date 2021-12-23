@@ -1,11 +1,11 @@
-const greenwoodPluginFontAwesome = require('greenwood-plugin-font-awesome');
-const greenwoodPluginTypeScript = require('@greenwood/plugin-typescript');
-const pluginImportCss = require('@greenwood/plugin-import-css');
-const pluginPostCss = require('@greenwood/plugin-postcss');
-const rollupPluginAnalyzer = require('rollup-plugin-analyzer');
-const rollupPluginVisualizer = require('rollup-plugin-visualizer').default;
+import { greenwoodPluginFontAwesome } from '@analogstudiosri/greenwood-plugin-font-awesome';
+import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
+import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css';
+import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
+import analyze from 'rollup-plugin-analyzer';
+import { visualizer } from 'rollup-plugin-visualizer';
 
-module.exports = {
+export default {
   mode: 'spa',
   devServer: {
     proxy: {
@@ -13,8 +13,8 @@ module.exports = {
     }
   },
   plugins: [
-    pluginPostCss(),
-    ...pluginImportCss(),
+    greenwoodPluginPostCss(),
+    ...greenwoodPluginImportCss(),
     ...greenwoodPluginFontAwesome(),
     ...greenwoodPluginTypeScript(),
     {
@@ -22,7 +22,7 @@ module.exports = {
       name: 'rollup-plugin-analyzer',
       provider: () => {
         return [
-          rollupPluginAnalyzer({
+          analyze({
             summaryOnly: true,
             filter: (module) => {
               return !module.id.endsWith('.html');
@@ -35,7 +35,7 @@ module.exports = {
       name: 'rollup-plugin-visualizer',
       provider: () => {
         return [
-          rollupPluginVisualizer({
+          visualizer({
             filename: 'reports/stats.html'
           })
         ];

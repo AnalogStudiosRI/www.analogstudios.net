@@ -1,9 +1,9 @@
-const { defaultReporter } = require('@web/test-runner');
-const greenwoodPluginImportCss = require('@greenwood/plugin-import-css/src/index');
-const greenwoodPluginTypeScript = require('@greenwood/plugin-typescript');
-const { junitReporter } = require('@web/test-runner-junit-reporter');
-const path = require('path');
-const { puppeteerLauncher } = require('@web/test-runner-puppeteer');
+import { defaultReporter } from '@web/test-runner';
+import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css/src/index.js';
+import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript/src/index.js';
+import { junitReporter } from '@web/test-runner-junit-reporter';
+import path from 'path';
+import { puppeteerLauncher } from '@web/test-runner-puppeteer';
 
 // create a direct instance of ImportCssResource
 const importCssResource = greenwoodPluginImportCss()[0].provider({});
@@ -15,7 +15,7 @@ const typeScriptResource = greenwoodPluginTypeScript()[0].provider({
   }
 });
 
-module.exports = {
+export default {
   files: './src/**/*.spec.js',
   nodeResolve: true,
   mimeTypes: {
