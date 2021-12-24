@@ -51,9 +51,9 @@ export class EventDetailsRouteComponent extends LitElement {
         </style>
 
         <div class="as-events-container">
-
           <div id="as-event-detail-container">
-            <i class="cal-icon fa fa-calendar-o" style="font-size: 5rem;width:20%"></i>
+            <app-social-share></app-social-share>
+            <i class="cal-icon fa fa-calendar-o" style="font-size: 5rem;width:10%"></i>
             <div id="as-event-info">
               <p>Event Title: ${event.title}</p>
               <p>Event Date: ${this.formatEventTime(event.startTime)}</p>
@@ -61,7 +61,6 @@ export class EventDetailsRouteComponent extends LitElement {
               <p style="color: var(--color-primary)">${unsafeHTML(event.description)}</p>
             </div>
           </div>
-          <app-social-share></app-social-share>
         </div>
       `;
     }
