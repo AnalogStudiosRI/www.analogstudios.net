@@ -8,6 +8,10 @@ connectRouter(store);
 @customElement('app-router-outlet')
 export class App extends LitElement {
 
+  createRenderRoot(): Element | ShadowRoot {
+    return this;
+  }
+
   render() {
     return html`
       <div>
