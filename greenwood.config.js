@@ -4,7 +4,7 @@ import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css';
 import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
 import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
-import rollupPluginDynamicImportVars from '@rollup/plugin-dynamic-import-vars';
+import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
 
 export default {
   mode: 'spa',
@@ -23,7 +23,7 @@ export default {
       name: 'rollup-plugin-import-vars',
       provider: () => {
         return [
-          rollupPluginDynamicImportVars()
+          dynamicImportVariables.default()
         ];
       }
     }, {
