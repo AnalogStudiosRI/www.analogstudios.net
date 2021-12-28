@@ -9,7 +9,7 @@ import eventsCalendarCss from './events-calendar.css?type=css';
 export class EventsCalendarComponent extends LitElement {
 
   private DAYS_IN_WEEK = 7;
-  private MAX_CALENDAR_SPACES = 35;
+  private MAX_CALENDAR_SPACES = 42;
   private CALENDAR = [
     { NAME: 'January', DAYS: 31 },
     { NAME: 'February', DAYS: 28 },
