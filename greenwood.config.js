@@ -4,6 +4,7 @@ import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css';
 import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
 import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
+import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
 
 export default {
   mode: 'spa',
@@ -18,6 +19,14 @@ export default {
     ...greenwoodPluginFontAwesome(),
     ...greenwoodPluginTypeScript(),
     {
+      type: 'rollup',
+      name: 'rollup-plugin-import-vars',
+      provider: () => {
+        return [
+          dynamicImportVariables.default()
+        ];
+      }
+    }, {
       type: 'rollup',
       name: 'rollup-plugin-analyzer',
       provider: () => {

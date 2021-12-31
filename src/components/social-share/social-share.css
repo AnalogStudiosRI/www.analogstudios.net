@@ -1,0 +1,15 @@
+@import '../../theme.css';
+
+button {
+  background-color: var(--color-tertiary);
+  border: 2px solid var(--black)!important;
+}
+
+svg {
+  height: 20px;
+}
+
+i.fa {
+  color: #00aced;
+  width: 1.4rem;
+}

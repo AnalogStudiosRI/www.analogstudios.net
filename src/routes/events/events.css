@@ -34,7 +34,7 @@
 #as-event-detail-container {
   display: flex;
   font-size: 1.2rem;
-  padding: 3rem;
+  padding: 2rem;
 
   @media(max-width: 768px) {
     flex-direction: column;

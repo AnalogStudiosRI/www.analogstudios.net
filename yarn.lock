@@ -1431,6 +1431,16 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@rollup/plugin-dynamic-import-vars@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-dynamic-import-vars/-/plugin-dynamic-import-vars-1.4.1.tgz#ef6d042cd826ba05df6975c8a2612700cf0820ce"
+  integrity sha512-izHpMs9w8U8CLwyHTXE55H4ytGVaf2ZtlKIWxKigghw6ZC6Mx6AXCsixSY6JOchuX9BN4ZkeN8egLRTS+BxO+w==
+  dependencies:
+    "@rollup/pluginutils" "^3.1.0"
+    estree-walker "^2.0.1"
+    globby "^11.0.1"
+    magic-string "^0.25.7"
+
 "@rollup/plugin-node-resolve@^11.0.1":
   version "11.2.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-11.2.1.tgz#82aa59397a29cd4e13248b106e6a4a1880362a60"
@@ -5721,6 +5731,11 @@ estree-walker@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-1.0.1.tgz#31bc5d612c96b704106b477e6dd5d8aa138cb700"
   integrity sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==
+
+estree-walker@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-2.0.2.tgz#52f010178c2a4c117a7757cfe942adb7d2da4cac"
+  integrity sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==
 
 esutils@^2.0.2:
   version "2.0.3"
@@ -12671,6 +12686,11 @@ web-namespaces@^1.0.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.4.tgz#bc98a3de60dadd7faefc403d1076d529f5e030ec"
   integrity sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
+
+web-social-share@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/web-social-share/-/web-social-share-8.0.1.tgz#460fc6120f97371a840bec2b87e2a7a5bed26360"
+  integrity sha512-SdYm76yaFDRbAm+2n+mVi7q/tgg+UqX8BDKwvIWTymssfB9CfyH9uyXPzh2o3Kfa1SIeIGY0lmExxVLdYdGueA==
 
 webidl-conversions@^6.1.0:
   version "6.1.0"
