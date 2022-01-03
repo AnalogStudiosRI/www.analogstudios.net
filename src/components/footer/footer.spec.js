@@ -23,6 +23,12 @@ describe('Footer Component', () => {
       expect(footer.shadowRoot.querySelectorAll('footer').length).equal(1);
     });
 
+    it('should have two div containers', () => {
+      const elements = footer.shadowRoot.querySelectorAll('div.row > div');
+
+      expect(elements.length).equal(2);
+    });
+
     it('should have expected copyright elements', () => {
       const elements = footer.shadowRoot.querySelectorAll('p');
 

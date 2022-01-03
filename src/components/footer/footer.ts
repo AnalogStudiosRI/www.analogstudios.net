@@ -17,9 +17,7 @@ export class FooterComponent extends LitElement {
       <footer class='container as-footer'>
         <div class='row'>
           <div class='col-xs-12'>
-            <p class='copyright-text'>
-              &copy; ${STARTING_YEAR} - ${currentYear} Analog Studios
-            </p>
+            <p class='copyright-text'>&copy; ${STARTING_YEAR} - ${currentYear} Analog Studios</p>
           </div>
           <div class='col-xs-12'>
             <app-socials-media></app-socials-media>
