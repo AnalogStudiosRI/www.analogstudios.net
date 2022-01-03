@@ -1,8 +1,8 @@
-@import '../../theme.css';
+@import "../../theme.css";
 
 button {
   background-color: var(--color-tertiary);
-  border: 2px solid var(--black)!important;
+  border: 2px solid var(--black) !important;
 }
 
 svg {
@@ -12,4 +12,54 @@ svg {
 i.fa {
   color: #00aced;
   width: 1.4rem;
+}
+
+section.socials {
+  article {
+    text-align: center;
+    ul {
+      margin: 0 auto;
+      padding: 0;
+      li {
+        display: inline-block;
+        list-style-type: none;
+        padding: 1%;
+        strong {
+          display: none;
+        }
+        a {
+          i {
+            font-size: 2rem;
+            color: var(--color-dark);
+          }
+          i:hover {
+            color: var(--color-tertiary);
+          }
+        }
+
+        @media screen and (max-width: 900px) {
+          a {
+            i {
+              font-size: 2rem !important;
+            }
+          }
+        }
+
+        @media screen and (max-width: 900px) and (min-width: 700px) {
+          a {
+            i {
+              font-size: 1.85rem !important;
+            }
+          }
+        }
+        @media screen and (max-width: 700px) {
+          a {
+            i {
+              font-size: 1.5rem !important;
+            }
+          }
+        }
+      }
+    }
+  }
 }
