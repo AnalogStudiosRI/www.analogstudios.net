@@ -1,7 +1,6 @@
 import { css, html, LitElement, unsafeCSS, TemplateResult } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 import socialShareCss from "./social-share.css?type=css";
-import "web-social-share";
 
 @customElement("app-socials-media")
 export class NavigationComponent extends LitElement {
