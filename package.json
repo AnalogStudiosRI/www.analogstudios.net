@@ -46,6 +46,7 @@
     "@analogstudiosri/greenwood-plugin-font-awesome": "^0.2.0",
     "@esm-bundle/chai": "^4.3.4",
     "@greenwood/cli": "^0.22.1",
+    "@greenwood/plugin-google-analytics": "^0.22.1",
     "@greenwood/plugin-import-css": "^0.22.1",
     "@greenwood/plugin-postcss": "^0.22.1",
     "@greenwood/plugin-typescript": "^0.22.1",
