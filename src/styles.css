@@ -39,9 +39,11 @@ main {
   font-size: 0.85rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background-color: transparentize(var(----color-secondary) 0.0375);
+  background-color: var(--color-secondary);
+  /* background-color: transparentize(var(--color-secondary) 0.0375); */
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.5);
   min-height: 1000px;
+  padding: 1rem;
 
   & a {
     color: var(--color-tertiary);
