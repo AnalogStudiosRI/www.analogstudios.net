@@ -1,8 +1,8 @@
-import { css, html, LitElement, unsafeCSS, TemplateResult } from "lit";
-import { customElement } from "lit/decorators.js";
-import socialShareCss from "./social-share.css?type=css";
+import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import socialShareCss from './social-share.css?type=css';
 
-@customElement("app-socials-media")
+@customElement('app-socials-media')
 export class NavigationComponent extends LitElement {
   static styles = css`${unsafeCSS(socialShareCss)}`;
   protected render(): TemplateResult {
