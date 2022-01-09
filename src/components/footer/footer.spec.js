@@ -30,7 +30,7 @@ describe('Footer Component', () => {
     });
 
     it('should have three anchor tags', () => {
-      const elements = footer.shadowRoot.querySelectorAll('footer > section > article > ul > li > a');
+      const elements = footer.shadowRoot.querySelectorAll('section > article:nth-of-type(1) > ul > li > a');
 
       expect(elements.length).equal(3);
     });

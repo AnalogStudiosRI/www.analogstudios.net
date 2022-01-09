@@ -17,10 +17,6 @@ export class FooterComponent extends LitElement {
         <section>
           <h2>Analog Studio's Footer</h2>
           <article class="col-xs-12">
-           <h3>Copyright</h3>
-            <p class="copyright-text">&copy; ${STARTING_YEAR} - ${currentYear} Analog Studios</p>
-          </article>
-          <article class="col-xs-12">
             <h3>Socials</h3>
             <ul class="socials">
               <li>
@@ -45,6 +41,10 @@ export class FooterComponent extends LitElement {
                 </a>
               </li>
             </ul>
+          </article>
+          <article class="col-xs-12">
+           <h3>Copyright</h3>
+            <p class="copyright-text">&copy; ${STARTING_YEAR} - ${currentYear} Analog Studios</p>
           </article>
         </section>
       </footer>
