@@ -4,6 +4,11 @@
   flex-grow: 1;
 }
 
+.as-navigation h2 {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
 .as-navigation {
   & .as-navigation__list {
     display: flex;

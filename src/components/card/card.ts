@@ -29,7 +29,7 @@ export class CardComponent extends LitElement {
 
                   <div class="media-body">
                     <!-- TODO anchor link here (click)="onArtistClicked(artist)" -->
-                    <h4 class="media-heading">${details.headingText}</h4>
+                    <h3 class="media-heading">${details.headingText}</h3>
                     <p>${unsafeHTML(details.bodyText || '')}</p>
                   </div>
 
@@ -39,7 +39,7 @@ export class CardComponent extends LitElement {
 
             <a href="${details.link}" title="Visit ${details.headingText}">
               <div class="card-row hidden-md-up">
-                <h4>${details.headingText}</h4>
+                <h3>${details.headingText}</h3>
                 <img src="${details.imagePath}" alt="${details.imageAltText}">
               </div>
             </a>

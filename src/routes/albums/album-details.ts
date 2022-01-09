@@ -25,7 +25,7 @@ export class AlbumDetailsRouteComponent extends LitElement {
       return html``;
     } else {
       return html`
-        <a class="download-url as-link" href="${album.downloadUrl}">Download Link</a>
+        <a class="download-url as-link" href="${album.downloadUrl}" rel="noopener noreferrer">Download Link</a>
       `;
     }
   }

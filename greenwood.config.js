@@ -6,6 +6,47 @@ import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
 import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
 
+import fs from 'fs';
+import path from 'path';
+
+const customCopyPlugins = [{
+  type: 'copy',
+  name: 'plugin-copy-favicon',
+  provider: (compilation) => {
+    const fileName = 'favicon.ico';
+    const { context } = compilation;
+    const faviconPath = path.join(context.userWorkspace, fileName);
+    const assets = [];
+
+    if (fs.existsSync(faviconPath)) {
+      assets.push({
+        from: faviconPath,
+        to: path.join(context.outputDir, fileName)
+      });
+    }
+
+    return assets;
+  }
+}, {
+  type: 'copy',
+  name: 'plugin-copy-robots', // and sitemap? - https://developers.google.com/search/docs/advanced/robots/create-robots-txt
+  provider: (compilation) => {
+    const fileName = 'robots.txt';
+    const { context } = compilation;
+    const robotsPath = path.join(context.userWorkspace, fileName);
+    const assets = [];
+
+    if (fs.existsSync(robotsPath)) {
+      assets.push({
+        from: robotsPath,
+        to: path.join(context.outputDir, fileName)
+      });
+    }
+
+    return assets;
+  }
+}];
+
 export default {
   mode: 'spa',
   devServer: {
@@ -49,6 +90,7 @@ export default {
           })
         ];
       }
-    }
+    },
+    ...customCopyPlugins
   ]
 };

@@ -134,13 +134,13 @@ export class EventsCalendarComponent extends LitElement {
 
       <div class="as-events-calendar">
         <div class="as-events-calendar__header">
-          <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1">
+          <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1" aria-label="goto previous month">
             <i class="fa fa-arrow-left"></i>
           </button>
 
           <h3 class="as-events-calendar__header-text">Event Calendar<br><span class="as-events-calendar__month">${this.getHeaderText()}</span></h3>
 
-          <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToNextMonth}" tabindex="-1">
+          <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToNextMonth}" tabindex="-1" aria-label="goto next month">
             <i class="fa fa-arrow-right"></i>
           </button>
         </div>
