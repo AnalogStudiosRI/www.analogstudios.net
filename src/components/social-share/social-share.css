@@ -13,7 +13,11 @@ i.fa {
   color: #00aced;
   width: 1.4rem;
 }
-
+/* W3C headlines on footer h2 to h3 nested headlines */
+section.socials > h2,
+section.socials > article > h3 {
+  display: none;
+}
 section.socials {
   article {
     text-align: center;
