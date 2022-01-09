@@ -23,10 +23,11 @@ describe('Footer Component', () => {
       expect(footer.shadowRoot.querySelectorAll('footer').length).equal(1);
     });
 
-    it('should have two div containers', () => {
-      const elements = footer.shadowRoot.querySelectorAll('div.row > div');
+    it('should have three anchor tags', () => {
+      const elements = footer.shadowRoot.querySelector("footer > div > div:nth-child(2) > app-socials-media");
+      const nestedElements = elements.shadowRoot.querySelectorAll("section > article > ul > li > a");
 
-      expect(elements.length).equal(2);
+      expect(nestedElements.length).equal(3);
     });
 
     it('should have expected copyright elements', () => {
