@@ -24,8 +24,8 @@ describe('Footer Component', () => {
     });
 
     it('should have three anchor tags', () => {
-      const elements = footer.shadowRoot.querySelector("footer > div > div:nth-child(2) > app-socials-media");
-      const nestedElements = elements.shadowRoot.querySelectorAll("section > article > ul > li > a");
+      const elements = footer.shadowRoot.querySelector('footer > div > div:nth-child(2) > app-socials-media');
+      const nestedElements = elements.shadowRoot.querySelectorAll('section > article > ul > li > a');
 
       expect(nestedElements.length).equal(3);
     });

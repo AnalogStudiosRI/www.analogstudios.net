@@ -10,10 +10,10 @@ export class NavigationComponent extends LitElement {
            <section class='socials'>
               <article>
                 <ul>
-                <li><a href="https://www.facebook.com/analogstudiosri/"><i class="fa fa-facebook-square" aria-hidden="true"><strong>Facebook</strong></i></a></li>
-                <li><a href="https://www.youtube.com/channel/UCxs5mxoDpmmR0hRbwsxU7Sg/"><i class="fa fa-youtube-play" aria-hidden="true"><strong>YouTube</strong></i></a></li>
-                <li><a href="https://www.instagram.com/dave.flamand/"><i class="fa fa-instagram" aria-hidden="true"><strong>Instagram</strong></i></a></li>
-                <ul>
+                <li><a href='https://www.facebook.com/analogstudiosri/'><i class='fa fa-facebook-square' aria-hidden='true'><strong>Facebook</strong></i></a></li>
+                <li><a href='https://www.youtube.com/channel/UCxs5mxoDpmmR0hRbwsxU7Sg/'><i class='fa fa-youtube-play' aria-hidden='true'><strong>YouTube</strong></i></a></li>
+                <li><a href='https://www.instagram.com/dave.flamand/'><i class='fa fa-instagram' aria-hidden='true'><strong>Instagram</strong></i></a></li>
+              </ul>
               </article>
             </section>
     `;
