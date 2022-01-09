@@ -1,4 +1,4 @@
-@import '../../theme.css';
+@import "../../theme.css";
 
 :host {
   .copyright-text {
@@ -7,5 +7,59 @@
     color: var(--color-dark);
     text-transform: uppercase;
     font-family: var(--font-family-primary);
+  }
+}
+/* W3C headlines on footer h2 to h3 nested headlines */
+footer > section > h2,
+footer > section > article > h3 {
+  display: none;
+}
+
+article:nth-of-type(2) {
+  ul.socials {
+    /* keeps it centered */
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    li {
+      list-style-type: none;
+      /* creates spacing between icons */
+      padding: 0% 0.75%;
+      strong {
+        display: none;
+      }
+      a {
+        i {
+          font-size: 2rem;
+          color: var(--color-dark);
+        }
+        i:hover {
+          color: var(--color-tertiary);
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        a {
+          i {
+            font-size: 2rem !important;
+          }
+        }
+      }
+
+      @media screen and (max-width: 900px) and (min-width: 700px) {
+        a {
+          i {
+            font-size: 1.85rem !important;
+          }
+        }
+      }
+      @media screen and (max-width: 700px) {
+        a {
+          i {
+            font-size: 1.5rem !important;
+          }
+        }
+      }
+    }
   }
 }
