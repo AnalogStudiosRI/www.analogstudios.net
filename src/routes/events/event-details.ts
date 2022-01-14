@@ -19,6 +19,9 @@ export class EventDetailsRouteComponent extends LitElement {
     super.connectedCallback();
 
     this.event = await getEventById(this.id);
+
+    ga('set', 'page', `/event/${encodeURIComponent(this.event.title)}`);
+    ga('send', 'pageview');
   }
 
   // EEEE, MMMM d, yyyy, h:mm a

@@ -27,6 +27,9 @@ export class ArtistsRouteComponent extends LitElement {
     // and keep Analog at the top of the list
     this.displayArtists = this.artists.reverse().filter((artist: Artist) => artist.id !== this.ANALOG_ID);
     this.analog = this.artists.filter((artist: Artist) => artist.id === this.ANALOG_ID)[0];
+
+    ga('set', 'page', '/artists');
+    ga('send', 'pageview');
   }
 
   private onArtistSelected(): void {

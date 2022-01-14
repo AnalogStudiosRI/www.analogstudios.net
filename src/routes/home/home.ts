@@ -7,6 +7,13 @@ import homeCss from './home.css?type=css';
 @customElement('as-route-home')
 export class HomeRouteComponent extends LitElement {
 
+  protected connectedCallback(): void {
+    super.connectedCallback();
+
+    ga('set', 'page', '/');
+    ga('send', 'pageview');
+  }
+
   protected render(): TemplateResult {
     return html`
       <style>
