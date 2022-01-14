@@ -29,6 +29,12 @@ describe('Footer Component', () => {
       expect(elements.length).equal(1);
     });
 
+    it('should have three anchor tags', () => {
+      const elements = footer.shadowRoot.querySelectorAll('section > article:nth-of-type(1) > ul > li > a');
+
+      expect(elements.length).equal(3);
+    });
+
     it('should have expected copyright text', () => {
       const text = footer.shadowRoot.querySelector('p').textContent;
       const currentYear = new Date().getFullYear();
