@@ -8,7 +8,12 @@
     <meta property="og:title" content="Analog Studios" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.analogstudios.net/" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+
+    <!-- https://css-tricks.com/how-to-load-fonts-in-a-way-that-fights-fout-and-makes-lighthouse-happy/ -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/montserrat/v21/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" media="print" onload="this.media='all'">
 
     <!-- <meta property="og:image" content="https://s3.amazonaws.com/hosted.contributary.community/media/contributary-logo-invert.png" /> -->
     <!-- <meta property="og:description" content="A project for helping connect open source with the open source community." />-->
