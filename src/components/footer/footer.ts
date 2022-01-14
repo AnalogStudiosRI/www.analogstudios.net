@@ -20,21 +20,30 @@ export class FooterComponent extends LitElement {
             <h3>Socials</h3>
             <ul class="socials">
               <li>
-                <a href="https://www.facebook.com/analogstudiosri/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/analogstudiosri/"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Visit our Facebook page"
+                >
                   <i class="fa fa-facebook-square" aria-hidden="true">
                     <strong>Facebook</strong>
                   </i>
                 </a>
               </li>
               <li>
-                <a href="https://www.youtube.com/channel/UCxs5mxoDpmmR0hRbwsxU7Sg/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.youtube.com/channel/UCxs5mxoDpmmR0hRbwsxU7Sg/"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Visit our YouTube channel"
+              >
                   <i class="fa fa-youtube-play" aria-hidden="true">
                     <strong>YouTube</strong>
                   </i>
                 </a>
               </li>
               <li>
-                <a href="https://www.instagram.com/dave.flamand/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/dave.flamand/"
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Visit our Instagram page"
+                >
                   <i class="fa fa-instagram" aria-hidden="true">
                     <strong>Instagram</strong>
                   </i>
