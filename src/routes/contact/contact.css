@@ -13,7 +13,7 @@
 
   & form {
     margin: 20px auto;
-    width: 500px;
+    width: 90%;
   }
 
   & label {
@@ -21,16 +21,19 @@
   }
 
   & input {
-    width: 70%;
+    width: 50%;
     margin: 0 auto 20px;
     padding: 5px;
   }
 
   & textarea {
-    width: 100%;
+    width: 70%;
     margin: 0 auto 20px;
     padding: 5px;
     height: 200px;
   }
 
+  button[type="submit"] {
+    display: block;
+  }
 }
