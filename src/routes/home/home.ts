@@ -25,7 +25,7 @@ export class HomeRouteComponent extends LitElement {
           <div>
 
             <div class="as-media-carousel">
-              <img src="/assets/home-banner.jpg" class="img-fluid" alt="banner image of founders in chairs">
+              <img src="/assets/home-banner.webp" class="img-fluid" alt="banner image of founders in chairs">
 
               <span class="as-media-carousel__label">
                 Welcome to Analog Studios!
