@@ -40,15 +40,25 @@ export class FooterComponent extends LitElement {
                 </a>
               </li>
               <li>
-                <a href="https://www.instagram.com/dave.flamand/"
+                <a href="https://twitter.com/analogstudios"
                   target="_blank" rel="noopener noreferrer"
-                  aria-label="Visit our Instagram page"
+                  aria-label="Visit our Twitter account"
                 >
-                  <i class="fa fa-instagram" aria-hidden="true">
-                    <strong>Instagram</strong>
+                  <i class="fa fa-twitter" aria-hidden="true">
+                    <strong>Twitter</strong>
                   </i>
                 </a>
               </li>
+              <li>
+              <a href="https://www.instagram.com/dave.flamand/"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Visit our Instagram page"
+              >
+                <i class="fa fa-instagram" aria-hidden="true">
+                  <strong>Instagram</strong>
+                </i>
+              </a>
+            </li>
             </ul>
           </article>
           <article class="col-xs-12">
