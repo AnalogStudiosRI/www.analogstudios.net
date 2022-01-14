@@ -11,19 +11,19 @@ export class NavigationComponent extends LitElement {
       <nav class="as-navigation">
         <ul class="list-unstyled as-navigation__list">
           <li class="as-navigation__list-item">
-            <a class="as-navigation__link" href="/artists/">artists</a>
+            <h2><a class="as-navigation__link" href="/artists/">artists</a></h2>
           </li>
 
           <li class="as-navigation__list-item">
-            <a class="as-navigation__link" href="/albums/">albums</a>
+            <h2><a class="as-navigation__link" href="/albums/">albums</a></h2>
           </li>
 
           <li class="as-navigation__list-item">
-            <a class="as-navigation__link" href="/events/">events</a>
+            <h2><a class="as-navigation__link" href="/events/">events</a></h2>
           </li>
 
           <li class="as-navigation__list-item">
-            <a class="as-navigation__link" href="/contact/">contact</a>
+            <h2><a class="as-navigation__link" href="/contact/">contact</a></h2>
           </li>
         </ul>
       </nav>

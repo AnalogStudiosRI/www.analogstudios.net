@@ -18,14 +18,17 @@ export class HomeRouteComponent extends LitElement {
           <div>
 
             <div class="as-media-carousel">
-              <img src="/assets/home-banner.jpg" class="img-fluid">
+              <img src="/assets/home-banner.jpg" class="img-fluid" alt="banner image of founders in chairs">
 
               <span class="as-media-carousel__label">
                 Welcome to Analog Studios!
               </span>
 
               <span class="as-media-carousel__attribution-label">Photo courtesy of
-                <a href="http://www.maciaphotography.com/" class="as-media-carousel__attribution-label-link" target="_blank" alt="Morgan Macia Photography">Morgan Macia</a>
+                <a href="http://www.maciaphotography.com/" class="as-media-carousel__attribution-label-link" 
+                  target="_blank" rel="noopener noreferrer"
+                  alt="Morgan Macia Photography">Morgan Macia
+                </a>
               </span>
             </div>
 
