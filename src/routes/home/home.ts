@@ -7,6 +7,10 @@ import homeCss from './home.css?type=css';
 @customElement('as-route-home')
 export class HomeRouteComponent extends LitElement {
 
+  createRenderRoot(): Element | ShadowRoot {
+    return this;
+  }
+
   protected render(): TemplateResult {
     return html`
       <style>
@@ -16,6 +20,8 @@ export class HomeRouteComponent extends LitElement {
       <div class="as-view-home">
         <div>
           <div>
+
+            <app-header></app-header>
 
             <div class="as-media-carousel">
               <img src="/assets/home-banner.jpg" class="img-fluid">

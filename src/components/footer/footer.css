@@ -1,6 +1,4 @@
-@import '../../theme.css';
-
-:host {
+footer {
   .copyright-text {
     margin: 10px auto;
     text-align: center;

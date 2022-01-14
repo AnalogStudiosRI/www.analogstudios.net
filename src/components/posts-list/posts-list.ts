@@ -35,27 +35,30 @@ export class PostsListComponent extends LitElement {
       <style>
         ${postsListCss}
       </style>
-      <div class="as-posts-list">
 
-        <h3 class="as-posts-list__heading">Latest Posts</h3>
-        <div class="posts">
-          ${
-            maxPosts.map((post) => {
-              const formattedDate = this.getFormateDate(post.createdTime * 1000);
+      <div class="host">
+        <div class="as-posts-list">
 
-              return html`
-                <div class="post">
-                  <div class="post__time">Posted: ${formattedDate}</div>
+          <h3 class="as-posts-list__heading">Latest Posts</h3>
+          <div class="posts">
+            ${
+              maxPosts.map((post) => {
+                const formattedDate = this.getFormateDate(post.createdTime * 1000);
 
-                  <h4 class="post__heading">${post.title}</h4>
+                return html`
+                  <div class="post">
+                    <div class="post__time">Posted: ${formattedDate}</div>
 
-                  <details class="post__summary">${unsafeHTML(post.summary)}</details>
-                </div>
-              `;
-            })
-          }
+                    <h4 class="post__heading">${post.title}</h4>
+
+                    <details class="post__summary">${unsafeHTML(post.summary)}</details>
+                  </div>
+                `;
+              })
+            }
+          </div>
+
         </div>
-
       </div>
     `;
   }

@@ -1,4 +1,4 @@
-import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Details } from './card.model.ts';
@@ -8,12 +8,18 @@ import cardCss from './card.css?type=css';
 export class CardComponent extends LitElement {
   @property() details: Details;
 
-  static styles = css`${unsafeCSS(cardCss)}`;
-
+  createRenderRoot(): Element | ShadowRoot {
+    return this;
+  }
+  
   protected render():TemplateResult {
     const { details } = this;
 
     return html`
+      <style>
+        ${cardCss}
+      </style>
+
       <div class="container as-card">
         <div class="row">
           <!-- why doesn't col-xs-12 work here -->
