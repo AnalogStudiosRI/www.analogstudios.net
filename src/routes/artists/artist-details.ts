@@ -23,6 +23,9 @@ export class ArtistDetailsRouteComponent extends LitElement {
 
     this.artist = await getArtistById(this.id);
     this.albums = await getAlbumsByArtistId(this.id);
+
+    ga('set', 'page', `/artist/${encodeURIComponent(this.artist.name)}`);
+    ga('send', 'pageview');
   }
 
   private getAlbumsForArtist(artist: Artist): TemplateResult {

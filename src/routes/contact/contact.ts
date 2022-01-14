@@ -5,6 +5,13 @@ import contactCss from './contact.css?type=css';
 @customElement('as-route-contact')
 export class ContactRouteComponent extends LitElement {
 
+  protected connectedCallback(): void {
+    super.connectedCallback();
+
+    ga('set', 'page', '/contact');
+    ga('send', 'pageview');
+  }
+
   /* eslint-disable indent */
   protected render(): TemplateResult {
 

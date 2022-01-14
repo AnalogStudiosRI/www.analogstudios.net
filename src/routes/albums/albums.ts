@@ -18,6 +18,9 @@ export class AlbumsRouteComponent extends LitElement {
     super.connectedCallback();
 
     this.albums = await getAlbums();
+
+    ga('set', 'page', '/albums');
+    ga('send', 'pageview');
   }
 
   private onAlbumSelected(): void {

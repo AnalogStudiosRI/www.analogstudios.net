@@ -18,6 +18,9 @@ export class AlbumDetailsRouteComponent extends LitElement {
     super.connectedCallback();
 
     this.album = await getAlbumById(this.id);
+
+    ga('set', 'page', `/album/${encodeURIComponent(this.album.title)}`);
+    ga('send', 'pageview');
   }
 
   private getDownloadLink(album: Album): TemplateResult {
