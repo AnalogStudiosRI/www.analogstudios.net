@@ -44,6 +44,8 @@
   },
   "devDependencies": {
     "@analogstudiosri/greenwood-plugin-font-awesome": "^0.2.0",
+    "@aws-sdk/client-cloudfront": "^3.47.0",
+    "@aws-sdk/client-s3": "^3.46.0",
     "@esm-bundle/chai": "^4.3.4",
     "@greenwood/cli": "^0.22.1",
     "@greenwood/plugin-google-analytics": "^0.22.1",
@@ -63,6 +65,7 @@
     "@web/test-runner-junit-reporter": "^0.4.4",
     "@web/test-runner-puppeteer": "^0.10.2",
     "eslint": "^8.2.0",
+    "glob-promise": "^4.2.2",
     "postcss-nested": "^4.1.2",
     "rimraf": "^2.6.3",
     "rollup-plugin-analyzer": "^4.0.0",
