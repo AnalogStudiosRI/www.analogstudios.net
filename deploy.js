@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-// https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html
-// https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudfront/index.html
 import fs from 'fs';
 import glob from 'glob-promise';
 import * as AWS from '@aws-sdk/client-cloudfront';
@@ -18,6 +16,8 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 // }
 // test()
 
+// https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html
+// https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudfront/index.html
 async function run() {
   const REGION = 'us-east-1';
 
