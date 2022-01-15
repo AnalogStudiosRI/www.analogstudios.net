@@ -1,6 +1,5 @@
 # www.analogstudios.net
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3fa92afb-5d4d-4e27-a483-7eb64cdbe181/deploy-status)](https://app.netlify.com/sites/practical-fermat-fa2c48/deploys)
 [![GitHub release](https://img.shields.io/github/tag/AnalogStudiosRI/www.analogstudios.net.svg)](https://github.com/AnalogStudiosRI/www.analogstudios.net/tags)
 ![GitHub Actions status](https://github.com/AnalogStudiosRI/www.analogstudios.net/workflows/Main%20Integration/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues-pr-raw/AnalogStudiosRI/www.analogstudios.net.svg)](https://github.com/AnalogStudiosRI/www.analogstudios.net/issues)
@@ -8,7 +7,7 @@
 
 ## Overview
 
-Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io). It is built using Github Actions and deployed to Netlify. The backend is (currently) hosted in AWS.
+Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io). It is built and deployed using Github Actions to AWS using S3 and Cloudfront.  (The backend uses and API Gateway and EC2)
 
 ## Contributing
 
