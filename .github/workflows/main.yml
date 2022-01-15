@@ -26,3 +26,6 @@ jobs:
     - name: Build
       run: |
         yarn clean && yarn build
+    - name: Deploy
+      run: |
+        node deploy.js
