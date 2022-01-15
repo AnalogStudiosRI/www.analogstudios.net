@@ -5,6 +5,12 @@ import glob from 'glob-promise';
 import * as AWS from '@aws-sdk/client-cloudfront';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
+const CONFIG = {
+  region: 'us-east-1',
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+};
+
 // import { ListBucketsCommand } from '@aws-sdk/client-s3';
 // async function test () {
 //   try {
@@ -19,11 +25,9 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 // https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html
 // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudfront/index.html
 async function run() {
-  const REGION = 'us-east-1';
-
   try {
-    const s3Client = new S3Client({ region: REGION });
-    const cfClient = new AWS.CloudFront({ region: REGION });
+    const s3Client = new S3Client(CONFIG);
+    const cfClient = new AWS.CloudFront(CONFIG);
 
     // upload public/ directory to S3
     const uploadDir = new URL('./public/', import.meta.url).pathname;
@@ -34,13 +38,13 @@ async function run() {
       const fileStream = fs.createReadStream(file);
       const uploadParams = {
         Bucket: 'www.analogstudios.net',
-        Key: file.replace(`${process.cwd()}/public`, ''),
+        Key: file.replace(`${process.cwd()}/public/`, ''),
         Body: fileStream
       };
 
       await s3Client.send(new PutObjectCommand(uploadParams));
       
-      console.log(`Successfully uploaded object: ${bucketParams.Bucket} / ${bucketParams.Key}`);
+      console.log(`Successfully uploaded object: ${uploadParams.Key}`);
     }
 
     // invalidate index.html in Cloudfront
