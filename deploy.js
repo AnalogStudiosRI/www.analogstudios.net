@@ -2,6 +2,8 @@
 
 import fs from 'fs';
 import glob from 'glob-promise';
+import mime from 'mime-types';
+import path from 'path';
 import * as AWS from '@aws-sdk/client-cloudfront';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
@@ -39,7 +41,8 @@ async function run() {
       const uploadParams = {
         Bucket: 'www.analogstudios.net',
         Key: file.replace(`${process.cwd()}/public/`, ''),
-        Body: fileStream
+        Body: fileStream,
+        ContentType: mime.lookup(path.extname(file))
       };
 
       await s3Client.send(new PutObjectCommand(uploadParams));
