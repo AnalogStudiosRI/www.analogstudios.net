@@ -1,4 +1,4 @@
-@import "../../theme.css";
+@import "../../styles/theme.css";
 
 .as-header {
   background-color: var(--color-secondary);
