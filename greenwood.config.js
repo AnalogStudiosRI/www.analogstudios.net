@@ -8,7 +8,6 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
 
 export default {
-  mode: 'spa',
   optimization: 'inline',
   devServer: {
     proxy: {
