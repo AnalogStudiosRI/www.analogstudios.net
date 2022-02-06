@@ -1,0 +1,67 @@
+<html>
+
+  <head>
+    <!-- TODO <link rel="stylesheet" href="../../styles/artists.css?type=css"></link> -->
+    <script type="module" src="../../components/card/card.ts"></script>
+    <script type="module" data-gwd-opt="static">
+      import { html, render } from 'lit';
+      // import { modelArtist } from '../../components/card/card.model.ts';
+      console.debug(globalThis);
+      console.debug(globalThis.compilation);
+
+      // TODO sort analog first
+      // TODO event handlers
+      const artists = (await fetch('/graph.json')
+        .then(resp => resp.json()))
+        .filter(page => page.route.indexOf('/artists/') === 0 && page.id !== 'index');
+
+      document.querySelector('select').insertAdjacentHTML('beforeend', artists.map((artist) => {
+        const { id, name } = artist.data;
+
+        return `
+            <option value="${id}">${name}</option>
+          `;
+        }).join('\n'));
+
+      render(artists.map((artist) => {
+        const artistDetails = artist.data;
+        // TODO get from service / card.model.ts
+        const model = {
+          imagePath: artistDetails.imageUrl ||  '',
+          headingText: artistDetails.name || '',
+          bodyText: artistDetails.description || '',
+          imageAltText: artistDetails.name || '',
+          link: artistDetails.id ? `/artists/${artist.id}` : ''
+        };
+
+        return html`
+          <app-card .details="${model}"></app-card>
+        `;
+      }), document.querySelector('.artist-cards-list'));
+    </script>
+  </head>
+
+  <body>
+    <div class="container-flex as-route-artists">
+      <div class="row">
+
+        <div class="hidden-sm-down col-xs-3">
+
+          <p>Quick Links</p>
+
+          <select class="hidden-sm-down" @change="${onArtistSelected}">
+            <option value="Select Artist">Select Artist</option>
+          </select>
+
+        </div>
+
+        <div class="col-xs-7">
+          <div class="artist-cards-list">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+</html>
