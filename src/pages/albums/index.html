@@ -1,0 +1,65 @@
+<html>
+
+  <head>
+    <!-- TODO <link rel="stylesheet" href="../../styles/albums.css?type=css"></link> -->
+    <script type="module" src="../../components/card/card.ts"></script>
+    <script type="module" data-gwd-opt="static">
+      import { html, render } from 'lit';
+      // TODO import { modelArtist } from '../../components/card/card.model.ts';
+      // console.debug(globalThis);
+      // console.debug(globalThis.compilation);
+
+      // TODO sort analog first
+      // TODO event handlers
+      const albums = (await fetch('/graph.json')
+        .then(resp => resp.json()))
+        .filter(page => page.route.indexOf('/albums/') === 0 && page.id !== 'index');
+
+      document.querySelector('select').insertAdjacentHTML('beforeend', albums.map((album) => {
+        const { id, title } = album.data;
+
+        return `<option value="${id}">${album.title}</option>`;
+      }).join('\n'));
+
+      render(albums.map((album) => {
+        const albumDetails = album.data;
+        // TODO get from service / card.model.ts
+        const model = {
+          imagePath: albumDetails.imageUrl || '',
+          headingText: albumDetails.title || '',
+          bodyText: albumDetails.description || '',
+          imageAltText: albumDetails.title || '',
+          link: albumDetails.id ? `/albums/${albumDetails.id}` : ''
+        };
+
+        return html`
+          <app-card .details="${model}"></app-card>
+        `;
+      }), document.querySelector('.album-cards-list'));
+    </script>
+  </head>
+
+  <body>
+    <div class="container-flex as-route-artists">
+      <div class="row">
+
+        <div class="hidden-sm-down col-xs-3">
+
+          <p>Quick Links</p>
+
+          <select class="hidden-sm-down" @change="${onAlbumSelected}">
+            <option value="Select Album">Select Album</option>
+          </select>
+
+        </div>
+
+        <div class="col-xs-7">
+          <div class="album-cards-list">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+</html>

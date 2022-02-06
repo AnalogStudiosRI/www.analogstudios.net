@@ -6,8 +6,8 @@
     <script type="module" data-gwd-opt="static">
       import { html, render } from 'lit';
       // TODO import { modelArtist } from '../../components/card/card.model.ts';
-      console.debug(globalThis);
-      console.debug(globalThis.compilation);
+      // console.debug(globalThis);
+      // console.debug(globalThis.compilation);
 
       // TODO sort analog first
       // TODO event handlers
@@ -19,7 +19,7 @@
         const { id, name } = artist.data;
 
         return `<option value="${id}">${name}</option>`;
-        }).join('\n'));
+      }).join('\n'));
 
       render(artists.map((artist) => {
         const artistDetails = artist.data;
