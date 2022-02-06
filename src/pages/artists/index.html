@@ -5,7 +5,7 @@
     <script type="module" src="../../components/card/card.ts"></script>
     <script type="module" data-gwd-opt="static">
       import { html, render } from 'lit';
-      // import { modelArtist } from '../../components/card/card.model.ts';
+      // TODO import { modelArtist } from '../../components/card/card.model.ts';
       console.debug(globalThis);
       console.debug(globalThis.compilation);
 
@@ -18,9 +18,7 @@
       document.querySelector('select').insertAdjacentHTML('beforeend', artists.map((artist) => {
         const { id, name } = artist.data;
 
-        return `
-            <option value="${id}">${name}</option>
-          `;
+        return `<option value="${id}">${name}</option>`;
         }).join('\n'));
 
       render(artists.map((artist) => {
@@ -31,7 +29,7 @@
           headingText: artistDetails.name || '',
           bodyText: artistDetails.description || '',
           imageAltText: artistDetails.name || '',
-          link: artistDetails.id ? `/artists/${artist.id}` : ''
+          link: artistDetails.id ? `/artists/${artistDetails.id}` : ''
         };
 
         return html`

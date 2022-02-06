@@ -3,7 +3,7 @@
 
 body {
   margin: 0;
-  background-image: url("./assets/view-banner.webp");
+  background-image: url("/assets/view-banner.webp");
   background-size: 100% 377px;
   background-color: var(--color-secondary);
   background-attachment: fixed;

@@ -13,7 +13,9 @@ export class CardComponent extends LitElement {
   protected render():TemplateResult {
     const { details } = this;
 
-    console.debug({ details });
+    if (!details) {
+      return html``;
+    }
 
     return html`
       <div class="container as-card">
