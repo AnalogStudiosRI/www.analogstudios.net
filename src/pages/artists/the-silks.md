@@ -9,8 +9,7 @@ label:
 contactPhone: 
 contactEmail: T.J.@email.com
 isActive: 0
+template: artist-details
 ---
-
-## The Silks
 
 The Silks are cool jazz rock band originating out of the Providence area.

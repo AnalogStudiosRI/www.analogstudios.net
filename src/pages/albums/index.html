@@ -2,7 +2,7 @@
 
   <head>
     <!-- TODO <link rel="stylesheet" href="../../styles/albums.css?type=css"></link> -->
-    <script type="module" src="../../components/card/card.ts"></script>
+    <script type="module" src="../../components/card-list/card-list.ts" data-gwd-opt="static"></script>
     <script type="module" data-gwd-opt="static">
       import { html, render } from 'lit';
       // TODO import { modelArtist } from '../../components/card/card.model.ts';
@@ -14,28 +14,24 @@
       const albums = (await fetch('/graph.json')
         .then(resp => resp.json()))
         .filter(page => page.route.indexOf('/albums/') === 0 && page.id !== 'index');
-
-      document.querySelector('select').insertAdjacentHTML('beforeend', albums.map((album) => {
-        const { id, title } = album.data;
-
-        return `<option value="${id}">${album.title}</option>`;
-      }).join('\n'));
-
-      render(albums.map((album) => {
+      const details = albums.map((album) => {
         const albumDetails = album.data;
         // TODO get from service / card.model.ts
-        const model = {
+        return {
           imagePath: albumDetails.imageUrl || '',
           headingText: albumDetails.title || '',
           bodyText: albumDetails.description || '',
           imageAltText: albumDetails.title || '',
           link: albumDetails.id ? `/albums/${albumDetails.id}` : ''
         };
+      });
 
-        return html`
-          <app-card .details="${model}"></app-card>
-        `;
-      }), document.querySelector('.album-cards-list'));
+      document.querySelector('app-card-list').setAttribute('details', JSON.stringify(details));
+      document.querySelector('select').insertAdjacentHTML('beforeend', albums.map((album) => {
+        const { id, title } = album.data;
+
+        return `<option value="${id}">${album.title}</option>`;
+      }).join('\n'));
     </script>
   </head>
 
@@ -54,8 +50,7 @@
         </div>
 
         <div class="col-xs-7">
-          <div class="album-cards-list">
-          </div>
+          <app-card-list></app-card-list>
         </div>
 
       </div>

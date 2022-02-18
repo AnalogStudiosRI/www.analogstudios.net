@@ -6,7 +6,7 @@ import cardCss from './card.css?type=css';
 
 @customElement('app-card')
 export class CardComponent extends LitElement {
-  @property() details: Details;
+  @property({ type: Object }) details: Details;
 
   static styles = css`${unsafeCSS(cardCss)}`;
 
@@ -34,7 +34,7 @@ export class CardComponent extends LitElement {
                   <div class="media-body">
                     <!-- TODO anchor link here (click)="onArtistClicked(artist)" -->
                     <h3 class="media-heading">${details.headingText}</h3>
-                    <p>${unsafeHTML(details.bodyText || '')}</p>
+                    <p>${unsafeHTML(details.bodyText || '<slot></slot>')}</p>
                   </div>
 
                 </div>

@@ -9,8 +9,7 @@ label: Analog Studios
 contactPhone: 
 contactEmail: 
 isActive: 1
+template: artist-details
 ---
-
-## Various Artists
 
 This is a compilation profile for various recordings and musical compilations.

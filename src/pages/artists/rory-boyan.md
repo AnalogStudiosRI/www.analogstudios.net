@@ -9,8 +9,7 @@ label: Analog Studios
 contactPhone: 
 contactEmail: roryboyan@yahoo.com
 isActive: 1
+template: artist-details
 ---
-
-## Rory Boyan
 
 One of my best friends, Rory plays instrumental music in a genre all to his own. Combining elements of blues, reggae, and percussion into his guitar playing, Rory manages to create something unique to him, and him alone. If you like chilled out and inspiring music, then you found your man.

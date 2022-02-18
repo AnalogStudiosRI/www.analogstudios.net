@@ -9,6 +9,7 @@ import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
 
 export default {
   optimization: 'inline',
+  interpolateFrontmatter: true,
   devServer: {
     proxy: {
       '/api': 'https://www.analogstudios.net'
