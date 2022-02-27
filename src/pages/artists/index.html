@@ -10,7 +10,6 @@
       // console.debug(globalThis.compilation);
 
       // TODO sort analog first
-      // TODO event handlers
       const artists = (await fetch('/graph.json')
         .then(resp => resp.json()))
         .filter(page => page.route.indexOf('/artists/') === 0 && page.id !== 'index' && page.data.isActive === 1);
@@ -28,10 +27,16 @@
 
       document.querySelector('app-card-list').setAttribute('details', JSON.stringify(details));
       document.querySelector('select').insertAdjacentHTML('beforeend', artists.map((artist) => {
-        const { id, name } = artist.data;
-
-        return `<option value="${id}">${name}</option>`;
+        return `<option value="${artist.route}">${artist.data.name}</option>`;
       }).join('\n'));
+    </script>
+    <script>
+      function onArtistSelected() {
+        const select = document.getElementById('artist-dropdown');
+        const albumRoute = select.options[select.selectedIndex].value;
+
+        window.location.assign(albumRoute)
+      }
     </script>
   </head>
 
@@ -43,7 +48,7 @@
 
           <p>Quick Links</p>
 
-          <select class="hidden-sm-down" @change="${onArtistSelected}">
+          <select id="artist-dropdown" class="hidden-sm-down" onchange="onArtistSelected()">
             <option value="Select Artist">Select Artist</option>
           </select>
 

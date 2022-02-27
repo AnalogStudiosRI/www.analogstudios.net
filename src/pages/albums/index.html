@@ -10,7 +10,6 @@
       // console.debug(globalThis.compilation);
 
       // TODO sort analog first
-      // TODO event handlers
       const albums = (await fetch('/graph.json')
         .then(resp => resp.json()))
         .filter(page => page.route.indexOf('/albums/') === 0 && page.id !== 'index');
@@ -28,10 +27,16 @@
 
       document.querySelector('app-card-list').setAttribute('details', JSON.stringify(details));
       document.querySelector('select').insertAdjacentHTML('beforeend', albums.map((album) => {
-        const { id, title } = album.data;
-
-        return `<option value="${id}">${album.title}</option>`;
+        return `<option value="${album.route}">${album.title}</option>`;
       }).join('\n'));
+    </script>
+    <script>
+      function onAlbumSelected(e) {
+        const select = document.getElementById('album-dropdown');
+        const albumRoute = select.options[select.selectedIndex].value;
+
+        window.location.assign(albumRoute)
+      }
     </script>
   </head>
 
@@ -43,7 +48,7 @@
 
           <p>Quick Links</p>
 
-          <select class="hidden-sm-down" @change="${onAlbumSelected}">
+          <select id="album-dropdown" class="hidden-sm-down" onchange="onAlbumSelected()">
             <option value="Select Album">Select Album</option>
           </select>
 
