@@ -1,8 +1,8 @@
 <html>
   <head>
     <!-- <script type="module" src="../../components/card/card.ts"></script> -->
-    <script type="module" src="../../components/social-share/social-share.ts"></script>
-    <script type="module" src="../../components/card-list/card-list.ts" ></script>
+    <script type="module" src="../../components/social-share/social-share.ts" data-gwd-opt="static"></script>
+    <script type="module" src="../../components/card-list/card-list.ts" data-gwd-opt="static"></script>
     <script type="module" data-gwd-opt="static">
       import { html, render } from 'lit';
 
@@ -25,7 +25,7 @@
           headingText: album.title || '',
           bodyText: albumDetails.description || '',
           imageAltText: album.title || '',
-          link: `/albums/${album.title.toLowerCase().replace(/ /g, '-')}/`
+          link: album.route
         };
       });
 
@@ -56,6 +56,7 @@
             <content-outlet></content-outlet>
           </div>
 
+          <h4>ALBUMS BY ${globalThis.page.name}</h4>
           <app-card-list></app-card-list>
 
         </div>
