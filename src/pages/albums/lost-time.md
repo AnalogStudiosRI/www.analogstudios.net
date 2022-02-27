@@ -6,6 +6,7 @@ year: 2008
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/dave-flamand/lost-time/lost-time.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/dave-flamand/lost-time/lost-time.zip
 artistId: 6
+template: album-details
 ---
 
 ## Lost Time

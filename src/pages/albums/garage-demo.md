@@ -6,6 +6,7 @@ year: 2008
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/electro-calrissian/garage-demo/garage-demo.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/electro-calrissian/garage-demo/garage-demo.zip
 artistId: 2
+template: album-details
 ---
 
 ## Garage Demo

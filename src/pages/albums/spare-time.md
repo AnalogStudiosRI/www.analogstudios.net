@@ -6,6 +6,7 @@ year: 2008
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/dave-flamand/spare-time/spare-time.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/dave-flamand/spare-time/spare-time.zip
 artistId: 6
+template: album-details
 ---
 
 ## Spare Time

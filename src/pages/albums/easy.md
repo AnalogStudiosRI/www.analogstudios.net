@@ -6,6 +6,7 @@ year: 2005
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/jay-st/easy/easy.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/jay-st/easy/easy.zip
 artistId: 8
+template: album-details
 ---
 
 ## Easy

@@ -6,6 +6,7 @@ year: 2010
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/various-artists/block-island-musicfest-2010/block-island-musicfest-2010.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/various-artists/block-island-musicfest-2010/block-island-musicfest-2010.zip
 artistId: 9
+template: album-details
 ---
 
 ## BI Music Fest - Porch Gigs

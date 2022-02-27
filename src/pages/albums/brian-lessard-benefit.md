@@ -6,6 +6,7 @@ year: 2008
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/audio-kickstand/brian-lessard-benefit/brian-lessard-benefit.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/audio-kickstand/brian-lessard-benefit/brian-lessard-benefit.zip
 artistId: 7
+template: album-details
 ---
 
 ## Brian Lessard Benefit

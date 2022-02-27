@@ -6,6 +6,7 @@ year: 2008
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/analog/analog-debut/analog-debut.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/analog/analog-debut/analog-debut.zip
 artistId: 1
+template: album-details
 ---
 
 ## Debut CD Release Party (live)

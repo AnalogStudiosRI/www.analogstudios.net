@@ -6,6 +6,7 @@ year: 2009
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/rory-boyan/rpm-recording-challenge/rpm-recording-challenge.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/rory-boyan/rpm-recording-challenge/rpm-recording-challenge.zip
 artistId: 3
+template: album-details
 ---
 
 ## RPM Recordings

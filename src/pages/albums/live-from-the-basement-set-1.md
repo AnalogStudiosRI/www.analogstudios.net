@@ -6,6 +6,7 @@ year: 2005
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/jay-st/from-the-basement-live-pt1/from-the-basement-live-pt1.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/jay-st/from-the-basement-live-pt1/from-the-basement-live-pt1.zip
 artistId: 8
+template: album-details
 ---
 
 ## Live - From The Basement (set 1)

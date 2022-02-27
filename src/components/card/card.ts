@@ -28,7 +28,7 @@ export class CardComponent extends LitElement {
                 <div class="media">
 
                   <div class="media-left">
-                    <img class="media-object" src="${details.imagePath}" alt="${details.imageAltText}">
+                    <img class="media-object" src="${details.imagePath}" alt="${details.imageAltText}" loading="lazy">
                   </div>
 
                   <div class="media-body">
@@ -44,7 +44,7 @@ export class CardComponent extends LitElement {
             <a href="${details.link}" title="Visit ${details.headingText}">
               <div class="card-row hidden-md-up">
                 <h3>${details.headingText}</h3>
-                <img src="${details.imagePath}" alt="${details.imageAltText}">
+                <img src="${details.imagePath}" alt="${details.imageAltText}" loading="lazy">
               </div>
             </a>
 

@@ -6,6 +6,7 @@ year: 2013
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/laurent-bonetto/music-mansion-series-vol3/music-mansion-series-vol3.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/laurent-bonetto/music-mansion-series-vol3/music-mansion-series-vol3.zip
 artistId: 4
+template: album-details
 ---
 
 ## Music Mansion Series vol3

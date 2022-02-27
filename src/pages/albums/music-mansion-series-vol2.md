@@ -6,6 +6,7 @@ year: 2010
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/laurent-bonetto/music-mansion-series-vol2/music-mansion-series-vol2.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/laurent-bonetto/music-mansion-series-vol2/music-mansion-series-vol2.zip
 artistId: 4
+template: album-details
 ---
 
 ## Music Mansion Series vol2

@@ -6,6 +6,7 @@ year: 2008
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/laurent-bonetto/music-mansion-series-vol1/music-mansion-series-vol1.jpg
 downloadUrl: //d34k5cjnk2rcze.cloudfront.net/albums/laurent-bonetto/music-mansion-series-vol1/music-mansion-series-vol1.zip
 artistId: 4
+template: album-details
 ---
 
 ## Music Mansion Series vol1

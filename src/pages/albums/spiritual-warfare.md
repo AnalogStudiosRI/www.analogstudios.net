@@ -6,6 +6,7 @@ year: 2014
 imageUrl: //d34k5cjnk2rcze.cloudfront.net/albums/metal-wings/spiritual-warfare/spiritual-warfare.jpg
 downloadUrl: 
 artistId: 10
+template: album-details
 ---
 
 ## Spiritual Warfare
