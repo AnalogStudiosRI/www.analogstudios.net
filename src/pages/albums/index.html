@@ -15,13 +15,14 @@
         .filter(page => page.route.indexOf('/albums/') === 0 && page.id !== 'index');
       const details = albums.map((album) => {
         const albumDetails = album.data;
+
         // TODO get from service / card.model.ts
         return {
           imagePath: albumDetails.imageUrl || '',
           headingText: albumDetails.title || '',
           bodyText: albumDetails.description || '',
           imageAltText: albumDetails.title || '',
-          link: albumDetails.id ? `/albums/${albumDetails.id}` : ''
+          link: album.route
         };
       });
 
@@ -35,7 +36,7 @@
         const select = document.getElementById('album-dropdown');
         const albumRoute = select.options[select.selectedIndex].value;
 
-        window.location.assign(albumRoute)
+        window.location.assign(albumRoute);
       }
     </script>
   </head>

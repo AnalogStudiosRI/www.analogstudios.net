@@ -21,7 +21,7 @@
           headingText: artistDetails.name || '',
           bodyText: artistDetails.description || '',
           imageAltText: artistDetails.name || '',
-          link: `/artists/${artistDetails.name.toLowerCase().replace(/ /g, '-')}/`
+          link: artist.route
         };
       });
 
