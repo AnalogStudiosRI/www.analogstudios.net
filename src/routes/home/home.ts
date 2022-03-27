@@ -10,10 +10,6 @@ export class HomeRouteComponent extends LitElement {
   protected connectedCallback(): void {
     super.connectedCallback();
 
-    fetch('/api/v2/events')
-      .then(resp => resp.json())
-      .then(resp => console.debug(resp));
-
     ga('set', 'page', '/');
     ga('send', 'pageview');
   }

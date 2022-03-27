@@ -1,6 +1,6 @@
 import './event.model.ts';
 
-const EVENTS_API_URL = '/api/events';
+const EVENTS_API_URL = '/api/v2/events';
 
 function getEvents(): Promise<[Event]> {
   return fetch(EVENTS_API_URL)
@@ -8,7 +8,7 @@ function getEvents(): Promise<[Event]> {
 }
 
 function getEventById(id): Promise<Event> {
-  return fetch(`${EVENTS_API_URL}/${id}`)
+  return fetch(`${EVENTS_API_URL}?id=${id}`)
     .then(resp => resp.json())
     .then(resp => resp[0]);
 }
