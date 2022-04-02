@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <!-- <script type="module" src="../../components/card/card.ts"></script> -->
+    <script type="module" src="../../components/social-share/social-share.ts" data-gwd-opt="static"></script>
+    <script type="module" src="../../components/card-list/card-list.ts" data-gwd-opt="static"></script>
+    <script type="module" data-gwd-opt="static">
+      import { html, render } from 'lit';
+
+      const currentArtist = {
+        imagePath: '${globalThis.page.imageUrl}' ||  '',
+        headingText: '${globalThis.page.name}' || '',
+        bodyText: '',
+        imageAltText: '${globalThis.page.name}' || ''
+      };
+      const albums = (await fetch('/graph.json')
+        .then(resp => resp.json()))
+        .filter((page) => {
+          return page.data.artistId == '${globalThis.page.id}';
+        });
+      const details = albums.map((album) => {
+        const albumDetails = album.data;
+        // TODO get from service / card.model.ts
+        return {
+          imagePath: albumDetails.imageUrl ||  '',
+          headingText: album.title || '',
+          bodyText: albumDetails.description || '',
+          imageAltText: album.title || '',
+          link: album.route
+        };
+      });
+
+      document.querySelector('app-card').setAttribute('details', JSON.stringify(currentArtist));
+      document.querySelector('app-card-list').setAttribute('details', JSON.stringify(details));
+    </script>
+  </head>
+
+  <body>
+    <div class="container-flex as-route-artist-details">
+      <div class="row">
+
+        <div class="col-xs-4 hidden-sm-down">
+          <app-social-share></app-social-share>
+        </div>
+
+        <div class="col-xs-6">
+
+          <div class="card-row hidden-sm-down">
+            <app-card>
+              <content-outlet></content-outlet>
+            </app-card>
+          </div>
+
+          <div class="card-row hidden-md-up" >
+            <h4>${globalThis.page.name}</h4>
+            <img src="${globalThis.page.imageUrl}" alt="${globalThis.page.name}"/>
+            <content-outlet></content-outlet>
+          </div>
+
+          <h4>ALBUMS BY ${globalThis.page.name}</h4>
+          <app-card-list></app-card-list>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,66 @@
+<html>
+
+  <head>
+    <!-- TODO <link rel="stylesheet" href="../../styles/albums.css?type=css"></link> -->
+    <script type="module" src="../../components/card-list/card-list.ts" data-gwd-opt="static"></script>
+    <script type="module" data-gwd-opt="static">
+      import { html, render } from 'lit';
+      // TODO import { modelArtist } from '../../components/card/card.model.ts';
+      // console.debug(globalThis);
+      // console.debug(globalThis.compilation);
+
+      // TODO sort analog first
+      const albums = (await fetch('/graph.json')
+        .then(resp => resp.json()))
+        .filter(page => page.route.indexOf('/albums/') === 0 && page.id !== 'index');
+      const details = albums.map((album) => {
+        const albumDetails = album.data;
+
+        // TODO get from service / card.model.ts
+        return {
+          imagePath: albumDetails.imageUrl || '',
+          headingText: albumDetails.title || '',
+          bodyText: albumDetails.description || '',
+          imageAltText: albumDetails.title || '',
+          link: album.route
+        };
+      });
+
+      document.querySelector('app-card-list').setAttribute('details', JSON.stringify(details));
+      document.querySelector('select').insertAdjacentHTML('beforeend', albums.map((album) => {
+        return `<option value="${album.route}">${album.title}</option>`;
+      }).join('\n'));
+    </script>
+    <script>
+      function onAlbumSelected(e) {
+        const select = document.getElementById('album-dropdown');
+        const albumRoute = select.options[select.selectedIndex].value;
+
+        window.location.assign(albumRoute);
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="container-flex as-route-artists">
+      <div class="row">
+
+        <div class="hidden-sm-down col-xs-3">
+
+          <p>Quick Links</p>
+
+          <select id="album-dropdown" class="hidden-sm-down" onchange="onAlbumSelected()">
+            <option value="Select Album">Select Album</option>
+          </select>
+
+        </div>
+
+        <div class="col-xs-7">
+          <app-card-list></app-card-list>
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+</html>

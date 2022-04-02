@@ -1,0 +1,65 @@
+<html>
+
+  <head>
+    <!-- TODO <link rel="stylesheet" href="../../styles/artists.css?type=css"></link> -->
+    <script type="module" src="../../components/card-list/card-list.ts" data-gwd-opt="static"></script>
+    <script type="module" data-gwd-opt="static">
+      import { html, render } from 'lit';
+      // TODO import { modelArtist } from '../../components/card/card.model.ts';
+      // console.debug(globalThis);
+      // console.debug(globalThis.compilation);
+
+      // TODO sort analog first
+      const artists = (await fetch('/graph.json')
+        .then(resp => resp.json()))
+        .filter(page => page.route.indexOf('/artists/') === 0 && page.id !== 'index' && page.data.isActive === 1);
+      const details = artists.map((artist) => {
+        const artistDetails = artist.data;
+        // TODO get from service / card.model.ts
+         return {
+          imagePath: artistDetails.imageUrl ||  '',
+          headingText: artistDetails.name || '',
+          bodyText: artistDetails.description || '',
+          imageAltText: artistDetails.name || '',
+          link: artist.route
+        };
+      });
+
+      document.querySelector('app-card-list').setAttribute('details', JSON.stringify(details));
+      document.querySelector('select').insertAdjacentHTML('beforeend', artists.map((artist) => {
+        return `<option value="${artist.route}">${artist.data.name}</option>`;
+      }).join('\n'));
+    </script>
+    <script>
+      function onArtistSelected() {
+        const select = document.getElementById('artist-dropdown');
+        const albumRoute = select.options[select.selectedIndex].value;
+
+        window.location.assign(albumRoute)
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="container-flex as-route-artists">
+      <div class="row">
+
+        <div class="hidden-sm-down col-xs-3">
+
+          <p>Quick Links</p>
+
+          <select id="artist-dropdown" class="hidden-sm-down" onchange="onArtistSelected()">
+            <option value="Select Artist">Select Artist</option>
+          </select>
+
+        </div>
+
+        <div class="col-xs-7">
+         <app-card-list></app-card-list>
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+</html>

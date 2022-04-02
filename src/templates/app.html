@@ -18,17 +18,14 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" media="print" onload="this.media='all'">
 
-    <!-- <meta property="og:image" content="https://s3.amazonaws.com/hosted.contributary.community/media/contributary-logo-invert.png" /> -->
-    <!-- <meta property="og:description" content="A project for helping connect open source with the open source community." />-->
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link rel="icon" href="/favicon.ico"/>
 
-    <script type="module" src="./components/footer/footer.ts"></script>
-    <script type="module" src="./components/header/header.ts"></script>
-    <script type="module" src="./index.ts"></script>
+    <script type="module" src="../components/footer/footer.ts"></script>
+    <script type="module" src="../components/header/header.ts"></script>
 
-    <link rel="stylesheet" href="./theme.css"></script>
-    <link rel="stylesheet" href="./styles.css"></script>
+    <link rel="stylesheet" href="../styles/theme.css"></link>
+    <link rel="stylesheet" href="../styles/styles.css"></link>
   </head>
 
   <body>
@@ -40,7 +37,7 @@
     <div class="container">
       <section>
         <main class="router-outlet">
-          <app-router-outlet></app-router-outlet>
+          <page-outlet></page-outlet>
         </main>
       </section>
 
@@ -48,13 +45,5 @@
         <app-footer></app-footer>
       </section>
     </div>
-
-    <!-- Netlify hidden form for the contact page -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <textarea name="message"></textarea>
-    </form>
-
   </body>
 </html>

@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <!-- <script type="module" src="../../components/card/card.ts"></script> -->
+    <script type="module" src="../../components/social-share/social-share.ts" data-gwd-opt="static"></script>
+    <script type="module" src="../../components/card-list/card-list.ts" data-gwd-opt="static"></script>
+    <script type="module" data-gwd-opt="static">
+      import { html, render } from 'lit';
+
+      const currentAlbum = {
+        imagePath: '${globalThis.page.imageUrl}' ||  '',
+        headingText: '',
+        bodyText: '',
+        imageAltText: '${globalThis.page.title}' || '',
+        downloadLink: '${globalThis.page.downloadUrl}' || ''
+      };
+
+      document.querySelector('app-card').setAttribute('details', JSON.stringify(currentAlbum));
+    </script>
+  </head>
+
+  <body>
+    <div class="container-flex as-route-artist-details">
+      <div class="row">
+
+        <div class="col-xs-4 hidden-sm-down">
+          <app-social-share></app-social-share>
+        </div>
+
+        <div class="col-xs-6">
+          <a href="${globalThis.page.downloadUrl}" alt="Download Link">Download Link</a>
+          <div class="card-row hidden-sm-down">
+            <app-card>
+              <content-outlet></content-outlet>
+            </app-card>
+          </div>
+
+          <div class="card-row hidden-md-up" >
+            <h4>${globalThis.page.data.title}</h4>
+            <img src="${globalThis.page.imageUrl}" alt="${globalThis.page.title}"/>
+            <content-outlet></content-outlet>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -6,12 +6,16 @@ import cardCss from './card.css?type=css';
 
 @customElement('app-card')
 export class CardComponent extends LitElement {
-  @property() details: Details;
+  @property({ type: Object }) details: Details;
 
   static styles = css`${unsafeCSS(cardCss)}`;
 
   protected render():TemplateResult {
     const { details } = this;
+
+    if (!details) {
+      return html``;
+    }
 
     return html`
       <div class="container as-card">
@@ -24,13 +28,13 @@ export class CardComponent extends LitElement {
                 <div class="media">
 
                   <div class="media-left">
-                    <img class="media-object" src="${details.imagePath}" alt="${details.imageAltText}">
+                    <img class="media-object" src="${details.imagePath}" alt="${details.imageAltText}" loading="lazy">
                   </div>
 
                   <div class="media-body">
                     <!-- TODO anchor link here (click)="onArtistClicked(artist)" -->
                     <h3 class="media-heading">${details.headingText}</h3>
-                    <p>${unsafeHTML(details.bodyText || '')}</p>
+                    <p>${unsafeHTML(details.bodyText || '<slot></slot>')}</p>
                   </div>
 
                 </div>
@@ -40,7 +44,7 @@ export class CardComponent extends LitElement {
             <a href="${details.link}" title="Visit ${details.headingText}">
               <div class="card-row hidden-md-up">
                 <h3>${details.headingText}</h3>
-                <img src="${details.imagePath}" alt="${details.imageAltText}">
+                <img src="${details.imagePath}" alt="${details.imageAltText}" loading="lazy">
               </div>
             </a>
 
