@@ -2580,14 +2580,13 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
-"@greenwood/cli@^0.26.0-alpha.0":
-  version "0.26.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@greenwood/cli/-/cli-0.26.0-alpha.0.tgz#94274d4d5138f1a93f3c8ab321b2c06350120b22"
-  integrity sha512-Wp/UHtuf+DbHVnSZMycGpUPe9Z1JznEmUfqlSJTCyKtWNv0pUDShNiDhwWEqm9x6aS098IjK6ybsTkJiuLxkoQ==
+"@greenwood/cli@^0.26.0-alpha.1":
+  version "0.26.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@greenwood/cli/-/cli-0.26.0-alpha.1.tgz#1b62c8753f8a95dca4ea02445e370f0cf6b19d56"
+  integrity sha512-T26/cP3cbqC5hUTnnv3O9DFmSfOb2cisrehLi0zof5yMLiL/rHAQbTbCBQ0+xiPPUHwnSKNQRPklHE/yNCTqOQ==
   dependencies:
     "@rollup/plugin-node-resolve" "^13.0.0"
     "@rollup/plugin-replace" "^2.3.4"
-    "@webcomponents/webcomponentsjs" "^2.6.0"
     acorn "^8.0.1"
     acorn-walk "^8.0.0"
     commander "^2.20.0"
@@ -2609,32 +2608,32 @@
     rollup "^2.58.0"
     rollup-plugin-terser "^7.0.0"
     unified "^9.2.0"
-    wc-compiler "~0.3.1"
+    wc-compiler "~0.4.0"
 
-"@greenwood/plugin-google-analytics@^0.26.0-alpha.0":
-  version "0.26.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-google-analytics/-/plugin-google-analytics-0.26.0-alpha.0.tgz#8e9e8cb454ed2938a29fa4d5d5b236dfe2d40221"
-  integrity sha512-YF8WYWv2yv4lFG8RXeIGIxMZ86tuNxil6c5PdRizNk77D5BmVkSv40FpKy2gB9Ahdp4d7cw74rbA6bEYMjFd7Q==
+"@greenwood/plugin-google-analytics@^0.26.0-alpha.1":
+  version "0.26.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-google-analytics/-/plugin-google-analytics-0.26.0-alpha.1.tgz#f4d8196b70e6efcfba9d48614645f603c6c67f81"
+  integrity sha512-570q8dmMJwj/JcdCl2Em+X0mTMc5FeK8088C+IeNWQcLOOjfhYMb2lkBYlElSfIx3rRS7haiA0uS9xVPnjzpcA==
 
-"@greenwood/plugin-import-css@^0.26.0-alpha.0":
-  version "0.26.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-import-css/-/plugin-import-css-0.26.0-alpha.0.tgz#822e54b3f0912271286b8f1ad924109711df1835"
-  integrity sha512-/r4LPng2sMpVnLEP5UZedskwRSlbqxloOEhdENyBhK5BAp1TplhYOB8fk/nEr03TEkQhHgrbjJEXD0Spk9UCFA==
+"@greenwood/plugin-import-css@^0.26.0-alpha.1":
+  version "0.26.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-import-css/-/plugin-import-css-0.26.0-alpha.1.tgz#27e3f50889a9e880b2c8dc5f6c4cc79f363b0507"
+  integrity sha512-kuaDaFBm6+wHDn9+bB1SYnZuJ+G/Sj5zheMNDB8X5wHv5HqGAfW6Ic/CzW0I6H7gEbFqumYhr/+TKVEKRicXIQ==
   dependencies:
     rollup-plugin-postcss "^4.0.2"
 
-"@greenwood/plugin-postcss@^0.26.0-alpha.0":
-  version "0.26.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-postcss/-/plugin-postcss-0.26.0-alpha.0.tgz#434cfd802531467a77909df4858964ff5e2e2518"
-  integrity sha512-buvaVxriuI4kcS6wtk02cxcbFH/9QMmDdY5BP/PL6dqo1GPxR7yCn2Y85OsP/DL17D3oIno9cDCy5qu0R/9hDw==
+"@greenwood/plugin-postcss@^0.26.0-alpha.1":
+  version "0.26.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-postcss/-/plugin-postcss-0.26.0-alpha.1.tgz#026a05f0bc3c95963ff55b40b714216a51c2c2c0"
+  integrity sha512-wueJeFW/zy76cDbCf0C3+/515DTSsCNtbFQnWYCjbMIGZKd+MkzTd2okClz88TCQZNcnqiw02oTFKdhKu7NEDw==
   dependencies:
     cssnano "^5.0.11"
     postcss-preset-env "^7.0.1"
 
-"@greenwood/plugin-typescript@^0.26.0-alpha.0":
-  version "0.26.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-typescript/-/plugin-typescript-0.26.0-alpha.0.tgz#4c7a753c9a6f330a61b0787a158421f1a0ab1722"
-  integrity sha512-VLqpKBvU4YEwhdxEF8zRSfdRXS2Yh4COWEHqhwXA+XJNan52IKhnvNzTmm+pVj+kiao7CqGbSx2d257vIYDipg==
+"@greenwood/plugin-typescript@^0.26.0-alpha.1":
+  version "0.26.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-typescript/-/plugin-typescript-0.26.0-alpha.1.tgz#481371dc5a886b864ae0af38a8e946e7ae29588c"
+  integrity sha512-Jcoi03GXdJVJ8jgzdAiFpG7Nn7NjNflRDHRTYN5CoaEnftHx4p8c4MF7QAmyt2jE14btjwBLyYjUkkliUSLAIw==
   dependencies:
     "@rollup/plugin-typescript" "^8.2.1"
     typescript "^4.3.5"
@@ -4563,11 +4562,6 @@
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
-
-"@webcomponents/webcomponentsjs@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.6.0.tgz#7d1674c40bddf0c6dd974c44ffd34512fe7274ff"
-  integrity sha512-Moog+Smx3ORTbWwuPqoclr+uvfLnciVd6wdCaVscHPrxbmQ/IJKm3wbB7hpzJtXWjAq2l/6QMlO85aZiOdtv5Q==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -14115,10 +14109,10 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-wc-compiler@~0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/wc-compiler/-/wc-compiler-0.3.1.tgz#fedd4249947092ef8d30c41156911a2891c7cef4"
-  integrity sha512-hY72m2EX6WW9k8+kXzrOCxyJetaTRKmGODnW3Ftl2u1d5pOw6mXSZkBI6/5SEw07jbQK/CLs/Tem/SF2PBO0mQ==
+wc-compiler@~0.4.0:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/wc-compiler/-/wc-compiler-0.4.1.tgz#7a970760f6decaedfba4d99939d590b43a5ad6a2"
+  integrity sha512-TmjrquaS83Ra+q58L7fhHY2sJPM22oFRbrAnC6Djvq5Ex+qc/iAn/jg4pXRgLzWHlhLwI+6Z8C3sBpINFq0O4Q==
   dependencies:
     acorn "^8.7.0"
     acorn-walk "^8.2.0"
