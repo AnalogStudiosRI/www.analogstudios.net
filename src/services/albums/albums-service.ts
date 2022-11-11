@@ -14,7 +14,7 @@ function getAlbumById(id): Promise<Album> {
 }
 
 function getAlbumsByArtistId(id): Promise<[Album]> {
-  return fetch(`${ALBUMS_API_URL}?artistId=${id}`)
+  return fetch(`${ALBUMS_API_URL}/?artistId=${id}`)
     .then(resp => resp.json());
 }
 
