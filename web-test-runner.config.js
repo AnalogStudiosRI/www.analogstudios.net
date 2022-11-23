@@ -59,10 +59,16 @@ export default {
     name: 'import-css',
     async transform(context) {
       const url = importCssResource.getBareUrlPath(context.request.url); // need to remove query strings first
-      const shouldIntercept = await importCssResource.shouldIntercept(url, context.body, { request: context.headers });
+      const customHeaders = {
+        request: {
+          originalUrl: url,
+          ...context.headers
+        }
+      };
+      const shouldIntercept = await importCssResource.shouldIntercept(url, context.body, customHeaders);
 
       if (shouldIntercept) {
-        const cssResource = await importCssResource.intercept(url, context.body);
+        const cssResource = await importCssResource.intercept(url, context.body, customHeaders);
         const { body, contentType } = cssResource;
 
         return {
