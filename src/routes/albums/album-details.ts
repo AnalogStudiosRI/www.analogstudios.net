@@ -37,9 +37,14 @@ export class AlbumDetailsRouteComponent extends LitElement {
   protected render(): TemplateResult {
     const { album } = this;
 
+    console.debug({ album })
+
     if (!album) {
       return html``;
     } else {
+      const formattedTitle = `${album.title} (${album.year})`;
+
+      album.title = formattedTitle;
       return html`
         <style>
           ${albumsCss}
@@ -56,13 +61,13 @@ export class AlbumDetailsRouteComponent extends LitElement {
 
               <div class="card-row hidden-sm-down">
                 ${this.getDownloadLink(album)}
-                <app-card .details="${modelAlbum(album)}"></as-card>
+                <app-card .details="${modelAlbum(album)}"></app-card>
               </div>
 
               <div class="card-row hidden-md-up">
-                <h4>${album.title}</h4>
-                <img src="${album.imageUrl}" alt="${album.title}"/>
-                <p>${unsafeHTML(album.description)}></p>
+                <h4>${formattedTitle}</h4>
+                <img src="${album.imageUrl}" alt="${formattedTitle}"/>
+                <p>${unsafeHTML(album.description)}</p>
               </div>
 
             </div>
