@@ -41,8 +41,8 @@ export class AlbumDetailsRouteComponent extends LitElement {
       return html``;
     } else {
       const formattedTitle = `${album.title} (${album.year})`;
-
       album.title = formattedTitle;
+
       return html`
         <style>
           ${albumsCss}
