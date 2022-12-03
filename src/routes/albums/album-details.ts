@@ -37,8 +37,6 @@ export class AlbumDetailsRouteComponent extends LitElement {
   protected render(): TemplateResult {
     const { album } = this;
 
-    console.debug({ album })
-
     if (!album) {
       return html``;
     } else {
