@@ -11,7 +11,7 @@ const importCssResource = greenwoodPluginImportCss()[0].provider({});
 // create a direct instance of TypeScriptResource
 const typeScriptResource = greenwoodPluginTypeScript()[0].provider({
   context: {
-    projectDirectory: process.cwd()
+    projectDirectory: new URL(import.meta.url)
   }
 });
 
