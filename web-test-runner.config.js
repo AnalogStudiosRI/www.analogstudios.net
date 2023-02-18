@@ -72,7 +72,7 @@ export default {
         return {
           body: await response.text(),
           headers: {
-            'content-type': response.headers.get('Content-Type')
+            'Content-Type': response.headers.get('Content-Type')
           }
         };
       }
