@@ -51,6 +51,11 @@ export class ArtistDetailsRouteComponent extends LitElement {
     if (!artist) {
       return html``;
     } else {
+      const modeledArtist = modelArtist(artist);
+
+      // don't need links on details pages
+      delete modeledArtist.link;
+
       return html`
         <style>
           ${artistsCss}
@@ -66,7 +71,7 @@ export class ArtistDetailsRouteComponent extends LitElement {
             <div class="col-xs-6">
 
               <div class="card-row hidden-sm-down">
-                <app-card .details="${modelArtist(artist)}"></app-card>
+                <app-card .details="${modeledArtist}"></app-card>
               </div>
 
               <div class="card-row hidden-md-up" >
