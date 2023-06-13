@@ -46,7 +46,7 @@ async function run() {
       };
 
       await s3Client.send(new PutObjectCommand(uploadParams));
-      
+
       console.log(`Successfully uploaded object: ${uploadParams.Key}`);
     }
 
