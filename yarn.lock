@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@analogstudiosri/greenwood-plugin-font-awesome@^0.2.0":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@analogstudiosri/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.2.1.tgz#fb7774846278a2005370088b3b718a1c50ee7d41"
-  integrity sha512-4GYUUYNcn60yQNHyB4p7GQKEaxdhaNkSPWCpw+hhjTEgudQ1Ij4sAAeDn453iL+bpiadw2MFyCMUu/Zmdyd8og==
+"@analogstudiosri/greenwood-plugin-font-awesome@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@analogstudiosri/greenwood-plugin-font-awesome/-/greenwood-plugin-font-awesome-0.3.0.tgz#3e537b6b4ecdd8d6a71b3da8dfa99aba912c927e"
+  integrity sha512-arujJ21mWfeem7EpbuKTUIEDlh6EQopSLYGKvobHR0sx8T8PFiCIUz/1vHxURfUCKx9J8oK6BBmtmKsHJ+YiKA==
 
 "@aws-crypto/crc32@2.0.0":
   version "2.0.0"
@@ -2580,10 +2580,10 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
-"@greenwood/cli@^0.28.2":
-  version "0.28.2"
-  resolved "https://registry.yarnpkg.com/@greenwood/cli/-/cli-0.28.2.tgz#4ff180bdc45ff2dc5e91ada1baa25e912c045311"
-  integrity sha512-MD7zC3EmNYCIZKR3zJSjBld6v3X22AWXMlt9KeXeX5sU8im+qDBl9uIKFLvYGZw8P0Wx8baFSJdHsF5Ziy/kqg==
+"@greenwood/cli@^0.28.4":
+  version "0.28.4"
+  resolved "https://registry.yarnpkg.com/@greenwood/cli/-/cli-0.28.4.tgz#feb2314c2095b8ddf87cd5038977e21a9c8580a5"
+  integrity sha512-2WjQRxGf/kKLKetwpAFP/U3Tseul+mfsR36pb0GvTZl4SPkEIVk5yiWNg2efg2o+FyGLI4GnfC89T+UezkW9aQ==
   dependencies:
     "@rollup/plugin-commonjs" "^21.0.0"
     "@rollup/plugin-node-resolve" "^13.0.0"
@@ -2609,29 +2609,29 @@
     unified "^9.2.0"
     wc-compiler "~0.8.0"
 
-"@greenwood/plugin-google-analytics@^0.28.2":
-  version "0.28.2"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-google-analytics/-/plugin-google-analytics-0.28.2.tgz#1b0bb914da765898af487d44734bc3974ab3856b"
-  integrity sha512-xzoQuMe38q3Y1jGfFofwm59pRkd5zeUCCHw901rAA7ZdcvmmQj9qaLQXUizeINWBx6iF1l/q71NKvhG4nUaXZg==
+"@greenwood/plugin-google-analytics@^0.28.4":
+  version "0.28.4"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-google-analytics/-/plugin-google-analytics-0.28.4.tgz#c0232e438bd695d86834e93fa9ef0d26ed6030ed"
+  integrity sha512-Dp27GuaVoJjCzRaHw/hynOwNwMSucppFtcOPu68GA0hH4jf0FH983jxLUP+KKz0u0XyCj/+HTTzdkaDrgTHsBA==
 
-"@greenwood/plugin-import-css@^0.28.2":
-  version "0.28.2"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-import-css/-/plugin-import-css-0.28.2.tgz#e12ad59a3280f48209fff4e53fa067e2fd2cb052"
-  integrity sha512-6lQ3HoB08+3F8Jia/5KAb09ZUtpQHUddlXBIlL0pJGAXcG1D69n61KzFBE7PQLFjLzo0wROz2UG6l9NKphbjdQ==
+"@greenwood/plugin-import-css@^0.28.4":
+  version "0.28.4"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-import-css/-/plugin-import-css-0.28.4.tgz#736c6c9a93e65612efcf86467e75198bb9aa7c4e"
+  integrity sha512-dSbuwKLUZhgCFQAaRdFg4hfD2XZkh1+wFw+fUPvEsEfnhrQGufSwP4dETe1izmTOVzCb6rlwMI4b2litRK2PMQ==
 
-"@greenwood/plugin-postcss@^0.28.2":
-  version "0.28.2"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-postcss/-/plugin-postcss-0.28.2.tgz#0484b9f762990b5bb75dfd7c611bbf8c0c6c2764"
-  integrity sha512-rpoFkB/HW8fGUYj51RPlhe8PsGcd8Wndnm1xEW97be3/NQ9B6mC50hbQ5c4yj6PxMEEPRfM1osmVGvLiPz0Iiw==
+"@greenwood/plugin-postcss@^0.28.4":
+  version "0.28.4"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-postcss/-/plugin-postcss-0.28.4.tgz#435b99dfe78b62f23469c5caea4ca9498906229a"
+  integrity sha512-LZM6KBVhY1J71x1waOlU1gWuqiiZzbsBJGalFMpOgZfvpqB1bSiR7JVS+E5dnIAyAgf/AfbVRZ2o0XasObjnIQ==
   dependencies:
     postcss "^8.3.11"
     postcss-import "^13.0.0"
     postcss-preset-env "^7.0.1"
 
-"@greenwood/plugin-typescript@^0.28.2":
-  version "0.28.2"
-  resolved "https://registry.yarnpkg.com/@greenwood/plugin-typescript/-/plugin-typescript-0.28.2.tgz#609ec7fb4abe18cd4a5ce271bed66077d70a576b"
-  integrity sha512-hQbuGc99Kngz+Y78qzb4PT1g0TDySAz9W+CwSMuPGU4nuren+kX4kXvS8Epi1OZt2Sz9erEHotiYhNs1nDoi2w==
+"@greenwood/plugin-typescript@^0.28.4":
+  version "0.28.4"
+  resolved "https://registry.yarnpkg.com/@greenwood/plugin-typescript/-/plugin-typescript-0.28.4.tgz#c20a2308ffafb9aee454928979a6af535894c878"
+  integrity sha512-j5ceqYeZarC1ZgaJIDTpPHt+pHZUTVsP7LBXQNPEKqquAvZ2Rd9EZToynv1QA5E4TMOtqVvT+OKoBeKhp+tbKA==
   dependencies:
     typescript "^4.3.5"
 

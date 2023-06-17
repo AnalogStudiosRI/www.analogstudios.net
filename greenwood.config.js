@@ -1,5 +1,4 @@
-// import { greenwoodPluginFontAwesome } from '@analogstudiosri/greenwood-plugin-font-awesome';
-import { greenwoodPluginFontAwesome } from './plugin-font-awesome.js';
+import { greenwoodPluginFontAwesome } from '@analogstudiosri/greenwood-plugin-font-awesome';
 import { greenwoodPluginGoogleAnalytics } from '@greenwood/plugin-google-analytics';
 import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css';
