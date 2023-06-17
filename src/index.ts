@@ -15,42 +15,42 @@ export class App extends LitElement {
           <lit-route
             path="/albums/:id"
             component="as-route-album-details"
-            .resolve="${() => import('/routes/albums/album-details.ts')}">
+            .resolve="${() => import('./routes/albums/album-details.ts')}">
           </lit-route>
           <lit-route
             path="/albums"
             component="as-route-albums"
-            .resolve="${() => import('/routes/albums/albums.ts')}">
+            .resolve="${() => import('./routes/albums/albums.ts')}">
           </lit-route>
           <lit-route
             path="/artists/:id"
             component="as-route-artist-details"
-            .resolve="${() => import('/routes/artists/artist-details.ts')}">
+            .resolve="${() => import('./routes/artists/artist-details.ts')}">
           </lit-route>
           <lit-route
             path="/artists"
             component="as-route-artists"
-            .resolve="${() => import('/routes/artists/artists.ts')}">
+            .resolve="${() => import('./routes/artists/artists.ts')}">
           </lit-route>
           <lit-route
             path="/contact"
             component="as-route-contact"
-            .resolve="${() => import('/routes/contact/contact.ts')}">
+            .resolve="${() => import('./routes/contact/contact.ts')}">
           </lit-route>
           <lit-route
             path="/events/:id"
             component="as-route-event-details"
-            .resolve="${() => import('/routes/events/event-details.ts')}">
+            .resolve="${() => import('./routes/events/event-details.ts')}">
           </lit-route>
           <lit-route
             path="/events"
             component="as-route-events"
-            .resolve="${() => import('/routes/events/events.ts')}">
+            .resolve="${() => import('./routes/events/events.ts')}">
           </lit-route>
           <lit-route
             path="/"
             component="as-route-home"
-            .resolve="${() => import('/routes/home/home.ts')}">
+            .resolve="${() => import('./routes/home/home.ts')}">
           </lit-route>
           <lit-route><h1>Not Found (404) Page - TODO</h1></lit-route>
         </main>

@@ -1,8 +1,8 @@
 import { defaultReporter } from '@web/test-runner';
+import fs from 'fs/promises';
 import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css/src/index.js';
 import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript/src/index.js';
 import { junitReporter } from '@web/test-runner-junit-reporter';
-import path from 'path';
 import { puppeteerLauncher } from '@web/test-runner-puppeteer';
 
 // create a direct instance of ImportCssResource
@@ -11,7 +11,7 @@ const importCssResource = greenwoodPluginImportCss()[0].provider({});
 // create a direct instance of TypeScriptResource
 const typeScriptResource = greenwoodPluginTypeScript()[0].provider({
   context: {
-    projectDirectory: process.cwd()
+    projectDirectory: new URL(import.meta.url)
   }
 });
 
@@ -45,9 +45,9 @@ export default {
       const { url } = context.request;
 
       if (url.endsWith('.ts')) {
-        const resource = await typeScriptResource.serve(path.join(process.cwd(), url));
+        const response = await typeScriptResource.serve(new URL(`.${url}`, import.meta.url));
         // https://github.com/ProjectEvergreen/greenwood/issues/661
-        const body = resource.body.replace(/\/\/# sourceMappingURL=module.js.map/, '');
+        const body = (await response.text()).replace(/\/\/# sourceMappingURL=module.js.map/, '');
 
         return {
           body,
@@ -58,23 +58,21 @@ export default {
   }, {
     name: 'import-css',
     async transform(context) {
-      const url = importCssResource.getBareUrlPath(context.request.url); // need to remove query strings first
-      const customHeaders = {
-        request: {
-          originalUrl: url,
-          ...context.headers
-        }
-      };
-      const shouldIntercept = await importCssResource.shouldIntercept(url, context.body, customHeaders);
+      const url = new URL(`.${context.request.url}`, import.meta.url);
+      const request = new Request(url, { headers: new Headers(context.headers) });
+      const shouldIntercept = await importCssResource.shouldIntercept(url, request);
 
       if (shouldIntercept) {
-        const cssResource = await importCssResource.intercept(url, context.body, customHeaders);
-        const { body, contentType } = cssResource;
+        const contents = await fs.readFile(url);
+        const initResponse = new Response(contents, {
+          headers: new Headers(context.headers)
+        });
+        const response = await importCssResource.intercept(url, request, initResponse.clone());
 
         return {
-          body,
+          body: await response.text(),
           headers: {
-            'content-type': contentType
+            'Content-Type': response.headers.get('Content-Type')
           }
         };
       }
