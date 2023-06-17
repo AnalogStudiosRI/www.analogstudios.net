@@ -22,10 +22,10 @@ You can confirm by running the following
 
 ```sh
 $ node -v
-v14.16.0
+v18.15.0
 
 $ yarn -v
-1.12.3
+1.22.19
 ```
 
 Then run `yarn install` to install the project's dependencies.
