@@ -12,6 +12,13 @@ export class CardComponent extends LitElement {
 
   protected render():TemplateResult {
     const { details } = this;
+    const detailsHeadingLink = !details.link
+      ? details.headingText
+      : html`
+        <a href="${details.link}" title="Visit ${details.headingText}">
+          ${details.headingText}
+        </a>
+      `;
 
     return html`
       <div class="container as-card">
@@ -19,23 +26,23 @@ export class CardComponent extends LitElement {
           <!-- why doesn't col-xs-12 work here -->
           <div class="col-xs-12">
 
-            <a href="${details.link}" title="Visit ${details.headingText}">
-              <div class="card-row hidden-sm-down">
-                <div class="media">
+            <div class="card-row hidden-sm-down">
+              <div class="media">
 
-                  <div class="media-left">
-                    <img class="media-object" src="${details.imagePath}" alt="${details.imageAltText}">
-                  </div>
-
-                  <div class="media-body">
-                    <!-- TODO anchor link here (click)="onArtistClicked(artist)" -->
-                    <h3 class="media-heading">${details.headingText}</h3>
-                    <p>${unsafeHTML(details.bodyText || '')}</p>
-                  </div>
-
+                <div class="media-left">
+                  <img class="media-object" src="${details.imagePath}" alt="${details.imageAltText}">
                 </div>
+
+                <div class="media-body">
+                  <!-- TODO anchor link here (click)="onArtistClicked(artist)" -->
+                  <h3 class="media-heading">
+                    ${detailsHeadingLink}
+                  </h3>
+                  <p>${unsafeHTML(details.bodyText || '')}</p>
+                </div>
+
               </div>
-            </a>
+            </div>
 
             <a href="${details.link}" title="Visit ${details.headingText}">
               <div class="card-row hidden-md-up">

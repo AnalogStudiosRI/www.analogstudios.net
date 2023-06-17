@@ -41,7 +41,12 @@ export class AlbumDetailsRouteComponent extends LitElement {
       return html``;
     } else {
       const formattedTitle = `${album.title} (${album.year})`;
+      const modeledAlbum = modelAlbum(album);
+
       album.title = formattedTitle;
+
+      // don't need links on details pages
+      delete modeledAlbum.link;
 
       return html`
         <style>
@@ -59,7 +64,7 @@ export class AlbumDetailsRouteComponent extends LitElement {
 
               <div class="card-row hidden-sm-down">
                 ${this.getDownloadLink(album)}
-                <app-card .details="${modelAlbum(album)}"></app-card>
+                <app-card .details="${modeledAlbum}"></app-card>
               </div>
 
               <div class="card-row hidden-md-up">
