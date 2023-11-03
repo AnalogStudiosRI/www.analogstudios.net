@@ -5,7 +5,7 @@ import contactCss from './contact.css?type=css';
 @customElement('as-route-contact')
 export class ContactRouteComponent extends LitElement {
 
-  protected connectedCallback(): void {
+  connectedCallback(): void {
     super.connectedCallback();
 
     ga('set', 'page', '/contact');

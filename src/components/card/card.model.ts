@@ -1,5 +1,5 @@
-import { Artist } from '../../services/artists/artist.model';
-import { Album } from '../../services/albums/album.model';
+import { Artist } from '../../services/artists/artist.model.ts';
+import { Album } from '../../services/albums/album.model.ts';
 
 function modelAlbum(album: Album) {
   return {

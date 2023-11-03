@@ -14,9 +14,10 @@ export class ArtistsRouteComponent extends LitElement {
 
   private ANALOG_ID = '1';
   private displayArtists: Array<Artist> = [];
-  private analog: Artist = {};
+  private analog: Artist;
 
-  @property() artists: Array<Artist> = [];
+  @property()
+  accessor artists: Array<Artist> = [];
 
   async connectedCallback() {
     super.connectedCallback();
@@ -33,14 +34,14 @@ export class ArtistsRouteComponent extends LitElement {
   }
 
   private onArtistSelected(): void {
-    const selectedAristId = this.shadowRoot.querySelector('select').value;
+    const selectedArtistId = this.shadowRoot.querySelector('select').value;
 
-    store.dispatch(navigate(`/artists/${selectedAristId}`));
+    store.dispatch(navigate(`/artists/${selectedArtistId}`));
   }
 
   /* eslint-disable indent */
   protected render(): TemplateResult {
-    const { displayArtists, analog } = this;
+    const { displayArtists = [], analog = {} } = this;
 
     return html`
       <style>
