@@ -8,7 +8,7 @@ export class FooterComponent extends LitElement {
 
   @property()
   private accessor STARTING_YEAR = 2007;
-  
+
   @property()
   private accessor currentYear = new Date().getFullYear();
 

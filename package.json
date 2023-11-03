@@ -60,7 +60,7 @@
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/web-components": "^6.3.2",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
-    "@typescript-eslint/parser": "^5.4.0",
+    "@typescript-eslint/parser": "^6.6.0",
     "@web/test-runner": "^0.13.13",
     "@web/test-runner-junit-reporter": "^0.4.4",
     "@web/test-runner-puppeteer": "^0.10.2",
