@@ -7,7 +7,7 @@ import eventsCss from './events.css?type=css';
 @customElement('as-route-events')
 export class EventsRouteComponent extends LitElement {
 
-  protected connectedCallback(): void {
+  connectedCallback(): void {
     super.connectedCallback();
 
     ga('set', 'page', '/events');

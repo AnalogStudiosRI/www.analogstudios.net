@@ -26,9 +26,14 @@ export class EventsCalendarComponent extends LitElement {
   ];
   private currentMonthData = [[Event]];
 
-  @property() events = [];
-  @property() currentMonthIndex;
-  @property() currentYear;
+  @property()
+  accessor events = [];
+
+  @property()
+  accessor currentMonthIndex;
+
+  @property()
+  accessor currentYear;
 
   constructor() {
     super();

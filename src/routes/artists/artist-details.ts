@@ -6,7 +6,7 @@ import { getArtistById } from '../../services/artists/artists-service.ts';
 import { getAlbumsByArtistId } from '../../services/albums/albums-service.ts';
 import { modelArtist, modelAlbum } from '../../components/card/card.model.ts';
 import { Artist } from '../../services/artists/artist.model.ts';
-import { Album } from '../../services/album/album.model.ts';
+import { Album } from '../../services/albums/album.model.ts';
 import '../../components/card/card.ts';
 import '../../components/social-share/social-share.ts';
 import artistsCss from './artists.css?type=css';
@@ -14,9 +14,14 @@ import artistsCss from './artists.css?type=css';
 @customElement('as-route-artist-details')
 export class ArtistDetailsRouteComponent extends LitElement {
 
-  @property() id: string;
-  @property() artist: Artist;
-  @property() albums: Array<Album>;
+  @property()
+  accessor id: string;
+
+  @property()
+  accessor artist: Artist;
+
+  @property()
+  accessor albums: Array<Album>;
 
   async connectedCallback() {
     super.connectedCallback();

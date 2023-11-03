@@ -1,12 +1,14 @@
 {
-  "exclude": [
-    "./node_modules/*"
-  ],
-  "include": [
-    "./**/*.ts"
-  ],
   "compilerOptions": {
-    "esModuleInterop": true,
-    "experimentalDecorators": true
-  }
+    "target": "es2022",
+    "module": "NodeNext",
+    "lib": ["es2022", "DOM", "DOM.Iterable", "esnext"],
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
 }
