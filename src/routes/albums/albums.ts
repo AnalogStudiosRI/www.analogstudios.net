@@ -12,7 +12,8 @@ import albumsCss from './albums.css?type=css';
 @customElement('as-route-albums')
 export class AlbumsRouteComponent extends LitElement {
 
-  @property() albums: Array<Album> = [];
+  @property()
+  accessor albums: Array<Album> = [];
 
   async connectedCallback() {
     super.connectedCallback();

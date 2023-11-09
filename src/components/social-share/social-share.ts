@@ -7,7 +7,9 @@ import 'web-social-share';
 export class NavigationComponent extends LitElement {
   static styles = css`${unsafeCSS(socialShareCss)}`;
 
-  @property() show = false;
+  @property()
+  accessor show = false;
+
   shareConfig = {};
 
   constructor() {

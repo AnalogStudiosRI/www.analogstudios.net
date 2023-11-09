@@ -12,8 +12,11 @@ export class EventDetailsRouteComponent extends LitElement {
   private MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   private DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  @property() id: string;
-  @property() event: Event;
+  @property()
+  accessor id: string;
+
+  @property()
+  accessor event: Event;
 
   async connectedCallback() {
     super.connectedCallback();

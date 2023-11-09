@@ -6,7 +6,8 @@ import cardCss from './card.css?type=css';
 
 @customElement('app-card')
 export class CardComponent extends LitElement {
-  @property() details: Details;
+  @property()
+  accessor details: Details;
 
   static styles = css`${unsafeCSS(cardCss)}`;
 

@@ -6,8 +6,11 @@ import footerCss from './footer.css?type=css';
 export class FooterComponent extends LitElement {
   static styles = css`${unsafeCSS(footerCss)}`;
 
-  @property() private STARTING_YEAR = 2007;
-  @property() private currentYear = new Date().getFullYear();
+  @property()
+  private accessor STARTING_YEAR = 2007;
+
+  @property()
+  private accessor currentYear = new Date().getFullYear();
 
   protected render(): TemplateResult {
     const { currentYear, STARTING_YEAR } = this;
