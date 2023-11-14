@@ -59,6 +59,7 @@
     "@storybook/addon-links": "^6.3.2",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/web-components": "^6.3.2",
+    "@types/google.analytics": "^0.0.45",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^6.6.0",
     "@web/test-runner": "^0.13.13",
