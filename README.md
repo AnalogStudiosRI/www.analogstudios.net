@@ -13,10 +13,7 @@ Frontend website for [www.analogstudios.net](https://www.analogstudios.net) base
 
 ### Setup
 
-You'll need the following installed to run and contribute to this project.
-
-1. [NodeJS LTS](https://nodejs.org/)
-1. [Yarn 1.x](https://classic.yarnpkg.com/)
+You'll need the latest [NodeJS LTS](https://nodejs.org/) version installed to run and contribute to this project.  Or run `nvm use` if using [nvm**](https://github.com/nvm-sh/nvm).
 
 You can confirm by running the following
 
@@ -24,20 +21,20 @@ You can confirm by running the following
 $ node -v
 v18.15.0
 
-$ yarn -v
-1.22.19
+% npm -v
+8.19.2
 ```
 
-Then run `yarn install` to install the project's dependencies.
+Then run `npm ci` to install the project's dependencies.
 
 ### Tasks
 
 After installing the above, you can run the following commands:
 
-- `yarn lint` - Lint all files in the project (JS , CSS, naming)
-- `yarn start` - Starts **Greenwood**'s local development server
-- `yarn build` - Runs **Greenwood** to generate a production build
-- `yarn storybook:deveop` - Runs [**Storybook**](https://storybook.js.org/) in development mode
-- `yarn test:tdd` - Runs unit tests in `watch` mode using [**@web/test-runner**](https://modern-web.dev/docs/test-runner/overview/)
+- `npm run lint` - Lint all files in the project (JS , CSS, naming)
+- `npm run start` - Starts **Greenwood**'s local development server
+- `npm run build` - Runs **Greenwood** to generate a production build
+- `npm run storybook:dev` - Runs [**Storybook**](https://storybook.js.org/) in development mode
+- `npm run test:tdd` - Runs unit tests in `watch` mode using [**@web/test-runner**](https://modern-web.dev/docs/test-runner/overview/)
 
 > _See `package.json#scripts` for a full list of available commands._
