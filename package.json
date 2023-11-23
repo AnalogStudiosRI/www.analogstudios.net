@@ -22,15 +22,15 @@
   "scripts": {
     "clean": "rimraf .greenwood/ public/ reports/ storybook-static/",
     "lint": "eslint \"*.js\" \"./.storybook/*.js\" \"./src/**/*.js\" \"./src/**/*.ts\" && ls-lint \"./src/**/*.js\"",
-    "develop": "greenwood develop",
+    "dev": "greenwood develop",
     "build": "greenwood build",
-    "start": "yarn develop",
-    "serve": "yarn build && greenwood serve",
-    "storybook:develop": "start-storybook -p 6006",
-    "storybook:build": "build-storybook",
-    "storybook:serve": "yarn clean && yarn storybook:build && npx http-server ./storybook-static",
+    "start": "npm run dev",
+    "serve": "npm run clean && npm run build && greenwood serve",
+    "story:dev": "start-storybook -p 6006",
+    "story:build": "build-storybook",
+    "story:serve": "npm run clean && npm run story:build && http-server ./storybook-static",
     "test": "wtr",
-    "test:tdd": "yarn test --watch"
+    "test:tdd": "npm run test --watch"
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.4",
@@ -67,6 +67,7 @@
     "@web/test-runner-puppeteer": "^0.10.2",
     "eslint": "^8.2.0",
     "glob-promise": "^4.2.2",
+    "http-server": "^14.1.1",
     "mime-types": "^2.1.34",
     "postcss-nested": "^4.1.2",
     "rimraf": "^2.6.3",

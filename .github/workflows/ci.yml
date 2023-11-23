@@ -19,16 +19,16 @@ jobs:
         node-version: ${{ matrix.node }}
     - name: Installing project dependencies
       run: |
-        yarn install --frozen-lockfile
+        npm ci
     - name: Lint
       run: |
-        yarn lint
+        npm run lint
     - name: Test
       run: |
-        yarn test
+        npm run test
     - name: Build
       run: |
-        yarn clean && yarn build
+        npm run build
     # - name: Storybook
     #   run: |
-    #     yarn storybook:build
+    #     npm run storybook:build
