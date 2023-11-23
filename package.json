@@ -28,9 +28,9 @@
     "serve": "npm run clean && npm run build && greenwood serve",
     "story:dev": "start-storybook -p 6006",
     "story:build": "build-storybook",
-    "story:serve": "yarn clean && yarn story:build && http-server ./storybook-static",
+    "story:serve": "npm run clean && npm run story:build && http-server ./storybook-static",
     "test": "wtr",
-    "test:tdd": "yarn test --watch"
+    "test:tdd": "npm run test --watch"
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.4",
