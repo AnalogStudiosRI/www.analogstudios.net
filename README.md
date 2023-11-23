@@ -34,7 +34,7 @@ After installing the above, you can run the following commands:
 - `npm run lint` - Lint all files in the project (JS , CSS, naming)
 - `npm run start` - Starts **Greenwood**'s local development server
 - `npm run build` - Runs **Greenwood** to generate a production build
-- `npm run storybook:dev` - Runs [**Storybook**](https://storybook.js.org/) in development mode
+- `npm run story:dev` - Runs [**Storybook**](https://storybook.js.org/) in development mode
 - `npm run test:tdd` - Runs unit tests in `watch` mode using [**@web/test-runner**](https://modern-web.dev/docs/test-runner/overview/)
 
 > _See `package.json#scripts` for a full list of available commands._
