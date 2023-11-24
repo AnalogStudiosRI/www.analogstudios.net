@@ -12,7 +12,7 @@ import artistsCss from './artists.css?type=css';
 @customElement('as-route-artists')
 export class ArtistsRouteComponent extends LitElement {
 
-  private ANALOG_ID = '1';
+  private ANALOG_ID = 1;
   private displayArtists: Array<Artist> = [];
   private analog: Artist;
 
