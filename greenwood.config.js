@@ -11,8 +11,7 @@ export default {
   optimization: 'inline',
   devServer: {
     proxy: {
-      '/posts': 'https://06bmlpytgi.execute-api.us-east-1.amazonaws.com/',
-      '/events': 'https://06bmlpytgi.execute-api.us-east-1.amazonaws.com/'
+      '/api': 'https://www.analogstudios.net'
     }
   },
   plugins: [
