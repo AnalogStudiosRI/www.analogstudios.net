@@ -69,7 +69,7 @@ export class ArtistsRouteComponent extends LitElement {
 
           <div class="col-xs-7">
             <div class="artist-cards-list">
-              <app-card .details="${modelArtist(analog)}"></app-card>
+              <app-card .details="${modelArtist(this.analog)}"></app-card>
 
               ${displayArtists.map((artist: Artist) => {
                 return html`
