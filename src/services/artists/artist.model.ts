@@ -1,5 +1,5 @@
 interface Artist {
-  id: string,
+  id: number,
   name: string,
   bio: string,
   imageUrl: string,

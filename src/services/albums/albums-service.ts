@@ -1,6 +1,6 @@
 import { Album } from './album.model.ts';
 
-const ALBUMS_API_URL = '/api/albums';
+const ALBUMS_API_URL = '/api/v2/albums';
 
 function getAlbums(): Promise<[Album]> {
   return fetch(ALBUMS_API_URL)
@@ -8,7 +8,7 @@ function getAlbums(): Promise<[Album]> {
 }
 
 function getAlbumById(id): Promise<Album> {
-  return fetch(`${ALBUMS_API_URL}/${id}`)
+  return fetch(`${ALBUMS_API_URL}?id=${id}`)
     .then(resp => resp.json())
     .then(resp => resp[0]);
 }

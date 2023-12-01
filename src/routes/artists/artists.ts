@@ -12,7 +12,7 @@ import artistsCss from './artists.css?type=css';
 @customElement('as-route-artists')
 export class ArtistsRouteComponent extends LitElement {
 
-  private ANALOG_ID = '1';
+  private ANALOG_ID = 1;
   private displayArtists: Array<Artist> = [];
   private analog: Artist;
 
@@ -69,7 +69,7 @@ export class ArtistsRouteComponent extends LitElement {
 
           <div class="col-xs-7">
             <div class="artist-cards-list">
-              <app-card .details="${modelArtist(analog)}"></app-card>
+              <app-card .details="${modelArtist(this.analog)}"></app-card>
 
               ${displayArtists.map((artist: Artist) => {
                 return html`
