@@ -1,6 +1,6 @@
 import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import navigationCss from './navigation.css?type=css';
+import navigationCss from './navigation.css?type=raw';
 
 @customElement('app-navigation')
 export class NavigationComponent extends LitElement {

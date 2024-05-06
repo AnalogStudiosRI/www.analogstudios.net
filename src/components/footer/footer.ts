@@ -1,6 +1,6 @@
 import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import footerCss from './footer.css?type=css';
+import footerCss from './footer.css?type=raw';
 
 @customElement('app-footer')
 export class FooterComponent extends LitElement {

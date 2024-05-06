@@ -3,7 +3,7 @@ import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../../services/events/events-service.ts';
-import eventsCalendarCss from './events-calendar.css?type=css';
+import eventsCalendarCss from './events-calendar.css?type=raw';
 
 @customElement('app-events-calendar')
 export class EventsCalendarComponent extends LitElement {

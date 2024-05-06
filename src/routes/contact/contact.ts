@@ -1,6 +1,6 @@
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import contactCss from './contact.css?type=css';
+import contactCss from './contact.css?type=raw';
 
 @customElement('as-route-contact')
 export class ContactRouteComponent extends LitElement {

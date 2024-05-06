@@ -4,7 +4,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { getEventById } from '../../services/events/events-service.ts';
 import { Event } from '../../services/events/event.model.ts';
 import '../../components/social-share/social-share.ts';
-import eventsCss from './events.css?type=css';
+import eventsCss from './events.css?type=raw';
 
 @customElement('as-route-event-details')
 export class EventDetailsRouteComponent extends LitElement {

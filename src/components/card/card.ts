@@ -2,7 +2,7 @@ import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Details } from './card.model.ts';
-import cardCss from './card.css?type=css';
+import cardCss from './card.css?type=raw';
 
 @customElement('app-card')
 export class CardComponent extends LitElement {

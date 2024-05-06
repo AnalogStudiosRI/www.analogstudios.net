@@ -1,6 +1,6 @@
 import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import socialShareCss from './social-share.css?type=css';
+import socialShareCss from './social-share.css?type=raw';
 import 'web-social-share';
 
 @customElement('app-social-share')

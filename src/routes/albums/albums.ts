@@ -7,7 +7,7 @@ import { modelAlbum } from '../../components/card/card.model.ts';
 import { Album } from '../../services/albums/album.model.ts';
 import store from '../../store.ts';
 import '../../components/card/card.ts';
-import albumsCss from './albums.css?type=css';
+import albumsCss from './albums.css?type=raw';
 
 @customElement('as-route-albums')
 export class AlbumsRouteComponent extends LitElement {

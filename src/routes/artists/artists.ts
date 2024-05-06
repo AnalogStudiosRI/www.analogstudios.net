@@ -7,7 +7,7 @@ import { modelArtist } from '../../components/card/card.model.ts';
 import { Artist } from '../../services/artists/artist.model.ts';
 import store from '../../store.ts';
 import '../../components/card/card.ts';
-import artistsCss from './artists.css?type=css';
+import artistsCss from './artists.css?type=raw';
 
 @customElement('as-route-artists')
 export class ArtistsRouteComponent extends LitElement {

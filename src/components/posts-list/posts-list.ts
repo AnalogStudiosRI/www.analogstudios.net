@@ -2,7 +2,7 @@ import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getPosts } from '../../services/posts/posts-service.ts';
-import postsListCss from './posts-list.css?type=css';
+import postsListCss from './posts-list.css?type=raw';
 
 @customElement('app-posts-list')
 export class PostsListComponent extends LitElement {
