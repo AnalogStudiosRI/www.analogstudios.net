@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getArtistById } from '../../services/artists/artists-service.ts';
@@ -10,9 +10,12 @@ import { Album } from '../../services/albums/album.model.ts';
 import '../../components/card/card.ts';
 import '../../components/social-share/social-share.ts';
 import artistsCss from './artists.css?type=raw';
+import theme from '../../theme.css' with { type: 'css' };
+import styles from '../../styles.css' with { type: 'css' };
 
 @customElement('as-route-artist-details')
 export class ArtistDetailsRouteComponent extends LitElement {
+  static styles = [theme, styles, css`${unsafeCSS(artistsCss)}`];
 
   @property()
   accessor id: string;
@@ -62,10 +65,6 @@ export class ArtistDetailsRouteComponent extends LitElement {
       delete modeledArtist.link;
 
       return html`
-        <style>
-          ${artistsCss}
-        </style>
-
         <div class="container-flex as-route-artist-details">
           <div class="row">
 

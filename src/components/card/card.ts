@@ -3,13 +3,14 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Details } from './card.model.ts';
 import cardCss from './card.css?type=raw';
+import theme from '../../theme.css' with { type: 'css' };
 
 @customElement('app-card')
 export class CardComponent extends LitElement {
   @property()
   accessor details: Details;
 
-  static styles = css`${unsafeCSS(cardCss)}`;
+  static styles = [theme, css`${unsafeCSS(cardCss)}`];
 
   protected render():TemplateResult {
     const { details } = this;

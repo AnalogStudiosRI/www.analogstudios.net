@@ -1,10 +1,11 @@
 import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import footerCss from './footer.css?type=raw';
+import theme from '../../theme.css' with { type: 'css' };
 
 @customElement('app-footer')
 export class FooterComponent extends LitElement {
-  static styles = css`${unsafeCSS(footerCss)}`;
+  static styles = [theme, css`${unsafeCSS(footerCss)}`];
 
   @property()
   private accessor STARTING_YEAR = 2007;

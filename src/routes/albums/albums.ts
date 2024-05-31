@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
 import { getAlbums } from '../../services/albums/albums-service.ts';
@@ -8,9 +8,12 @@ import { Album } from '../../services/albums/album.model.ts';
 import store from '../../store.ts';
 import '../../components/card/card.ts';
 import albumsCss from './albums.css?type=raw';
+import theme from '../../theme.css' with { type: 'css' };
+import styles from '../../styles.css' with { type: 'css' };
 
 @customElement('as-route-albums')
 export class AlbumsRouteComponent extends LitElement {
+  static styles = [theme, styles, css`${unsafeCSS(albumsCss)}`];
 
   @property()
   accessor albums: Array<Album> = [];
@@ -35,10 +38,6 @@ export class AlbumsRouteComponent extends LitElement {
     const { albums } = this;
 
     return html`
-      <style>
-        ${albumsCss}
-      </style>
-
       <div class="container-flex as-route-albums">
         <div class="row">
 

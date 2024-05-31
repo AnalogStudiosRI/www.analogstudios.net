@@ -1,11 +1,14 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getPosts } from '../../services/posts/posts-service.ts';
 import postsListCss from './posts-list.css?type=raw';
+import theme from '../../theme.css' with { type: 'css' };
 
 @customElement('app-posts-list')
 export class PostsListComponent extends LitElement {
+  static styles = [theme, css`${unsafeCSS(postsListCss)}`];
+
   @property()
   accessor max = 0;
 
@@ -35,9 +38,6 @@ export class PostsListComponent extends LitElement {
     const maxPosts = this.posts.slice(0, maxDisplay);
 
     return html`
-      <style>
-        ${postsListCss}
-      </style>
       <div class="as-posts-list">
 
         <h3 class="as-posts-list__heading">Latest Posts</h3>

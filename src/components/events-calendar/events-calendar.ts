@@ -1,12 +1,14 @@
 /* eslint-disable max-depth */
-import { html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../../services/events/events-service.ts';
 import eventsCalendarCss from './events-calendar.css?type=raw';
+import theme from '../../theme.css' with { type: 'css' };
 
 @customElement('app-events-calendar')
 export class EventsCalendarComponent extends LitElement {
+  static styles = [theme, css`${unsafeCSS(eventsCalendarCss)}`];
 
   private DAYS_IN_WEEK = 7;
   private MAX_CALENDAR_SPACES = 42;
@@ -133,10 +135,6 @@ export class EventsCalendarComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <style>
-        ${eventsCalendarCss}
-      </style>
-
       <div class="as-events-calendar">
         <div class="as-events-calendar__header">
           <button type="button" class="btn btn-default btn-sm as-events-calendar__btn" @click="${this.shiftToPreviousMonth}" tabindex="-1" aria-label="goto previous month">

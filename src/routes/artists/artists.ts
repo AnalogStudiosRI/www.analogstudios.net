@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
 import { getArtists } from '../../services/artists/artists-service.ts';
@@ -8,9 +8,12 @@ import { Artist } from '../../services/artists/artist.model.ts';
 import store from '../../store.ts';
 import '../../components/card/card.ts';
 import artistsCss from './artists.css?type=raw';
+import theme from '../../theme.css' with { type: 'css' };
+import styles from '../../styles.css' with { type: 'css' };
 
 @customElement('as-route-artists')
 export class ArtistsRouteComponent extends LitElement {
+  static styles = [theme, styles, css`${unsafeCSS(artistsCss)}`];
 
   private ANALOG_ID = 1;
   private displayArtists: Array<Artist> = [];
@@ -44,10 +47,6 @@ export class ArtistsRouteComponent extends LitElement {
     const { displayArtists = [], analog = {} } = this;
 
     return html`
-      <style>
-        ${artistsCss}
-      </style>
-
       <div class="container-flex as-route-artists">
         <div class="row">
 
