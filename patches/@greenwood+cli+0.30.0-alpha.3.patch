@@ -1,0 +1,37 @@
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-dev-proxy.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-dev-proxy.js
+index 2414985..b9d44b6 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-dev-proxy.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-dev-proxy.js
+@@ -33,6 +33,7 @@ class DevProxyResource extends ResourceInterface {
+       method: request.method,
+       headers: request.header
+     });
++
+     const response = await fetch(requestProxied);
+     const filteredResponseHeaders = new Headers();
+ 
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
+index a2e5e86..c49c856 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
+@@ -26,15 +26,18 @@ class StandardHtmlResource extends ResourceInterface {
+     this.contentType = 'text/html';
+   }
+ 
+-  async shouldServe(url) {
++  async shouldServe(url, request) {
+     const { protocol, pathname } = url;
+     const hasMatchingPageRoute = this.compilation.graph.find(node => node.route === pathname);
+     const isSPA = this.compilation.graph.find(node => node.isSPA) && pathname.indexOf('.') < 0;
+ 
+-    return protocol.startsWith('http') && (hasMatchingPageRoute || isSPA);
++    console.log({ pathname, hasMatchingPageRoute })
++    return protocol.startsWith('http') && (hasMatchingPageRoute || (isSPA && request.headers.get('Accept').indexOf('text/html') >= 0));
++    // return protocol.startsWith('http') && (hasMatchingPageRoute || isSPA);
+   }
+ 
+   async serve(url, request) {
++    console.log('serve ---->', url.href);
+     const { config, context } = this.compilation;
+     const { pagesDir, userWorkspace } = context;
+     const { interpolateFrontmatter } = config;
