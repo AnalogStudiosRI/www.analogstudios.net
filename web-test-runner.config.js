@@ -3,7 +3,6 @@ import fs from 'fs/promises';
 import { greenwoodPluginImportRaw } from '@greenwood/plugin-import-raw';
 import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { junitReporter } from '@web/test-runner-junit-reporter';
-import { puppeteerLauncher } from '@web/test-runner-puppeteer';
 
 // create a direct instance of ImportCssResource
 const importRawResource = greenwoodPluginImportRaw()[0].provider({});
@@ -29,14 +28,6 @@ export default {
     defaultReporter({ reportTestResults: true, reportTestProgress: true }),
     junitReporter({
       outputPath: './reports/test-results.xml'
-    })
-  ],
-  browsers: [
-    puppeteerLauncher({
-      launchOptions: {
-        headless: true,
-        devtools: false
-      }
     })
   ],
   plugins: [{
