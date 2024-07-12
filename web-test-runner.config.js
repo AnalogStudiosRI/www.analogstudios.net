@@ -1,11 +1,7 @@
 import { defaultReporter } from '@web/test-runner';
 import fs from 'fs/promises';
-import { greenwoodPluginImportRaw } from '@greenwood/plugin-import-raw';
 import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { junitReporter } from '@web/test-runner-junit-reporter';
-
-// create a direct instance of ImportCssResource
-const importRawResource = greenwoodPluginImportRaw()[0].provider({});
 
 // create a direct instance of TypeScriptResource
 const typeScriptResource = greenwoodPluginTypeScript()[0].provider({
@@ -43,28 +39,6 @@ export default {
         return {
           body,
           type: 'js'
-        };
-      }
-    }
-  }, {
-    name: 'import-raw-css',
-    async transform(context) {
-      const url = new URL(`.${context.request.url}`, import.meta.url);
-      const request = new Request(url, { headers: { 'Sec-Fetch-Dest': 'empty' } });
-      const shouldIntercept = await importRawResource.shouldIntercept(url, request);
-
-      if (shouldIntercept) {
-        const contents = await fs.readFile(url);
-        const initResponse = new Response(contents, {
-          headers: new Headers(context.headers)
-        });
-        const response = await importRawResource.intercept(url, request, initResponse.clone());
-
-        return {
-          body: await response.text(),
-          headers: {
-            'Content-Type': response.headers.get('Content-Type')
-          }
         };
       }
     }

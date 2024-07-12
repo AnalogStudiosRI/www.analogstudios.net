@@ -14,7 +14,7 @@ export default {
     }
   },
   plugins: [
-    greenwoodPluginPostCss(),
+    // greenwoodPluginPostCss(),
     greenwoodPluginFontAwesome(),
     greenwoodPluginTypeScript(),
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
