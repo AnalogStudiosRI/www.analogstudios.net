@@ -1,19 +1,19 @@
 /* eslint-disable max-len */
-import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
 import { getArtists } from '../../services/artists/artists-service.ts';
 import { modelArtist } from '../../components/card/card.model.ts';
 import { Artist } from '../../services/artists/artist.model.ts';
 import store from '../../store.ts';
+import artistSheet from './artists.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
+import stylesSheet from '../../styles.css' with { type: 'css' };
 import '../../components/card/card.ts';
-import artistsCss from './artists.css?type=raw';
-import theme from '../../theme.css' with { type: 'css' };
-import styles from '../../styles.css' with { type: 'css' };
 
 @customElement('as-route-artists')
 export class ArtistsRouteComponent extends LitElement {
-  static styles = [theme, styles, css`${unsafeCSS(artistsCss)}`];
+  static styles = [themeSheet, stylesSheet, artistSheet];
 
   private ANALOG_ID = 1;
   private displayArtists: Array<Artist> = [];

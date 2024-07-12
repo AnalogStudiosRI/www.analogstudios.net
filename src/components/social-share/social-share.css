@@ -1,5 +1,3 @@
-@import '../../theme.css';
-
 button {
   background-color: var(--color-tertiary);
   border: 2px solid var(--black)!important;

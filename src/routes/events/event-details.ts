@@ -1,15 +1,15 @@
-import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { customElement, property } from 'lit/decorators.js';
 import { getEventById } from '../../services/events/events-service.ts';
 import { Event } from '../../services/events/event.model.ts';
 import '../../components/social-share/social-share.ts';
-import eventsCss from './events.css?type=raw';
-import theme from '../../theme.css' with { type: 'css' };
+import eventsSheet from './events.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
 
 @customElement('as-route-event-details')
 export class EventDetailsRouteComponent extends LitElement {
-  static styles = [theme, css`${unsafeCSS(eventsCss)}`];
+  static styles = [themeSheet, eventsSheet];
 
   private MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   private DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

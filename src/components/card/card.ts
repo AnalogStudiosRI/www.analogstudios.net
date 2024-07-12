@@ -1,16 +1,16 @@
-import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Details } from './card.model.ts';
-import cardCss from './card.css?type=raw';
-import theme from '../../theme.css' with { type: 'css' };
+import cardSheet from './card.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
 
 @customElement('app-card')
 export class CardComponent extends LitElement {
   @property()
   accessor details: Details;
 
-  static styles = [theme, css`${unsafeCSS(cardCss)}`];
+  static styles = [themeSheet, cardSheet];
 
   protected render():TemplateResult {
     const { details } = this;

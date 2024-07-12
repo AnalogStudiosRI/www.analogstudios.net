@@ -49,7 +49,6 @@
     "@esm-bundle/chai": "^4.3.4",
     "@greenwood/cli": "^0.30.0-alpha.4",
     "@greenwood/plugin-google-analytics": "^0.30.0-alpha.4",
-    "@greenwood/plugin-import-raw": "^0.30.0-alpha.4",
     "@greenwood/plugin-postcss": "^0.30.0-alpha.4",
     "@greenwood/plugin-typescript": "^0.30.0-alpha.4",
     "@ls-lint/ls-lint": "^1.10.0",

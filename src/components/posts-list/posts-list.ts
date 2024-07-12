@@ -1,13 +1,13 @@
-import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getPosts } from '../../services/posts/posts-service.ts';
-import postsListCss from './posts-list.css?type=raw';
-import theme from '../../theme.css' with { type: 'css' };
+import postsListSheet from './posts-list.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
 
 @customElement('app-posts-list')
 export class PostsListComponent extends LitElement {
-  static styles = [theme, css`${unsafeCSS(postsListCss)}`];
+  static styles = [themeSheet, postsListSheet];
 
   @property()
   accessor max = 0;

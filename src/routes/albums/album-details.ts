@@ -4,12 +4,14 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getAlbumById } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
 import { Album } from '../../services/albums/album.model.ts';
+import themeSheet from '../../theme.css' with { type: 'css' };
+import albumsSheet from './albums.css' with { type: 'css' };
 import '../../components/card/card.ts';
 import '../../components/social-share/social-share.ts';
-import albumsCss from './albums.css?type=raw';
 
 @customElement('as-route-album-details')
 export class AlbumDetailsRouteComponent extends LitElement {
+  static styles = [themeSheet, albumsSheet];
 
   @property()
   accessor id: string;
@@ -52,10 +54,6 @@ export class AlbumDetailsRouteComponent extends LitElement {
       delete modeledAlbum.link;
 
       return html`
-        <style>
-          ${albumsCss}
-        </style>
-
         <div class="container-flex as-routes-album-details">
           <div class="row">
 

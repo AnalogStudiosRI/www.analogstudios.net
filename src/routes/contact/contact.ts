@@ -1,11 +1,11 @@
-import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import contactCss from './contact.css?type=raw';
-import theme from '../../theme.css' with { type: 'css' };
+import contactSheet from './contact.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
 
 @customElement('as-route-contact')
 export class ContactRouteComponent extends LitElement {
-  static styles = [theme, css`${unsafeCSS(contactCss)}`];
+  static styles = [themeSheet, contactSheet];
 
   connectedCallback(): void {
     super.connectedCallback();
