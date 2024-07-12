@@ -1,5 +1,4 @@
 import { defaultReporter } from '@web/test-runner';
-import fs from 'fs/promises';
 import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { junitReporter } from '@web/test-runner-junit-reporter';
 
