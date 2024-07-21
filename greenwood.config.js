@@ -1,7 +1,7 @@
 import { greenwoodPluginFontAwesome } from '@analogstudiosri/greenwood-plugin-font-awesome';
 import { greenwoodPluginGoogleAnalytics } from '@greenwood/plugin-google-analytics';
 import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
-// import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
+import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
 import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
 import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
@@ -14,7 +14,7 @@ export default {
     }
   },
   plugins: [
-    // greenwoodPluginPostCss(),
+    greenwoodPluginPostCss(),
     greenwoodPluginFontAwesome(),
     greenwoodPluginTypeScript(),
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
