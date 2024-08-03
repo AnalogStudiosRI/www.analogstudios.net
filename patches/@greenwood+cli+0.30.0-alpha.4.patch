@@ -1,5 +1,5 @@
 diff --git a/node_modules/@greenwood/cli/src/config/rollup.config.js b/node_modules/@greenwood/cli/src/config/rollup.config.js
-index 7771d11..5d48e0c 100644
+index 7771d11..731363a 100644
 --- a/node_modules/@greenwood/cli/src/config/rollup.config.js
 +++ b/node_modules/@greenwood/cli/src/config/rollup.config.js
 @@ -12,7 +12,9 @@ function cleanRollupId(id) {
@@ -60,7 +60,7 @@ index 7771d11..5d48e0c 100644
      generateBundle(options, bundles) {
        for (const bundle in bundles) {
          const bundleExtension = bundle.split('.').pop();
-@@ -398,6 +414,120 @@ function greenwoodImportMetaUrl(compilation) {
+@@ -398,6 +414,136 @@ function greenwoodImportMetaUrl(compilation) {
    };
  }
  
@@ -83,84 +83,100 @@ index 7771d11..5d48e0c 100644
 +      const that = this;
 +      for (const bundle in bundles) {
 +        //  console.log({ bundle });
++        if(bundle.endsWith('.map')) {
++          return;
++        }
 +
-+        if (!bundle.endsWith('.map')) {
-+          // console.log('sync import attributes', { bundle });
-+          const { code } = bundles[bundle];
-+          const ast = this.parse(code);
++        // console.log('sync import attributes', { bundle });
++        const { code } = bundles[bundle];
++        const ast = this.parse(code);
 +
-+          walk.simple(ast, {
-+            // TOOO should really get import attributes through the actual AST, not sure if possible though...
-+            ImportDeclaration(node) {
-+              // console.log('ImportDeclaration ########', node.source.raw);
-+              // const statement = code.slice(node.start, node.end);
-+              const { value } = node.source;
-+              // console.log({ value, statement });
++        walk.simple(ast, {
++          // TOOO should really get import attributes through the actual AST, not sure if possible though...
++          ImportDeclaration(node) {
++            // console.log('ImportDeclaration ########', node.source.raw);
++            const statement = code.slice(node.start, node.end);
++            const { value } = node.source;
++            console.log({ value, statement });
 +
-+              // TODO will this also happen to module.css, need to filter somehow?
-+              if (value.endsWith('.css') || value.endsWith('.json')) {
-+                // Rollup currently emits externals with assert keyword
-+                let preBundled = false;
-+                bundles[bundle].code = bundles[bundle].code.replace(/assert{/g, 'with{');
++            // TODO will this also happen to module.css, need to filter somehow?
++            if (value.endsWith('.css') || value.endsWith('.json')) {
++              // Rollup currently emits externals with assert keyword
++              // https://github.com/ProjectEvergreen/greenwood/issues/1218
++              let preBundled = false;
++              let inlineOptimization = false;
++              bundles[bundle].code = bundles[bundle].code.replace(/assert{/g, 'with{');
 +
-+                // check for app level assets, like say a shared theme.css
-+                compilation.resources.forEach((resource) => {
-+                  if (resource.sourcePathURL.pathname === new URL(value, compilation.context.projectDirectory).pathname) {
-+                    //  console.log('$$$ found pre-bundled CSS!!!', resource.optimizedFileName);
-+                    bundles[bundle].code = bundles[bundle].code.replace(value, `/${resource.optimizedFileName}`);
-+                    preBundled = true;
-+                  }
-+                });
++              // console.log('@@@@', compilation.resources);
++              // check for app level assets, like say a shared theme.css
++              compilation.resources.forEach((resource) => {
++                // console.log('??????', resource);
++                inlineOptimization = resource.optimizationAttr === 'inline' || compilation.config.optimization === 'inline';
 +
-+                // otherwise emit "one-offs" as Rollup assets
-+                if (!preBundled) {
-+                  // console.log('#### not pre bundled', { value, bundle });
-+                  const source = fs.readFileSync(new URL(value, compilation.context.projectDirectory), 'utf-8');
-+                  const type = 'asset';
-+                  const emitConfig = { type, name: value.split('/').pop(), source, needsCodeReference: true };
-+                  const ref = that.emitFile(emitConfig);
-+                  const importRef = `import.meta.ROLLUP_ASSET_URL_${ref}`;
++                if (resource.sourcePathURL.pathname === new URL(value, compilation.context.projectDirectory).pathname && !inlineOptimization) {
++                  //  console.log('$$$ found pre-bundled CSS!!!', resource.optimizedFileName);
++                  bundles[bundle].code = bundles[bundle].code.replace(value, `/${resource.optimizedFileName}`);
++                  preBundled = true;
++                }
++              });
 +
-+                  // console.log({ importRef });
-+                  bundles[bundle].code = bundles[bundle].code.replace(value, `/${importRef}`);
-+                  if (!unbundledAssetsRefMapper[emitConfig.name]) {
-+                    unbundledAssetsRefMapper[emitConfig.name] = {
-+                      importers: [],
-+                      importRefs: []
-+                    };
-+                  }
++              // otherwise emit "one-offs" as Rollup assets
++              if (!preBundled) {
++                console.log('#### not pre bundled', { value, bundle });
++                const sourceURL = new URL(value, compilation.context.projectDirectory);
++                console.log({ sourceURL }, compilation.resources.get(sourceURL.pathname))
++                console.log('$$$$', compilation.resources.get(sourceURL.pathname))
++                const source = compilation.resources.get(sourceURL.pathname)?.optimizedFileContents 
++                  ? compilation.resources.get(sourceURL.pathname).optimizedFileContents
++                  : fs.readFileSync(sourceURL, 'utf-8');
++ 
++                const type = 'asset';
++                const emitConfig = { type, name: value.split('/').pop(), source, needsCodeReference: true };
++                const ref = that.emitFile(emitConfig);
++                const importRef = `import.meta.ROLLUP_ASSET_URL_${ref}`;
 +
++                console.log({ source, emitConfig, importRef });
++                bundles[bundle].code = bundles[bundle].code.replace(value, `/${importRef}`);
++
++                if (!unbundledAssetsRefMapper[emitConfig.name]) {
 +                  unbundledAssetsRefMapper[emitConfig.name] = {
-+                    importers: [...unbundledAssetsRefMapper[emitConfig.name].importers, bundle],
-+                    importRefs: [...unbundledAssetsRefMapper[emitConfig.name].importRefs, importRef]
++                    importers: [],
++                    importRefs: []
 +                  };
 +                }
++
++                unbundledAssetsRefMapper[emitConfig.name] = {
++                  importers: [...unbundledAssetsRefMapper[emitConfig.name].importers, bundle],
++                  importRefs: [...unbundledAssetsRefMapper[emitConfig.name].importRefs, importRef]
++                };
 +              }
 +            }
-+          });
-+        }
++          }
++        });
 +      }
++
++      console.log({ unbundledAssetsRefMapper });
 +    },
 +
 +    // we use write bundle here to handle import.meta.ROLLUP_ASSET_URL_${ref} linking
 +    // since it seems that Rollup will not do it after the bundling hook
 +    // https://github.com/rollup/rollup/blob/v3.29.4/docs/plugin-development/index.md#generatebundle
 +    writeBundle(options, bundles) {
-+      // console.log('WRITE BUNDLE', { unbundledAssetsRefMapper });
++      console.log('WRITE BUNDLE', { unbundledAssetsRefMapper });
 +      for (const asset in unbundledAssetsRefMapper) {
-+        // console.log({ asset });
-+        // const ext = asset.split('.').pop();
-+        // const key = asset.replace(`.${ext}`, '');
++        console.log({ asset });
++        const ext = asset.split('.').pop();
++        const key = asset.replace(`.${ext}`, '');
 +
 +        for (const bundle in bundles) {
 +          const { fileName } = bundles[bundle];
 +          const hash = fileName.split('.')[fileName.split('.').length - 2];
 +
 +          // console.log(bundles[bundle])
-+          // console.log('CHECKING....', { bundle, fileName, name, key });
++          console.log('CHECKING....', { bundle, fileName, hash, key });
 +
 +          if (fileName.replace(`.${hash}`, '') === asset) {
-+            // console.log('MONEY!!!!!!', unbundledAssetsRefMapper[asset], fileName);
++            console.log('MONEY!!!!!!', unbundledAssetsRefMapper[asset], fileName);
 +            unbundledAssetsRefMapper[asset].importers.forEach((importer, idx) => {
 +              let contents = fs.readFileSync(new URL(`./${importer}`, compilation.context.outputDir), 'utf-8');
 +
@@ -181,7 +197,7 @@ index 7771d11..5d48e0c 100644
  const getRollupConfigForScriptResources = async (compilation) => {
    const { outputDir } = compilation.context;
    const input = [...compilation.resources.values()]
-@@ -416,11 +546,13 @@ const getRollupConfigForScriptResources = async (compilation) => {
+@@ -416,11 +562,13 @@ const getRollupConfigForScriptResources = async (compilation) => {
        dir: normalizePathnameForWindows(outputDir),
        entryFileNames: '[name].[hash].js',
        chunkFileNames: '[name].[hash].js',

@@ -7,7 +7,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
 
 export default {
-  // optimization: 'inline',
+  optimization: 'inline',
   devServer: {
     proxy: {
       '/api': 'https://www.analogstudios.net'
