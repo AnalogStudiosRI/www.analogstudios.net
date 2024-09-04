@@ -1,0 +1,326 @@
+diff --git a/node_modules/@greenwood/cli/src/config/rollup.config.js b/node_modules/@greenwood/cli/src/config/rollup.config.js
+index 1354e66..53734d8 100644
+--- a/node_modules/@greenwood/cli/src/config/rollup.config.js
++++ b/node_modules/@greenwood/cli/src/config/rollup.config.js
+@@ -16,6 +16,7 @@ function cleanRollupId(id) {
+ const externalizedResources = ['css', 'json'];
+ 
+ function greenwoodResourceLoader (compilation, browser = false) {
++  const { importAttributes } = compilation.config?.polyfills;
+   const resourcePlugins = compilation.config.plugins.filter((plugin) => {
+     return plugin.type === 'resource';
+   }).map((plugin) => {
+@@ -33,7 +34,10 @@ function greenwoodResourceLoader (compilation, browser = false) {
+       if (normalizedId.startsWith('.')) {
+         const importerUrl = new URL(normalizedId, `file://${importer}`);
+         const extension = importerUrl.pathname.split('.').pop();
+-        const external = externalizedResources.includes(extension) && browser && !importerUrl.searchParams.has('type');
++        // if we are polyfilling import attributes for the browser we will want Rollup to bundles these as JS files
++        // instead of externalizing as their native content-type
++        const shouldPolyfill = browser && (importAttributes || []).includes(extension);
++        const external = !shouldPolyfill && externalizedResources.includes(extension) && browser && !importerUrl.searchParams.has('type');
+         const isUserWorkspaceUrl = importerUrl.pathname.startsWith(userWorkspace.pathname);
+         const prefix = normalizedId.startsWith('..') ? './' : '';
+         // if its not in the users workspace, we clean up the dot-dots and check that against the user's workspace
+@@ -54,8 +58,7 @@ function greenwoodResourceLoader (compilation, browser = false) {
+       const { pathname } = idUrl;
+       const extension = pathname.split('.').pop();
+       const headers = {
+-        'Accept': 'text/javascript',
+-        'Sec-Fetch-Dest': 'empty'
++        'Accept': 'text/javascript'
+       };
+ 
+       // filter first for any bare specifiers
+@@ -254,8 +257,7 @@ function greenwoodImportMetaUrl(compilation) {
+       const normalizedId = id.replace(/\\\\/g, '/').replace(/\\/g, '/'); // windows shenanigans...
+       let idUrl = new URL(`file://${cleanRollupId(id)}`);
+       const headers = {
+-        'Accept': 'text/javascript',
+-        'Sec-Fetch-Dest': 'empty'
++        'Accept': 'text/javascript'
+       };
+       const request = new Request(idUrl, {
+         headers
+@@ -424,7 +426,8 @@ function greenwoodImportMetaUrl(compilation) {
+ // - sync externalized import attribute paths with bundled CSS paths
+ function greenwoodSyncImportAttributes(compilation) {
+   const unbundledAssetsRefMapper = {};
+-  const { basePath } = compilation.config;
++  const { basePath, polyfills } = compilation.config;
++  const { importAttributes } = polyfills;
+ 
+   return {
+     name: 'greenwood-sync-import-attributes',
+@@ -451,7 +454,16 @@ function greenwoodSyncImportAttributes(compilation) {
+             if (externalizedResources.includes(extension)) {
+               let preBundled = false;
+               let inlineOptimization = false;
+-              bundles[bundle].code = bundles[bundle].code.replace(/assert{/g, 'with{');
++
++              if (importAttributes && importAttributes.includes(extension)) {
++                importAttributes.forEach((attribute) => {
++                  if (attribute === extension) {
++                    bundles[bundle].code = bundles[bundle].code.replace(new RegExp(`"assert{type:"${attribute}"}`, 'g'), `?polyfill=type-${extension}"`);
++                  }
++                });
++              } else {
++                bundles[bundle].code = bundles[bundle].code.replace(/assert{/g, 'with{');
++              }
+ 
+               // check for app level assets, like say a shared theme.css
+               compilation.resources.forEach((resource) => {
+@@ -529,9 +541,17 @@ function greenwoodSyncImportAttributes(compilation) {
+               // have to apply Greenwood's optimizing here instead of in generateBundle
+               // since we can't do async work inside a sync AST operation
+               if (!asset.preBundled) {
+-                const assetUrl = unbundledAssetsRefMapper[asset].sourceURL;
+-                const request = new Request(assetUrl, { headers: { 'Content-Type': 'text/css' } });
+-                let response = new Response(unbundledAssetsRefMapper[asset].source);
++                const type = ext === 'css'
++                  ? 'text/css'
++                  : ext === 'css'
++                    ? 'application/json'
++                    : '';
++                const assetUrl = importAttributes && importAttributes.includes(ext)
++                  ? new URL(`${unbundledAssetsRefMapper[asset].sourceURL.href}?polyfill=type-${ext}`)
++                  : unbundledAssetsRefMapper[asset].sourceURL;
++
++                const request = new Request(assetUrl, { headers: { 'Accept': type } });
++                let response = new Response(unbundledAssetsRefMapper[asset].source, { headers: { 'Content-Type': type } });
+ 
+                 for (const plugin of resourcePlugins) {
+                   if (plugin.shouldPreIntercept && await plugin.shouldPreIntercept(assetUrl, request, response.clone())) {
+diff --git a/node_modules/@greenwood/cli/src/lifecycles/config.js b/node_modules/@greenwood/cli/src/lifecycles/config.js
+index 7ee7fc2..9c31a23 100644
+--- a/node_modules/@greenwood/cli/src/lifecycles/config.js
++++ b/node_modules/@greenwood/cli/src/lifecycles/config.js
+@@ -52,7 +52,11 @@ const defaultConfig = {
+   prerender: false,
+   isolation: false,
+   pagesDirectory: 'pages',
+-  layoutsDirectory: 'layouts'
++  layoutsDirectory: 'layouts',
++  polyfills: {
++    importAttributes: null, // or ['css', 'json']
++    importMaps: false
++  }
+ };
+ 
+ const readAndMergeConfig = async() => {
+@@ -77,7 +81,8 @@ const readAndMergeConfig = async() => {
+ 
+       if (hasConfigFile) {
+         const userCfgFile = (await import(configUrl)).default;
+-        const { workspace, devServer, markdown, optimization, plugins, port, prerender, basePath, staticRouter, pagesDirectory, layoutsDirectory, interpolateFrontmatter, isolation } = userCfgFile;
++        // eslint-disable-next-line max-len
++        const { workspace, devServer, markdown, optimization, plugins, port, prerender, basePath, staticRouter, pagesDirectory, layoutsDirectory, interpolateFrontmatter, isolation, polyfills } = userCfgFile;
+ 
+         // workspace validation
+         if (workspace) {
+@@ -239,6 +244,28 @@ const readAndMergeConfig = async() => {
+             reject(`Error: greenwood.config.js staticRouter must be a boolean; true or false.  Passed value was typeof: ${typeof staticRouter}`);
+           }
+         }
++
++        if (polyfills !== undefined) {
++          const { importMaps, importAttributes } = polyfills;
++
++          customConfig.polyfills = {};
++
++          if (importMaps) {
++            if (typeof importMaps === 'boolean') {
++              customConfig.polyfills.importMaps = true;
++            } else {
++              reject(`Error: greenwood.config.js polyfills.importMaps must be a boolean; true or false.  Passed value was typeof: ${typeof importMaps}`);
++            }
++          }
++
++          if (importAttributes) {
++            if (Array.isArray(importAttributes)) {
++              customConfig.polyfills.importAttributes = importAttributes;
++            } else {
++              reject(`Error: greenwood.config.js polyfills.importAttributes must be an array of types; ['css', 'json'].  Passed value was typeof: ${typeof importAttributes}`);
++            }
++          }
++        }
+       } else {
+         // SPA should _not_ prerender unless if user has specified prerender should be true
+         if (isSPA) {
+diff --git a/node_modules/@greenwood/cli/src/lifecycles/prerender.js b/node_modules/@greenwood/cli/src/lifecycles/prerender.js
+index 04007e0..67994a3 100644
+--- a/node_modules/@greenwood/cli/src/lifecycles/prerender.js
++++ b/node_modules/@greenwood/cli/src/lifecycles/prerender.js
+@@ -121,6 +121,7 @@ async function preRenderCompilationWorker(compilation, workerPrerender) {
+ async function preRenderCompilationCustom(compilation, customPrerender) {
+   const { scratchDir } = compilation.context;
+   const renderer = (await import(customPrerender.customUrl)).default;
++  const { importMaps } = compilation.config.polyfills;
+ 
+   console.info('pages to generate', `\n ${compilation.graph.map(page => page.route).join('\n ')}`);
+ 
+@@ -129,10 +130,13 @@ async function preRenderCompilationCustom(compilation, customPrerender) {
+     const outputPathUrl = new URL(`.${outputPath}`, scratchDir);
+ 
+     // clean up special Greenwood dev only assets that would come through if prerendering with a headless browser
+-    body = body.replace(/<script src="(.*lit\/polyfill-support.js)"><\/script>/, '');
+-    body = body.replace(/<script type="importmap-shim">.*?<\/script>/s, '');
+-    body = body.replace(/<script defer="" src="(.*es-module-shims.js)"><\/script>/, '');
+-    body = body.replace(/type="module-shim"/g, 'type="module"');
++    if (importMaps) {
++      body = body.replace(/<script type="importmap-shim">.*?<\/script>/s, '');
++      body = body.replace(/<script defer="" src="(.*es-module-shims.js)"><\/script>/, '');
++      body = body.replace(/type="module-shim"/g, 'type="module"');
++    } else {
++      body = body.replace(/<script type="importmap">.*?<\/script>/s, '');
++    }
+ 
+     // clean this up to avoid sending webcomponents-bundle to rollup
+     body = body.replace(/<script src="(.*webcomponents-bundle.js)"><\/script>/, '');
+diff --git a/node_modules/@greenwood/cli/src/loader.js b/node_modules/@greenwood/cli/src/loader.js
+index 792f43c..9a676ff 100644
+--- a/node_modules/@greenwood/cli/src/loader.js
++++ b/node_modules/@greenwood/cli/src/loader.js
+@@ -19,8 +19,7 @@ const resourcePlugins = config.plugins
+ 
+ async function getCustomLoaderResponse(initUrl, checkOnly = false) {
+   const headers = {
+-    'Accept': 'text/javascript',
+-    'Sec-Fetch-Dest': 'empty'
++    'Accept': 'text/javascript'
+   };
+   const initResponse = new Response('');
+   let request = new Request(initUrl, { headers });
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js
+index ff05c44..286c2de 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js
+@@ -73,11 +73,14 @@ class NodeModulesResource extends ResourceInterface {
+   }
+ 
+   async intercept(url, request, response) {
+-    const { context } = this.compilation;
++    const { context, config } = this.compilation;
++    const { importMaps } = config.polyfills;
++    const importMapType = importMaps ? 'importmap-shim' : 'importmap';
++    const importMapShimScript = importMaps ? '<script defer src="/node_modules/es-module-shims/dist/es-module-shims.js"></script>' : '';
+     let body = await response.text();
+     const hasHead = body.match(/\<head>(.*)<\/head>/s);
+ 
+-    if (hasHead && hasHead.length > 0) {
++    if (importMaps && hasHead && hasHead.length > 0) {
+       const contents = hasHead[0].replace(/type="module"/g, 'type="module-shim"');
+ 
+       body = body.replace(/\<head>(.*)<\/head>/s, contents.replace(/\$/g, '$$$')); // https://github.com/ProjectEvergreen/greenwood/issues/656);
+@@ -97,8 +100,8 @@ class NodeModulesResource extends ResourceInterface {
+     // apply import map and shim for users
+     body = body.replace('<head>', `
+       <head>
+-        <script defer src="/node_modules/es-module-shims/dist/es-module-shims.js"></script>
+-        <script type="importmap-shim">
++        ${importMapShimScript}
++        <script type="${importMapType}">
+           {
+             "imports": ${JSON.stringify(importMap, null, 1)}
+           }
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
+index d8409ea..d698549 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
+@@ -306,18 +306,20 @@ class StandardCssResource extends ResourceInterface {
+     });
+   }
+ 
+-  async shouldIntercept(url) {
++  async shouldIntercept(url, request, response) {
+     const { pathname } = url;
+     const ext = pathname.split('.').pop();
+ 
+-    return url.protocol === 'file:' && ext === this.extensions[0];
++    return url.protocol === 'file:'
++      && ext === this.extensions[0]
++      && (response.headers.get('Content-Type')?.indexOf('text/css') >= 0 || request.headers.get('Accept')?.indexOf('text/javascript') >= 0) || url.searchParams?.get('polyfill') === 'type-css';
+   }
+ 
+   async intercept(url, request, response) {
+     let body = bundleCss(await response.text(), url, this.compilation);
+     let headers = {};
+ 
+-    if (request.headers.get('Accept')?.indexOf('text/javascript') >= 0 && !url.searchParams.has('type')) {
++    if ((request.headers.get('Accept')?.indexOf('text/javascript') >= 0 || url.searchParams?.get('polyfill') === 'type-css') && !url.searchParams.has('type')) {
+       const contents = body.replace(/\r?\n|\r/g, ' ').replace(/\\/g, '\\\\');
+ 
+       body = `const sheet = new CSSStyleSheet();sheet.replaceSync(\`${contents}\`);export default sheet;`;
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
+index 820899a..e1b7c9c 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
+@@ -7,6 +7,9 @@
+ import fs from 'fs/promises';
+ import { ResourceInterface } from '../../lib/resource-interface.js';
+ import terser from '@rollup/plugin-terser';
++import * as acorn from 'acorn';
++import * as walk from 'acorn-walk';
++import { importAttributes } from 'acorn-import-attributes';
+ 
+ class StandardJavaScriptResource extends ResourceInterface {
+   constructor(compilation, options) {
+@@ -28,6 +31,42 @@ class StandardJavaScriptResource extends ResourceInterface {
+       }
+     });
+   }
++
++  async shouldPreIntercept(url, request, response) {
++    const { polyfills } = this.compilation.config;
++
++    return (polyfills?.importAttributes || []).length > 0 && url.protocol === 'file:' && response.headers.get('Content-Type').indexOf(this.contentType) >= 0; // [...this.extensions, 'ts'].includes(url.pathname.split('.').pop());
++  }
++
++  async preIntercept(url, request, response) {
++    const { polyfills } = this.compilation.config;
++    const body = await response.clone().text();
++    let polyfilled = body;
++
++    walk.simple(acorn.Parser.extend(importAttributes).parse(body, {
++      ecmaVersion: 'latest',
++      sourceType: 'module'
++    }), {
++      async ImportDeclaration(node) {
++        const line = body.slice(node.start, node.end);
++        const { value } = node.source;
++
++        polyfills.importAttributes.forEach((attribute) => {
++          if (line.replace(/ /g, '').replace(/"/g, '\'').includes(`with{type:'${attribute}'}`)) {
++            console.log('we got a hit!', { url, line, value });
++            polyfilled = polyfilled.replace(line, `${line.split('with')[0]};\n`);
++            polyfilled = polyfilled.replace(value, `${value}?polyfill=type-${attribute}`);
++          }
++        });
++      }
++    });
++
++    return new Response(polyfilled, {
++      headers: {
++        'Content-Type': this.contentType
++      }
++    });
++  }
+ }
+ 
+ const greenwoodPluginStandardJavascript = [{
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-json.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-json.js
+index 07d9883..0610eb7 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-json.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-json.js
+@@ -45,7 +45,10 @@ class StandardJsonResource extends ResourceInterface {
+     const { protocol, pathname, searchParams } = url;
+     const ext = pathname.split('.').pop();
+ 
+-    return protocol === 'file:' && request.headers.get('Accept')?.indexOf('text/javascript') >= 0 && ext === this.extensions[0] && !searchParams.has('type');
++    return protocol === 'file:'
++      && ext === this.extensions[0]
++      && !searchParams.has('type')
++      && (request.headers.get('Accept')?.indexOf('text/javascript') >= 0 || url.searchParams?.get('polyfill') === 'type-json');
+   }
+ 
+   async intercept(url, request, response) {
