@@ -252,7 +252,7 @@ index d8409ea..d698549 100644
  
        body = `const sheet = new CSSStyleSheet();sheet.replaceSync(\`${contents}\`);export default sheet;`;
 diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
-index 820899a..e1b7c9c 100644
+index 820899a..15e89ae 100644
 --- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
 +++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
 @@ -7,6 +7,9 @@
@@ -291,7 +291,7 @@ index 820899a..e1b7c9c 100644
 +
 +        polyfills.importAttributes.forEach((attribute) => {
 +          if (line.replace(/ /g, '').replace(/"/g, '\'').includes(`with{type:'${attribute}'}`)) {
-+            console.log('we got a hit!', { url, line, value });
++            // console.log('we got a hit!', { url, line, value });
 +            polyfilled = polyfilled.replace(line, `${line.split('with')[0]};\n`);
 +            polyfilled = polyfilled.replace(value, `${value}?polyfill=type-${attribute}`);
 +          }
