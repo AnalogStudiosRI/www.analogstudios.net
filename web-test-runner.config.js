@@ -1,12 +1,6 @@
 import { defaultReporter } from '@web/test-runner';
-import fs from 'fs/promises';
-import { greenwoodPluginImportCss } from '@greenwood/plugin-import-css/src/index.js';
-import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript/src/index.js';
+import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { junitReporter } from '@web/test-runner-junit-reporter';
-import { puppeteerLauncher } from '@web/test-runner-puppeteer';
-
-// create a direct instance of ImportCssResource
-const importCssResource = greenwoodPluginImportCss()[0].provider({});
 
 // create a direct instance of TypeScriptResource
 const typeScriptResource = greenwoodPluginTypeScript()[0].provider({
@@ -31,14 +25,6 @@ export default {
       outputPath: './reports/test-results.xml'
     })
   ],
-  browsers: [
-    puppeteerLauncher({
-      launchOptions: {
-        headless: true,
-        devtools: false
-      }
-    })
-  ],
   plugins: [{
     name: 'transpile-typescript',
     async transform(context) {
@@ -52,28 +38,6 @@ export default {
         return {
           body,
           type: 'js'
-        };
-      }
-    }
-  }, {
-    name: 'import-css',
-    async transform(context) {
-      const url = new URL(`.${context.request.url}`, import.meta.url);
-      const request = new Request(url, { headers: new Headers(context.headers) });
-      const shouldIntercept = await importCssResource.shouldIntercept(url, request);
-
-      if (shouldIntercept) {
-        const contents = await fs.readFile(url);
-        const initResponse = new Response(contents, {
-          headers: new Headers(context.headers)
-        });
-        const response = await importCssResource.intercept(url, request, initResponse.clone());
-
-        return {
-          body: await response.text(),
-          headers: {
-            'Content-Type': response.headers.get('Content-Type')
-          }
         };
       }
     }

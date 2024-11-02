@@ -6,11 +6,14 @@ import { getAlbums } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
 import { Album } from '../../services/albums/album.model.ts';
 import store from '../../store.ts';
+import albumsSheet from './albums.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
+import stylesSheet from '../../styles.css' with { type: 'css' };
 import '../../components/card/card.ts';
-import albumsCss from './albums.css?type=css';
 
 @customElement('as-route-albums')
 export class AlbumsRouteComponent extends LitElement {
+  static styles = [themeSheet, stylesSheet, albumsSheet];
 
   @property()
   accessor albums: Array<Album> = [];
@@ -35,10 +38,6 @@ export class AlbumsRouteComponent extends LitElement {
     const { albums } = this;
 
     return html`
-      <style>
-        ${albumsCss}
-      </style>
-
       <div class="container-flex as-route-albums">
         <div class="row">
 

@@ -7,12 +7,15 @@ import { getAlbumsByArtistId } from '../../services/albums/albums-service.ts';
 import { modelArtist, modelAlbum } from '../../components/card/card.model.ts';
 import { Artist } from '../../services/artists/artist.model.ts';
 import { Album } from '../../services/albums/album.model.ts';
+import artistsSheet from './artists.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
+import stylesSheet from '../../styles.css' with { type: 'css' };
 import '../../components/card/card.ts';
 import '../../components/social-share/social-share.ts';
-import artistsCss from './artists.css?type=css';
 
 @customElement('as-route-artist-details')
 export class ArtistDetailsRouteComponent extends LitElement {
+  static styles = [themeSheet, stylesSheet, artistsSheet];
 
   @property()
   accessor id: string;
@@ -62,10 +65,6 @@ export class ArtistDetailsRouteComponent extends LitElement {
       delete modeledArtist.link;
 
       return html`
-        <style>
-          ${artistsCss}
-        </style>
-
         <div class="container-flex as-route-artist-details">
           <div class="row">
 

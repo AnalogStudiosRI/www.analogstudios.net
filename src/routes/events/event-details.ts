@@ -4,10 +4,12 @@ import { customElement, property } from 'lit/decorators.js';
 import { getEventById } from '../../services/events/events-service.ts';
 import { Event } from '../../services/events/event.model.ts';
 import '../../components/social-share/social-share.ts';
-import eventsCss from './events.css?type=css';
+import eventsSheet from './events.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
 
 @customElement('as-route-event-details')
 export class EventDetailsRouteComponent extends LitElement {
+  static styles = [themeSheet, eventsSheet];
 
   private MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   private DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -52,10 +54,6 @@ export class EventDetailsRouteComponent extends LitElement {
       return html``;
     } else {
       return html`
-        <style>
-          ${eventsCss}
-        </style>
-
         <div class="as-events-container">
           <div id="as-event-detail-container">
             <app-social-share></app-social-share>

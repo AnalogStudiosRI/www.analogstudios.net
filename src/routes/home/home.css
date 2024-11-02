@@ -1,6 +1,3 @@
-@import '../../theme.css';
-@import '../../styles.css';
-
 :host {
   & .as-view-home {
     margin-bottom: 15px;

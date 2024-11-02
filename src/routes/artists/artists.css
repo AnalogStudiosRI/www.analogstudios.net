@@ -1,6 +1,3 @@
-@import '../../theme.css';
-@import '../../styles.css';
-
 .as-route-artists {
   color: var(--color-dark);
 }

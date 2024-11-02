@@ -1,9 +1,11 @@
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import contactCss from './contact.css?type=css';
+import contactSheet from './contact.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
 
 @customElement('as-route-contact')
 export class ContactRouteComponent extends LitElement {
+  static styles = [themeSheet, contactSheet];
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -16,10 +18,6 @@ export class ContactRouteComponent extends LitElement {
   protected render(): TemplateResult {
 
     return html`
-      <style>
-        ${contactCss}
-      </style>
-
       <div class="as-route-contact">    
         <h2 class="header">Contact Us</h2>
         <p>Analog Studios is located in Newport RI and run by Owen Buckley and Dave Flamand.  Please use the contact form below to send us a message!</p>

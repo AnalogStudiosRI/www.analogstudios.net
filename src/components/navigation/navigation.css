@@ -1,5 +1,3 @@
-@import '../../theme.css';
-
 :host {
   flex-grow: 1;
 }

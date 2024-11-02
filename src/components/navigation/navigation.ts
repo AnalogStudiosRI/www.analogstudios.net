@@ -1,12 +1,14 @@
-import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import navigationCss from './navigation.css?type=css';
+import navigationCss from './navigation.css' with {type: 'css'};
+import theme from '../../theme.css' with { type: 'css' };
 
 @customElement('app-navigation')
 export class NavigationComponent extends LitElement {
-  static styles = css`${unsafeCSS(navigationCss)}`;
+  static styles = [theme, navigationCss];
 
   protected render(): TemplateResult {
+
     return html`
       <nav class="as-navigation">
         <ul class="list-unstyled as-navigation__list">

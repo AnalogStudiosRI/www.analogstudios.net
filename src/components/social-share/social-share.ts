@@ -1,11 +1,12 @@
-import { css, html, LitElement, unsafeCSS, TemplateResult } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import socialShareCss from './social-share.css?type=css';
+import socialShareSheet from './social-share.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
 import 'web-social-share';
 
 @customElement('app-social-share')
 export class NavigationComponent extends LitElement {
-  static styles = css`${unsafeCSS(socialShareCss)}`;
+  static styles = [themeSheet, socialShareSheet];
 
   @property()
   accessor show = false;

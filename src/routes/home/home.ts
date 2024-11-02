@@ -1,11 +1,14 @@
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import homeSheet from './home.css' with { type: 'css' };
+import themeSheet from '../../theme.css' with { type: 'css' };
+import stylesSheet from '../../styles.css' with { type: 'css' };
 import '../../components/events-calendar/events-calendar.ts';
 import '../../components/posts-list/posts-list.ts';
-import homeCss from './home.css?type=css';
 
 @customElement('as-route-home')
 export class HomeRouteComponent extends LitElement {
+  static styles = [themeSheet, stylesSheet, homeSheet];
 
   protected connectedCallback(): void {
     super.connectedCallback();
@@ -16,10 +19,6 @@ export class HomeRouteComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <style>
-        ${homeCss}
-      </style>
-
       <div class="as-view-home">
         <div>
           <div>
