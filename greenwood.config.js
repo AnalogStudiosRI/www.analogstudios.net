@@ -5,6 +5,31 @@ import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
 import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
 import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
+import { ResourceInterface } from '@greenwood/cli/src/lib/resource-interface.js';
+
+class ProcessEnvReplaceResource extends ResourceInterface {
+  constructor(compilation) {
+    super();
+
+    this.compilation = compilation;
+  }
+
+  async shouldIntercept(url) {
+    return url.pathname.endsWith('redux.mjs');
+  }
+
+  async intercept(url, request, response) {
+    const body = await response.text();
+    const env = process.env.__GWD_COMMAND__ === 'develop' ? 'development' : 'production'; // eslint-disable-line no-underscore-dangle
+    const contents = body.replace(/process.env.NODE_ENV/g, `"${env}"`);
+
+    return new Response(contents, {
+      headers: new Headers({
+        'Content-Type': 'text/javascript'
+      })
+    });
+  }
+}
 
 export default {
   optimization: 'inline',
@@ -55,6 +80,10 @@ export default {
           })
         ];
       }
+    }, {
+      type: 'resource',
+      name: 'process-env-replace',
+      provider: (compilation) => new ProcessEnvReplaceResource(compilation)
     }
   ]
 };
