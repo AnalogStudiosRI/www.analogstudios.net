@@ -1,0 +1,546 @@
+diff --git a/node_modules/@greenwood/cli/src/lib/node-modules-utils.js b/node_modules/@greenwood/cli/src/lib/node-modules-utils.js
+index c1d6f1c..47cc7c3 100644
+--- a/node_modules/@greenwood/cli/src/lib/node-modules-utils.js
++++ b/node_modules/@greenwood/cli/src/lib/node-modules-utils.js
+@@ -1,47 +1,29 @@
+-import { createRequire } from 'module';
+ import { checkResourceExists } from './resource-utils.js';
++import { resolveBareSpecifier, derivePackageRoot } from './walker-package-ranger.js';
+ import fs from 'fs/promises';
+ 
+-// TODO delete me and everything else in this file
+-// https://github.com/ProjectEvergreen/greenwood/issues/684
+-async function getNodeModulesLocationForPackage(packageName) {
+-  let nodeModulesUrl;
++function getSpecifierFromPathNameShortcut(pathname) {
++  const segments = pathname.replace('/node_modules/', '').split('/');
++  const hasScope = segments[0].startsWith('@');
++  const specifier = hasScope ? `${segments[0]}/${segments[1]}` : segments[0];
+ 
+-  // require.resolve may fail in the event a package has no main in its package.json
+-  // so as a fallback, ask for node_modules paths and find its location manually
+-  // https://github.com/ProjectEvergreen/greenwood/issues/557#issuecomment-923332104
+-  // // https://stackoverflow.com/a/62499498/417806
+-  const require = createRequire(import.meta.url);
+-  const locations = require.resolve.paths(packageName);
+-
+-  for (const location in locations) {
+-    const nodeModulesPackageRoot = `${locations[location]}/${packageName}`;
+-    const packageJsonLocation = `${nodeModulesPackageRoot}/package.json`;
+-
+-    if (await checkResourceExists(new URL(`file://${packageJsonLocation}`))) {
+-      nodeModulesUrl = nodeModulesPackageRoot;
+-    }
+-  }
+-
+-  if (!nodeModulesUrl) {
+-    console.debug(`Unable to look up ${packageName} using NodeJS require.resolve.  Falling back to process.cwd()`);
+-    nodeModulesUrl = new URL(`./node_modules/${packageName}`, `file://${process.cwd()}`).pathname;
+-  }
+-
+-  return nodeModulesUrl;
++  return specifier;
+ }
+ 
+-// extract the package name from a URL like /node_modules/<some>/<package>/index.js
+-function getPackageNameFromUrl(url) {
+-  const packagePathPieces = url.split('node_modules/')[1].split('/'); // double split to handle node_modules within nested paths
+-  let packageName = packagePathPieces.shift();
++// take a "shortcut" pathname, e.g. /node_modules/lit/lit-html.js
++// and resolve it using import.meta.resolve
++function getResolvedHrefFromPathnameShortcut(pathname, rootFallbackUrl) {
++  const specifier = getSpecifierFromPathNameShortcut(pathname);
++  const resolved = resolveBareSpecifier(specifier);
+ 
+-  // handle scoped packages
+-  if (packageName.indexOf('@') === 0) {
+-    packageName = `${packageName}/${packagePathPieces.shift()}`;
+-  }
++  if (resolved) {
++    const root = derivePackageRoot(resolved);
+ 
+-  return packageName;
++    return `${root}${segments.slice(hasScope ? 2 : 1).join('/')}`;
++  } else {
++    // best guess fallback, for example for local theme pack development
++    return new URL(`.${pathname}`, rootFallbackUrl);
++  }
+ }
+ 
+ async function getPackageJsonForProject({ userWorkspace, projectDirectory }) {
+@@ -57,8 +39,37 @@ async function getPackageJsonForProject({ userWorkspace, projectDirectory }) {
+       : {};
+ }
+ 
++function mergeImportMap(html = '', map = {}, shouldShim = false) {
++  const importMapType = shouldShim ? 'importmap-shim' : 'importmap';
++  const hasImportMap = html.indexOf(`script type="${importMapType}"`) > 0;
++  const danglingComma = hasImportMap ? ',' : '';
++  const importMap = JSON.stringify(map, null, 2).replace('}', '').replace('{', '');
++
++  if (Object.entries(map).length === 0) {
++    return html;
++  }
++
++  if (hasImportMap) {
++    return html.replace('"imports": {', `
++      "imports": {
++        ${importMap}${danglingComma}
++    `);
++  } else {
++    return html.replace('<head>', `
++      <head>
++      <script type="${importMapType}">
++        {
++          "imports": {
++            ${importMap}
++          }
++        }
++      </script>
++    `);
++  }
++}
++
+ export {
+   getPackageJsonForProject,
+-  getNodeModulesLocationForPackage,
+-  getPackageNameFromUrl
++  getResolvedHrefFromPathnameShortcut,
++  mergeImportMap
+ };
+\ No newline at end of file
+diff --git a/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js b/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js
+index 3f5b0e8..3bc4522 100644
+--- a/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js
++++ b/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js
+@@ -3,11 +3,14 @@ import fs from 'fs';
+ /* eslint-disable max-depth,complexity */
+ // priority if from L -> R
+ const SUPPORTED_EXPORT_CONDITIONS = ['import', 'module-sync', 'default'];
++const IMPORT_MAP_RESOLVED_PREFIX = '/~';
+ const importMap = {};
+ const diagnostics = {};
+ 
+-function updateImportMap(key, value) {
+-  importMap[key.replace('./', '')] = value.replace('./', '');
++function updateImportMap(key, value, resolvedRoot) {
++  if (!importMap[key.replace('./', '')]) {
++    importMap[key.replace('./', '')] = `${IMPORT_MAP_RESOLVED_PREFIX}${resolvedRoot.replace('file://', '')}${value.replace('./', '')}`;
++  }
+ }
+ 
+ // wrapper around import.meta.resolve to provide graceful error handling / logging
+@@ -35,11 +38,27 @@ function resolveBareSpecifier(specifier) {
+  *   root: 'file:///path/to/project/greenwood-lit-ssr/node_modules/.pnpm/lit-html@3.2.1/node_modules/lit-html/package.json'
+  *  }
+  */
+-function derivePackageRoot(dependencyName, resolved) {
+-  const root = resolved.slice(0, resolved.lastIndexOf(`/node_modules/${dependencyName}/`));
+-  const derived = `${root}/node_modules/${dependencyName}/`;
++function derivePackageRoot(resolved) {
++  // can't rely on the specifier, for example in monorepos
++  // where @foo/bar may point to a non node_modules location
++  // e.g. packages/some-namespace/package.json
++  // so we walk backwards looking for nearest package.json
++  const segments = resolved
++    .replace('file://', '')
++    .split('/')
++    .filter(segment => segment !== '')
++    .reverse();
++  let root = resolved.replace(segments[0], '');
++
++  for (const segment of segments.slice(1)) {
++    if (fs.existsSync(new URL('./package.json', root))) {
++      break;
++    }
++
++    root = root.replace(`${segment}/`, '');
++  }
+ 
+-  return derived;
++  return root;
+ }
+ 
+ // Helper function to convert export patterns to a regex (thanks ChatGPT :D)
+@@ -102,14 +121,13 @@ async function walkExportPatterns(dependency, sub, subValue, resolvedRoot) {
+       if (stat.isDirectory()) {
+         walkDirectoryForExportPatterns(new URL(`./${file}/`, directoryUrl));
+       } else if (regexPattern.test(filePathUrl.href)) {
+-        const rootSubOffset = patternRoot(sub);
+-        const relativePath = filePathUrl.href.replace(resolvedRoot, '/');
++        const relativePath = filePathUrl.href.replace(resolvedRoot, '');
+         // naive way to offset a subValue pattern to the sub pattern
+         // ex. "./js/*": "./packages/*/src/index.js",
+         // https://unpkg.com/browse/@uswds/uswds@3.10.0/package.json
+         const rootSubRelativePath = relativePath.replace(rootSubValueOffset, '');
+ 
+-        updateImportMap(`${dependency}${rootSubOffset}${rootSubRelativePath}`, `/node_modules/${dependency}${relativePath}`);
++        updateImportMap(`${dependency}/${rootSubRelativePath}`, relativePath, resolvedRoot);
+       }
+     });
+   }
+@@ -117,18 +135,18 @@ async function walkExportPatterns(dependency, sub, subValue, resolvedRoot) {
+   walkDirectoryForExportPatterns(new URL(`.${rootSubValueOffset}/`, resolvedRoot));
+ }
+ 
+-function trackExportConditions(dependency, exports, sub, condition) {
++function trackExportConditions(dependency, exports, sub, condition, resolvedRoot) {
+   if (typeof exports[sub] === 'object') {
+     // also check for nested conditions of conditions, default to default for now
+     // https://unpkg.com/browse/@floating-ui/dom@1.6.12/package.json
+     if (sub === '.') {
+-      updateImportMap(dependency, `/node_modules/${dependency}/${exports[sub][condition].default ?? exports[sub][condition]}`);
++      updateImportMap(dependency, `${exports[sub][condition].default ?? exports[sub][condition]}`, resolvedRoot);
+     } else {
+-      updateImportMap(`${dependency}/${sub}`, `/node_modules/${dependency}/${exports[sub][condition].default ?? exports[sub][condition]}`);
++      updateImportMap(`${dependency}/${sub}`, `${exports[sub][condition].default ?? exports[sub][condition]}`, resolvedRoot);
+     }
+   } else {
+     // https://unpkg.com/browse/redux@5.0.1/package.json
+-    updateImportMap(dependency, `/node_modules/${dependency}/${exports[sub][condition]}`);
++    updateImportMap(dependency, `${exports[sub][condition]}`);
+   }
+ }
+ 
+@@ -151,7 +169,7 @@ async function walkPackageForExports(dependency, packageJson, resolvedRoot) {
+         for (const condition of SUPPORTED_EXPORT_CONDITIONS) {
+           if (exports[sub][condition]) {
+             matched = true;
+-            trackExportConditions(dependency, exports, sub, condition);
++            trackExportConditions(dependency, exports, sub, condition, resolvedRoot);
+             break;
+           }
+         }
+@@ -163,16 +181,21 @@ async function walkPackageForExports(dependency, packageJson, resolvedRoot) {
+       } else {
+         // handle (unconditional) subpath exports
+         if (sub === '.') {
+-          updateImportMap(dependency, `/node_modules/${dependency}/${exports[sub]}`);
++          updateImportMap(dependency, `${exports[sub]}`, resolvedRoot);
+         } else if (sub.indexOf('*') >= 0) {
+           await walkExportPatterns(dependency, sub, exports[sub], resolvedRoot);
+         } else {
+-          updateImportMap(`${dependency}/${sub}`, `/node_modules/${dependency}/${exports[sub]}`);
++          updateImportMap(`${dependency}/${sub}`, `${exports[sub]}`, resolvedRoot);
+         }
+       }
+     }
+   } else if (module || main) {
+-    updateImportMap(dependency, `/node_modules/${dependency}/${module ?? main}`);
++    updateImportMap(dependency, `${module ?? main}`, resolvedRoot);
++  } else if (fs.existsSync(new URL('./index.js', resolvedRoot))) {
++    // if an index.js file exists but with no main entry point, then it should count as a main entry point
++    // https://docs.npmjs.com/cli/v7/configuring-npm/package-json#main
++    // https://unpkg.com/browse/object-assign@4.1.1/package.json
++    updateImportMap(dependency, 'index.js', resolvedRoot);
+   } else {
+     // ex: https://unpkg.com/browse/uuid@3.4.0/package.json
+     diagnostics[dependency] = `WARNING: No supported entry point detected for => \`${dependency}\``;
+@@ -186,7 +209,7 @@ async function walkPackageJson(packageJson = {}) {
+       const resolved = resolveBareSpecifier(dependency);
+ 
+       if (resolved) {
+-        const resolvedRoot = derivePackageRoot(dependency, resolved);
++        const resolvedRoot = derivePackageRoot(resolved);
+         const resolvedPackageJson = (await import(new URL('./package.json', resolvedRoot), { with: { type: 'json' } })).default;
+ 
+         walkPackageForExports(dependency, resolvedPackageJson, resolvedRoot);
+@@ -196,7 +219,7 @@ async function walkPackageJson(packageJson = {}) {
+             const resolved = resolveBareSpecifier(dependency);
+ 
+             if (resolved) {
+-              const resolvedRoot = derivePackageRoot(dependency, resolved);
++              const resolvedRoot = derivePackageRoot(resolved);
+               const resolvedPackageJson = (await import(new URL('./package.json', resolvedRoot), { with: { type: 'json' } })).default;
+ 
+               walkPackageForExports(dependency, resolvedPackageJson, resolvedRoot);
+@@ -214,37 +237,9 @@ async function walkPackageJson(packageJson = {}) {
+   return { importMap, diagnostics };
+ }
+ 
+-// could probably go somewhere else, in a util?
+-function mergeImportMap(html = '', map = {}, shouldShim = false) {
+-  const importMapType = shouldShim ? 'importmap-shim' : 'importmap';
+-  const hasImportMap = html.indexOf(`script type="${importMapType}"`) > 0;
+-  const danglingComma = hasImportMap ? ',' : '';
+-  const importMap = JSON.stringify(map, null, 2).replace('}', '').replace('{', '');
+-
+-  if (Object.entries(map).length === 0) {
+-    return html;
+-  }
+-
+-  if (hasImportMap) {
+-    return html.replace('"imports": {', `
+-      "imports": {
+-        ${importMap}${danglingComma}
+-    `);
+-  } else {
+-    return html.replace('<head>', `
+-      <head>
+-      <script type="${importMapType}">
+-        {
+-          "imports": {
+-            ${importMap}
+-          }
+-        }
+-      </script>
+-    `);
+-  }
+-}
+-
+ export {
+   walkPackageJson,
+-  mergeImportMap
++  resolveBareSpecifier,
++  derivePackageRoot,
++  IMPORT_MAP_RESOLVED_PREFIX
+ };
+\ No newline at end of file
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-active-content.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-active-content.js
+index 1ce5ff2..7c99e60 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-active-content.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-active-content.js
+@@ -1,4 +1,4 @@
+-import { mergeImportMap } from '../../lib/walker-package-ranger.js';
++import { mergeImportMap } from '../../lib/node-modules-utils.js';
+ import { ResourceInterface } from '../../lib/resource-interface.js';
+ import { checkResourceExists } from '../../lib/resource-utils.js';
+ import { activeFrontmatterKeys, cleanContentCollection, pruneGraph } from '../../lib/content-utils.js';
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js
+index a80b54d..ff22e43 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-node-modules.js
+@@ -6,11 +6,9 @@
+ import { checkResourceExists } from '../../lib/resource-utils.js';
+ import fs from 'fs/promises';
+ import { nodeResolve } from '@rollup/plugin-node-resolve';
+-import { getNodeModulesLocationForPackage, getPackageJsonForProject, getPackageNameFromUrl } from '../../lib/node-modules-utils.js';
+-import { resolveForRelativeUrl } from '../../lib/resource-utils.js';
++import { getPackageJsonForProject, getResolvedHrefFromPathnameShortcut, mergeImportMap } from '../../lib/node-modules-utils.js';
+ import { ResourceInterface } from '../../lib/resource-interface.js';
+-import { mergeImportMap } from '../../lib/walker-package-ranger.js';
+-import { walkPackageJson } from '../../lib/walker-package-ranger.js';
++import { walkPackageJson, IMPORT_MAP_RESOLVED_PREFIX } from '../../lib/walker-package-ranger.js';
+ 
+ let generatedImportMap;
+ 
+@@ -22,42 +20,33 @@ class NodeModulesResource extends ResourceInterface {
+   }
+ 
+   async shouldResolve(url) {
+-    return url.pathname.indexOf('/node_modules/') === 0;
++    const { pathname } = url;
++
++    return pathname.startsWith(IMPORT_MAP_RESOLVED_PREFIX) || pathname.startsWith('/node_modules/');
+   }
+ 
+   async resolve(url) {
+     const { projectDirectory } = this.compilation.context;
+     const { pathname, searchParams } = url;
+-    const packageName = getPackageNameFromUrl(pathname);
+-    const absoluteNodeModulesLocation = await getNodeModulesLocationForPackage(packageName);
+-    const packagePathPieces = pathname.split('node_modules/')[1].split('/'); // double split to handle node_modules within nested paths
+-    // use node modules resolution logic first, else hope for the best from the root of the project
+-    const absoluteNodeModulesPathname = absoluteNodeModulesLocation
+-      ? `${absoluteNodeModulesLocation}${packagePathPieces.join('/').replace(packageName, '')}`
+-      : (await resolveForRelativeUrl(url, projectDirectory)).pathname;
++    const fromImportMap = pathname.startsWith(IMPORT_MAP_RESOLVED_PREFIX);
++    const resolvedHref = fromImportMap
++      ? pathname.replace(IMPORT_MAP_RESOLVED_PREFIX, 'file://')
++      : getResolvedHrefFromPathnameShortcut(pathname, projectDirectory);
+     const params = searchParams.size > 0
+       ? `?${searchParams.toString()}`
+       : '';
+ 
+-    return new Request(`file://${absoluteNodeModulesPathname}${params}`);
++    return new Request(`${resolvedHref}${params}`);
+   }
+ 
+   async shouldServe(url) {
+-    const { href, pathname, protocol } = url;
+-    const extension = pathname.split('.').pop();
+-    const existsAsJs = protocol === 'file:' && await checkResourceExists(new URL(`${href}.js`));
++    const { href, protocol } = url;
+ 
+-    return extension === 'mjs'
+-      || extension === '' && existsAsJs
+-      || extension === 'js' && url.pathname.startsWith('/node_modules/');
++    return protocol === 'file:' && await checkResourceExists(new URL(href));
+   }
+ 
+   async serve(url) {
+-    const pathname = url.pathname;
+-    const urlExtended = pathname.split('.').pop() === ''
+-      ? new URL(`file://${pathname}.js`)
+-      : url;
+-    const body = await fs.readFile(urlExtended, 'utf-8');
++    const body = await fs.readFile(url, 'utf-8');
+ 
+     return new Response(body, {
+       headers: new Headers({
+@@ -96,6 +85,7 @@ class NodeModulesResource extends ResourceInterface {
+         Object.keys(diagnostics).forEach((diagnostic) => {
+           console.warn(diagnostics[diagnostic]);
+         });
++        console.log('Learn more about these warnings at => https://greenwoodjs.dev/docs/introduction/web-standards/#import-maps');
+         console.log('****************************************************************************');
+       }
+ 
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
+index c4c0ed9..61e3137 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
+@@ -9,8 +9,9 @@ import path from 'path';
+ import { parse, walk } from 'css-tree';
+ import { ResourceInterface } from '../../lib/resource-interface.js';
+ import { hashString } from '../../lib/hashing-utils.js';
++import { getResolvedHrefFromPathnameShortcut } from '../../lib/node-modules-utils.js';
+ 
+-function bundleCss(body, url, compilation) {
++function bundleCss(body, sourceUrl, compilation, workingUrl) {
+   const { projectDirectory, outputDir, userWorkspace } = compilation.context;
+   const ast = parse(body, {
+     onParseError(error) {
+@@ -26,13 +27,23 @@ function bundleCss(body, url, compilation) {
+       if ((type === 'String' || type === 'Url') && this.atrulePrelude && this.atrule.name === 'import') {
+         const { value } = node;
+ 
+-        if (value.indexOf('.') === 0 || value.indexOf('/node_modules') === 0) {
+-          const resolvedUrl = value.startsWith('/node_modules')
+-            ? new URL(`.${value}`, projectDirectory)
+-            : new URL(value, url);
+-          const importContents = fs.readFileSync(resolvedUrl, 'utf-8');
++        if (!value.startsWith('http')) {
++          if (value.indexOf('.') === 0 || value.indexOf('/node_modules') === 0) {
++            const resolvedUrl = value.startsWith('/node_modules')
++              ? new URL(getResolvedHrefFromPathnameShortcut(value, projectDirectory))
++              : new URL(value, sourceUrl);
+ 
+-          optimizedCss += bundleCss(importContents, url, compilation);
++            const importContents = fs.readFileSync(resolvedUrl, 'utf-8');
++
++            optimizedCss += bundleCss(importContents, sourceUrl, compilation, resolvedUrl);
++          } else if (workingUrl) {
++            const resolvedUrl = new URL(`./${value}`, workingUrl);
++            const importContents = fs.readFileSync(resolvedUrl, 'utf-8');
++
++            optimizedCss += bundleCss(importContents, workingUrl, compilation);
++          } else {
++            console.warn(`Unable to resolve ${value} from file => ${sourceUrl}`);
++          }
+         } else {
+           optimizedCss += `@import url('${value}');`;
+         }
+@@ -42,22 +53,29 @@ function bundleCss(body, url, compilation) {
+           return;
+         }
+ 
+-        const basePath = compilation.config.basePath === '' ? '/' : `${compilation.config.basePath}/`;
+-        let barePath = value.replace(/\.\.\//g, '').replace('./', '');
++        const { basePath } = compilation.config;
++        let rootPath = value.replace(/\.\.\//g, '').replace('./', '');
+ 
+-        if (barePath.startsWith('/')) {
+-          barePath = barePath.replace('/', '');
++        if (!rootPath.startsWith('/')) {
++          rootPath = `/${rootPath}`;
+         }
+ 
+-        const locationUrl = barePath.indexOf('node_modules/') >= 0
+-          ? new URL(`./${barePath}`, projectDirectory)
+-          : new URL(`./${barePath}`, userWorkspace);
++        const resolvedUrl = workingUrl
++          ? new URL(value, workingUrl)
++          : rootPath.startsWith('/node_modules/')
++              ? new URL(getResolvedHrefFromPathnameShortcut(rootPath, projectDirectory))
++              : new URL(`.${rootPath}`, userWorkspace);
+ 
+-        if (fs.existsSync(locationUrl)) {
++        console.log({ value, rootPath, resolvedUrl, sourceUrl, workingUrl})
++        if (fs.existsSync(resolvedUrl)) {
+           const isDev = process.env.__GWD_COMMAND__ === 'develop'; // eslint-disable-line no-underscore-dangle
+-          const hash = hashString(fs.readFileSync(locationUrl, 'utf-8'));
+-          const ext = barePath.split('.').pop();
+-          const hashedRoot = isDev ? barePath : barePath.replace(`.${ext}`, `.${hash}.${ext}`);
++          const hash = hashString(fs.readFileSync(resolvedUrl, 'utf-8'));
++          const ext = rootPath.split('.').pop();
++          const hashedRoot = isDev ? rootPath : rootPath.replace(`.${ext}`, `.${hash}.${ext}`);
++          // TODO specifier can not be hardcoded
++          const finalUrl = resolvedUrl.href.indexOf('/node_modules/') >= 0
++            ? `/node_modules/font-awesome${hashedRoot}`
++            : `${basePath}${hashedRoot}`;
+ 
+           if (!isDev) {
+             fs.mkdirSync(new URL(`./${path.dirname(hashedRoot)}/`, outputDir), {
+@@ -65,12 +83,13 @@ function bundleCss(body, url, compilation) {
+             });
+ 
+             fs.promises.copyFile(
+-              locationUrl,
++              resolvedUrl,
+               new URL(`./${hashedRoot}`, outputDir)
+             );
+           }
+ 
+-          optimizedCss += `url('${basePath}${hashedRoot}')`;
++          console.log({ basePath, hashedRoot, finalUrl });
++          optimizedCss += `url('${finalUrl}')`;
+         } else {
+           console.warn(`Unable to locate ${value}.  You may need to manually copy this file from its source location to the build output directory.`);
+           optimizedCss += `url('${value}')`;
+@@ -325,12 +344,9 @@ class StandardCssResource extends ResourceInterface {
+   }
+ 
+   async shouldIntercept(url, request, response) {
+-    const { pathname } = url;
+-    const ext = pathname.split('.').pop();
+-
+     return url.protocol === 'file:'
+-      && ext === this.extensions[0]
+-      && (response.headers.get('Content-Type')?.indexOf('text/css') >= 0 || request.headers.get('Accept')?.indexOf('text/javascript') >= 0) || url.searchParams?.get('polyfill') === 'type-css';
++      && (response.headers.get('Content-Type')?.indexOf(this.contentType) >= 0 || request.headers.get('Accept')?.indexOf(this.contentType) >= 0)
++      || (request.headers.get('Accept')?.indexOf('text/javascript') > 0 || url.searchParams?.get('polyfill') === 'type-css');
+   }
+ 
+   async intercept(url, request, response) {
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
+index 33da2a1..5a91eb7 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-javascript.js
+@@ -35,7 +35,7 @@ class StandardJavaScriptResource extends ResourceInterface {
+   async shouldPreIntercept(url, request, response) {
+     const { polyfills } = this.compilation.config;
+ 
+-    return (polyfills?.importAttributes || []).length > 0 && url.protocol === 'file:' && response.headers.get('Content-Type').indexOf(this.contentType) >= 0;
++    return (polyfills?.importAttributes || []).length > 0 && url.protocol === 'file:' && response.headers.get('Content-Type')?.indexOf(this.contentType) >= 0;
+   }
+ 
+   async preIntercept(url, request, response) {
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-user-workspace.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-user-workspace.js
+index 38fb656..6c6b8b8 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-user-workspace.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-user-workspace.js
+@@ -6,6 +6,7 @@
+  */
+ import { resolveForRelativeUrl } from '../../lib/resource-utils.js';
+ import { ResourceInterface } from '../../lib/resource-interface.js';
++import { IMPORT_MAP_RESOLVED_PREFIX } from '../../lib/walker-package-ranger.js';
+ 
+ class UserWorkspaceResource extends ResourceInterface {
+   constructor(compilation, options) {
+@@ -14,11 +15,13 @@ class UserWorkspaceResource extends ResourceInterface {
+ 
+   async shouldResolve(url) {
+     const { userWorkspace } = this.compilation.context;
+-    const extension = url.pathname.split('.').pop();
++    const { pathname } = url;
++    const extension = pathname.split('.').pop();
+     const hasExtension = extension !== '' && !extension.startsWith('/');
+ 
+     return hasExtension
+-      && !url.pathname.startsWith('/node_modules')
++      && !pathname.startsWith('/node_modules')
++      && !pathname.startsWith(IMPORT_MAP_RESOLVED_PREFIX)
+       && await resolveForRelativeUrl(url, userWorkspace);
+   }
+ 

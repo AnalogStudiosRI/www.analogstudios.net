@@ -30,7 +30,8 @@
     "story:build": "build-storybook",
     "story:serve": "npm run clean && npm run story:build && http-server ./storybook-static",
     "test": "wtr",
-    "test:tdd": "npm run test --watch"
+    "test:tdd": "npm run test --watch",
+    "postinstall": "patch-package"
   },
   "overrides": {
     "redux": "^5.0.1",
