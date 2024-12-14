@@ -1,8 +1,8 @@
 diff --git a/node_modules/@greenwood/cli/src/lib/node-modules-utils.js b/node_modules/@greenwood/cli/src/lib/node-modules-utils.js
-index c1d6f1c..47cc7c3 100644
+index c1d6f1c..f7901fd 100644
 --- a/node_modules/@greenwood/cli/src/lib/node-modules-utils.js
 +++ b/node_modules/@greenwood/cli/src/lib/node-modules-utils.js
-@@ -1,47 +1,29 @@
+@@ -1,47 +1,23 @@
 -import { createRequire } from 'module';
  import { checkResourceExists } from './resource-utils.js';
 +import { resolveBareSpecifier, derivePackageRoot } from './walker-package-ranger.js';
@@ -12,10 +12,13 @@ index c1d6f1c..47cc7c3 100644
 -// https://github.com/ProjectEvergreen/greenwood/issues/684
 -async function getNodeModulesLocationForPackage(packageName) {
 -  let nodeModulesUrl;
-+function getSpecifierFromPathNameShortcut(pathname) {
++// take a "shortcut" pathname, e.g. /node_modules/lit/lit-html.js
++// and resolve it using import.meta.resolve
++function getResolvedHrefFromPathnameShortcut(pathname, rootFallbackUrl) {
 +  const segments = pathname.replace('/node_modules/', '').split('/');
 +  const hasScope = segments[0].startsWith('@');
 +  const specifier = hasScope ? `${segments[0]}/${segments[1]}` : segments[0];
++  const resolved = resolveBareSpecifier(specifier);
  
 -  // require.resolve may fail in the event a package has no main in its package.json
 -  // so as a fallback, ask for node_modules paths and find its location manually
@@ -23,7 +26,9 @@ index c1d6f1c..47cc7c3 100644
 -  // // https://stackoverflow.com/a/62499498/417806
 -  const require = createRequire(import.meta.url);
 -  const locations = require.resolve.paths(packageName);
--
++  if (resolved) {
++    const root = derivePackageRoot(resolved);
+ 
 -  for (const location in locations) {
 -    const nodeModulesPackageRoot = `${locations[location]}/${packageName}`;
 -    const packageJsonLocation = `${nodeModulesPackageRoot}/package.json`;
@@ -36,39 +41,30 @@ index c1d6f1c..47cc7c3 100644
 -  if (!nodeModulesUrl) {
 -    console.debug(`Unable to look up ${packageName} using NodeJS require.resolve.  Falling back to process.cwd()`);
 -    nodeModulesUrl = new URL(`./node_modules/${packageName}`, `file://${process.cwd()}`).pathname;
--  }
--
--  return nodeModulesUrl;
-+  return specifier;
- }
- 
--// extract the package name from a URL like /node_modules/<some>/<package>/index.js
--function getPackageNameFromUrl(url) {
--  const packagePathPieces = url.split('node_modules/')[1].split('/'); // double split to handle node_modules within nested paths
--  let packageName = packagePathPieces.shift();
-+// take a "shortcut" pathname, e.g. /node_modules/lit/lit-html.js
-+// and resolve it using import.meta.resolve
-+function getResolvedHrefFromPathnameShortcut(pathname, rootFallbackUrl) {
-+  const specifier = getSpecifierFromPathNameShortcut(pathname);
-+  const resolved = resolveBareSpecifier(specifier);
- 
--  // handle scoped packages
--  if (packageName.indexOf('@') === 0) {
--    packageName = `${packageName}/${packagePathPieces.shift()}`;
--  }
-+  if (resolved) {
-+    const root = derivePackageRoot(resolved);
- 
--  return packageName;
 +    return `${root}${segments.slice(hasScope ? 2 : 1).join('/')}`;
 +  } else {
 +    // best guess fallback, for example for local theme pack development
 +    return new URL(`.${pathname}`, rootFallbackUrl);
-+  }
+   }
+-
+-  return nodeModulesUrl;
+-}
+-
+-// extract the package name from a URL like /node_modules/<some>/<package>/index.js
+-function getPackageNameFromUrl(url) {
+-  const packagePathPieces = url.split('node_modules/')[1].split('/'); // double split to handle node_modules within nested paths
+-  let packageName = packagePathPieces.shift();
+-
+-  // handle scoped packages
+-  if (packageName.indexOf('@') === 0) {
+-    packageName = `${packageName}/${packagePathPieces.shift()}`;
+-  }
+-
+-  return packageName;
  }
  
  async function getPackageJsonForProject({ userWorkspace, projectDirectory }) {
-@@ -57,8 +39,37 @@ async function getPackageJsonForProject({ userWorkspace, projectDirectory }) {
+@@ -57,8 +33,37 @@ async function getPackageJsonForProject({ userWorkspace, projectDirectory }) {
        : {};
  }
  
@@ -110,7 +106,7 @@ index c1d6f1c..47cc7c3 100644
  };
 \ No newline at end of file
 diff --git a/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js b/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js
-index 3f5b0e8..3bc4522 100644
+index 3f5b0e8..e1baee0 100644
 --- a/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js
 +++ b/node_modules/@greenwood/cli/src/lib/walker-package-ranger.js
 @@ -3,11 +3,14 @@ import fs from 'fs';
@@ -130,8 +126,12 @@ index 3f5b0e8..3bc4522 100644
  }
  
  // wrapper around import.meta.resolve to provide graceful error handling / logging
-@@ -35,11 +38,27 @@ function resolveBareSpecifier(specifier) {
-  *   root: 'file:///path/to/project/greenwood-lit-ssr/node_modules/.pnpm/lit-html@3.2.1/node_modules/lit-html/package.json'
+@@ -32,14 +35,30 @@ function resolveBareSpecifier(specifier) {
+  * {
+  *   dependencyName: 'lit-html',
+  *   resolved: 'file:///path/to/project/greenwood-lit-ssr/node_modules/.pnpm/lit-html@3.2.1/node_modules/lit-html/node/lit-html.js',
+- *   root: 'file:///path/to/project/greenwood-lit-ssr/node_modules/.pnpm/lit-html@3.2.1/node_modules/lit-html/package.json'
++ *   root: 'file:///path/to/project/greenwood-lit-ssr/node_modules/.pnpm/lit-html@3.2.1/node_modules/lit-html/'
   *  }
   */
 -function derivePackageRoot(dependencyName, resolved) {
@@ -387,21 +387,22 @@ index a80b54d..ff22e43 100644
        }
  
 diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
-index c4c0ed9..61e3137 100644
+index c4c0ed9..c384694 100644
 --- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
 +++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-css.js
-@@ -9,8 +9,9 @@ import path from 'path';
+@@ -9,8 +9,10 @@ import path from 'path';
  import { parse, walk } from 'css-tree';
  import { ResourceInterface } from '../../lib/resource-interface.js';
  import { hashString } from '../../lib/hashing-utils.js';
 +import { getResolvedHrefFromPathnameShortcut } from '../../lib/node-modules-utils.js';
++import { derivePackageRoot } from '../../lib/walker-package-ranger.js';
  
 -function bundleCss(body, url, compilation) {
 +function bundleCss(body, sourceUrl, compilation, workingUrl) {
    const { projectDirectory, outputDir, userWorkspace } = compilation.context;
    const ast = parse(body, {
      onParseError(error) {
-@@ -26,13 +27,23 @@ function bundleCss(body, url, compilation) {
+@@ -26,13 +28,23 @@ function bundleCss(body, url, compilation) {
        if ((type === 'String' || type === 'Url') && this.atrulePrelude && this.atrule.name === 'import') {
          const { value } = node;
  
@@ -431,7 +432,7 @@ index c4c0ed9..61e3137 100644
          } else {
            optimizedCss += `@import url('${value}');`;
          }
-@@ -42,22 +53,29 @@ function bundleCss(body, url, compilation) {
+@@ -42,35 +54,48 @@ function bundleCss(body, url, compilation) {
            return;
          }
  
@@ -462,23 +463,30 @@ index c4c0ed9..61e3137 100644
 -          const hash = hashString(fs.readFileSync(locationUrl, 'utf-8'));
 -          const ext = barePath.split('.').pop();
 -          const hashedRoot = isDev ? barePath : barePath.replace(`.${ext}`, `.${hash}.${ext}`);
++          // TODO avoid hashing if not needed...
 +          const hash = hashString(fs.readFileSync(resolvedUrl, 'utf-8'));
 +          const ext = rootPath.split('.').pop();
 +          const hashedRoot = isDev ? rootPath : rootPath.replace(`.${ext}`, `.${hash}.${ext}`);
-+          // TODO specifier can not be hardcoded
++          const resolvedRoot = derivePackageRoot(resolvedUrl.href);
++          const resolvedRootSegments = resolvedRoot.split('/').reverse().filter(segment => segment !== '');
++          const specifier = resolvedRootSegments[1].startsWith('@') ? `${resolvedRootSegments[0]}/${resolvedRootSegments[1]}` : resolvedRootSegments[0];
++
++          // console.log({ specifier, resolvedRoot, resolvedRootSegments });
 +          const finalUrl = resolvedUrl.href.indexOf('/node_modules/') >= 0
-+            ? `/node_modules/font-awesome${hashedRoot}`
++            ? `/node_modules/${specifier}${hashedRoot}`
 +            : `${basePath}${hashedRoot}`;
  
            if (!isDev) {
-             fs.mkdirSync(new URL(`./${path.dirname(hashedRoot)}/`, outputDir), {
-@@ -65,12 +83,13 @@ function bundleCss(body, url, compilation) {
+-            fs.mkdirSync(new URL(`./${path.dirname(hashedRoot)}/`, outputDir), {
++            fs.mkdirSync(new URL(`.${path.dirname(finalUrl)}/`, outputDir), {
+               recursive: true
              });
  
              fs.promises.copyFile(
 -              locationUrl,
+-              new URL(`./${hashedRoot}`, outputDir)
 +              resolvedUrl,
-               new URL(`./${hashedRoot}`, outputDir)
++              new URL(`.${finalUrl}`, outputDir)
              );
            }
  
@@ -488,7 +496,7 @@ index c4c0ed9..61e3137 100644
          } else {
            console.warn(`Unable to locate ${value}.  You may need to manually copy this file from its source location to the build output directory.`);
            optimizedCss += `url('${value}')`;
-@@ -325,12 +344,9 @@ class StandardCssResource extends ResourceInterface {
+@@ -325,12 +350,9 @@ class StandardCssResource extends ResourceInterface {
    }
  
    async shouldIntercept(url, request, response) {
