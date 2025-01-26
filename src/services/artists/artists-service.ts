@@ -3,7 +3,7 @@ import { Artist } from './artist.model.ts';
 const ARTISTS_API_URL = '/api/v2/artists';
 
 // ensure only active artists are shown on the front end
-function isActive(artist: Artist): Boolean {
+function isActive(artist: Artist): boolean {
   return parseInt(artist.isActive, 10) === 1;
 }
 

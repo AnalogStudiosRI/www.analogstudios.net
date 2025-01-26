@@ -1,4 +1,3 @@
-/* eslint-disable max-depth */
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -90,13 +89,13 @@ export class EventsCalendarComponent extends LitElement {
     this.currentMonthData = [];
     let week = [];
     let monthDateCounter = 1;
-    let startingDayOfMonth = new Date(this.currentYear, this.currentMonthIndex).getDay();
-    let daysInMonth = this.CALENDAR[this.currentMonthIndex].DAYS;
+    const startingDayOfMonth = new Date(this.currentYear, this.currentMonthIndex).getDay();
+    const daysInMonth = this.CALENDAR[this.currentMonthIndex].DAYS;
 
     for (let i = 0, j = this.MAX_CALENDAR_SPACES; i < j; i += 1) {
       // use null as date default to block out tiles in our calenader that aren't in the month
       // while still keeping the calendar looking "full"
-      let day = {
+      const day = {
         date: null,
         hasEvents: false,
         events: []
@@ -107,10 +106,10 @@ export class EventsCalendarComponent extends LitElement {
 
         // check if day has an event
         for (let k = 0, m = this.events.length; k < m; k += 1) {
-          let event = this.events[k];
-          let eventStartTimeTimestamp = event.startTime;
-          let currentDayStartTimestamp = new Date(this.currentYear, this.currentMonthIndex, monthDateCounter, 0, 0, 0).getTime() / 1000;
-          let currentDayEndTimestamp = new Date(this.currentYear, this.currentMonthIndex, monthDateCounter, 23, 0, 0).getTime() / 1000;
+          const event = this.events[k];
+          const eventStartTimeTimestamp = event.startTime;
+          const currentDayStartTimestamp = new Date(this.currentYear, this.currentMonthIndex, monthDateCounter, 0, 0, 0).getTime() / 1000;
+          const currentDayEndTimestamp = new Date(this.currentYear, this.currentMonthIndex, monthDateCounter, 23, 0, 0).getTime() / 1000;
 
           if (eventStartTimeTimestamp >= currentDayStartTimestamp &&
              eventStartTimeTimestamp <= currentDayEndTimestamp) {

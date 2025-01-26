@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -52,7 +51,6 @@ export class ArtistDetailsRouteComponent extends LitElement {
     }
   }
 
-  /* eslint-disable indent */
   protected render(): TemplateResult {
     const { artist } = this;
 
@@ -92,5 +90,4 @@ export class ArtistDetailsRouteComponent extends LitElement {
       `;
     }
   }
-  /* eslint-enable indent */
 }

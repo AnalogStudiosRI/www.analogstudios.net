@@ -38,7 +38,7 @@
             font-size: 3rem;
             color: var(--color-dark);
           }
-          i:hover {
+          i:hover, i:focus {
             color: var(--color-tertiary);
           }
         }

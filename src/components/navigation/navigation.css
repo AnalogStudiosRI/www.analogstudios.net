@@ -25,6 +25,7 @@
       padding: 10px 0;
   }
 
+  /* stylelint-disable-next-line a11y/media-prefers-reduced-motion */
   & .as-navigation__link {
     color: var(--color-dark);
     letter-spacing: 2px;
@@ -35,6 +36,7 @@
     transition: color 0.25s;
 
 
+    /* stylelint-disable-next-line a11y/media-prefers-reduced-motion */
     &.as-navigation__link::after {
       content: '';
       display: block;
@@ -44,7 +46,7 @@
       transition: width .3s;
     }
 
-    &.as-navigation__link:hover::after {
+    &.as-navigation__link:hover::after, &.as-navigation__link:focus::after {
       width: 100%;
     }
 

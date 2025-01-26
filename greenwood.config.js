@@ -19,7 +19,7 @@ class ProcessEnvReplaceResource extends ResourceInterface {
 
   async intercept(url, request, response) {
     const body = await response.text();
-    const env = process.env.__GWD_COMMAND__ === 'develop' ? 'development' : 'production'; // eslint-disable-line no-underscore-dangle
+    const env = process.env.__GWD_COMMAND__ === 'develop' ? 'development' : 'production';
     const contents = body.replace(/process.env.NODE_ENV/g, `"${env}"`);
 
     return new Response(contents, {

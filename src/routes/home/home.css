@@ -52,6 +52,7 @@
 
     & .as-media-carousel__label,
     & .as-media-carousel__attribution-label {
+      /* stylelint-disable-next-line at-rule-no-unknown */
       @include media-breakpoint-down(sm) {
         display: none;
       }

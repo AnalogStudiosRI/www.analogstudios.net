@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
@@ -42,7 +41,6 @@ export class ArtistsRouteComponent extends LitElement {
     store.dispatch(navigate(`/artists/${selectedArtistId}`));
   }
 
-  /* eslint-disable indent */
   protected render(): TemplateResult {
     const { displayArtists = [], analog = {} } = this;
 
@@ -82,5 +80,4 @@ export class ArtistsRouteComponent extends LitElement {
       </div>
     `;
   }
-  /* eslint-enable indent */
 }

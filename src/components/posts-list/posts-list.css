@@ -10,10 +10,12 @@
   color: var(--gold);
   min-height: 387px;
 
+  /* stylelint-disable-next-line at-rule-no-unknown */
   @include media-breakpoint-down(md) {
     margin-bottom: 30px;
   }
 
+  /* stylelint-disable-next-line at-rule-no-unknown */
   @include media-breakpoint-up(lg) {
     min-height: 387px;
   }
@@ -39,6 +41,7 @@
   & .post__summary {
     cursor: pointer;
 
+    /* stylelint-disable-next-line a11y/no-outline-none */
     &:focus {
       outline: 0;
     }
