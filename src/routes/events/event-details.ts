@@ -46,7 +46,6 @@ export class EventDetailsRouteComponent extends LitElement {
     return `${day}, ${month} ${date}, ${year}, ${hour}:${minute} ${ampm}`;
   }
 
-  /* eslint-disable indent */
   protected render(): TemplateResult {
     const { event } = this;
 
@@ -69,5 +68,4 @@ export class EventDetailsRouteComponent extends LitElement {
       `;
     }
   }
-  /* eslint-enable indent */
 }

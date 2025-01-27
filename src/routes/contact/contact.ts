@@ -14,7 +14,6 @@ export class ContactRouteComponent extends LitElement {
     ga('send', 'pageview');
   }
 
-  /* eslint-disable indent */
   protected render(): TemplateResult {
 
     return html`
@@ -41,6 +40,5 @@ export class ContactRouteComponent extends LitElement {
 
       </div>
     `;
-    /* eslint-enable indent */
   }
 }

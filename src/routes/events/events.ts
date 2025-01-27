@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../../components/events-calendar/events-calendar.ts';

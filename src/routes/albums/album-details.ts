@@ -38,7 +38,6 @@ export class AlbumDetailsRouteComponent extends LitElement {
     }
   }
 
-  /* eslint-disable indent */
   protected render(): TemplateResult {
     const { album } = this;
 
@@ -81,5 +80,4 @@ export class AlbumDetailsRouteComponent extends LitElement {
       `;
     }
   }
-  /* eslint-enable indent */
 }
