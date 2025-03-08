@@ -23,7 +23,8 @@ export class EventDetailsRouteComponent extends LitElement {
   async connectedCallback() {
     super.connectedCallback();
 
-    this.event = await getEventById(this.id);
+    // @ts-expect-error fix this please
+    this.event = await getEventById(parseInt(this.id, 10));
 
     ga('set', 'page', `/event/${encodeURIComponent(this.event.title)}`);
     ga('send', 'pageview');
@@ -59,7 +60,7 @@ export class EventDetailsRouteComponent extends LitElement {
             <i class="cal-icon fa fa-calendar-o" style="font-size: 5rem;width:10%"></i>
             <div id="as-event-info">
               <p>Event Title: ${event.title}</p>
-              <p>Event Date: ${this.formatEventTime(event.startTime)}</p>
+              <p>Event Date: ${this.formatEventTime(parseInt(event.startTime, 10))}</p>
               <p>Event Info:</p>
               <p style="color: var(--color-primary)">${unsafeHTML(event.description)}</p>
             </div>

@@ -10,7 +10,7 @@ import '../../components/posts-list/posts-list.ts';
 export class HomeRouteComponent extends LitElement {
   static styles = [themeSheet, stylesSheet, homeSheet];
 
-  protected connectedCallback(): void {
+  connectedCallback(): void {
     super.connectedCallback();
 
     ga('set', 'page', '/');

@@ -163,11 +163,16 @@ export class EventsCalendarComponent extends LitElement {
               <div class="as-events-calendar__week">
                 ${
                   week.map((day) => {
+                    // @ts-expect-error fix this please
                     const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
+                    // @ts-expect-error fix this please
                     const dayInMonthContent = day.date && !day.hasEvents
+                      // @ts-expect-error fix this please
                       ? day.date
                       : '';
+                    // @ts-expect-error fix this please
                     const eventsInDayContent = day.hasEvents
+                      // @ts-expect-error fix this please
                       ? day.events.map((event) => {
                         return html`
                           <span class="as-events-calendar__day-event">
