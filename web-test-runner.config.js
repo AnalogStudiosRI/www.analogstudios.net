@@ -1,13 +1,9 @@
+import fs from 'fs/promises';
 import { defaultReporter } from '@web/test-runner';
-import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { junitReporter } from '@web/test-runner-junit-reporter';
+import tsc from "typescript";
 
-// create a direct instance of TypeScriptResource
-const typeScriptResource = greenwoodPluginTypeScript()[0].provider({
-  context: {
-    projectDirectory: new URL(import.meta.url)
-  }
-});
+const compilerOptions = ((await import(new URL('./tsconfig.json', import.meta.url), { with: { type: "json" } })).default).compilerOptions;
 
 export default {
   files: './src/**/*.spec.js',
@@ -31,9 +27,8 @@ export default {
       const { url } = context.request;
 
       if (url.endsWith('.ts')) {
-        const response = await typeScriptResource.serve(new URL(`.${url}`, import.meta.url));
-        // https://github.com/ProjectEvergreen/greenwood/issues/661
-        const body = (await response.text()).replace(/\/\/# sourceMappingURL=module.js.map/, '');
+        const contents = await fs.readFile(new URL(`.${url}`, import.meta.url), "utf-8");
+        const body = tsc.transpileModule(contents, { compilerOptions }).outputText;
 
         return {
           body,
