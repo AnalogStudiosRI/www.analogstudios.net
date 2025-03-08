@@ -1,15 +1,14 @@
+import type { Config, ResourcePlugin, Compilation } from '@greenwood/cli';
 import { greenwoodPluginGoogleAnalytics } from '@greenwood/plugin-google-analytics';
-import { greenwoodPluginTypeScript } from '@greenwood/plugin-typescript';
 import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
 import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
 import dynamicImportVariables from '@rollup/plugin-dynamic-import-vars';
-import { ResourceInterface } from '@greenwood/cli/src/lib/resource-interface.js';
 
-class ProcessEnvReplaceResource extends ResourceInterface {
-  constructor(compilation) {
-    super();
+class ProcessEnvReplaceResource {
+  compilation;
 
+  constructor(compilation: Compilation) {
     this.compilation = compilation;
   }
 
@@ -30,8 +29,9 @@ class ProcessEnvReplaceResource extends ResourceInterface {
   }
 }
 
-export default {
+const config: Config = {
   optimization: 'inline',
+  useTsc: true,
   devServer: {
     proxy: {
       '/api': 'https://www.analogstudios.net'
@@ -42,7 +42,6 @@ export default {
   },
   plugins: [
     greenwoodPluginPostCss(),
-    greenwoodPluginTypeScript(),
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
     greenwoodPluginGoogleAnalytics({
       analyticsId: 'UA-69272660-1'
@@ -81,7 +80,9 @@ export default {
     }, {
       type: 'resource',
       name: 'process-env-replace',
-      provider: (compilation) => new ProcessEnvReplaceResource(compilation)
+      provider: (compilation: Compilation) => new ProcessEnvReplaceResource(compilation)
     }
   ]
-};
+}
+
+export default config;
