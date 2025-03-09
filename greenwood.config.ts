@@ -1,4 +1,4 @@
-import type { Config, ResourcePlugin, Resource } from '@greenwood/cli';
+import type { Config, ResourcePlugin, Resource, RollupPlugin } from '@greenwood/cli';
 import { greenwoodPluginGoogleAnalytics } from '@greenwood/plugin-google-analytics';
 import { greenwoodPluginPostCss } from '@greenwood/plugin-postcss';
 import analyze from 'rollup-plugin-analyzer';
@@ -29,7 +29,7 @@ const processEneReplaceResourcePlugin: ResourcePlugin = {
   provider: (): Resource => new ProcessEnvReplaceResource()
 }
 
-const customRollupPlugins = [
+const customRollupPlugins: RollupPlugin[] = [
   {
     type: 'rollup',
     name: 'rollup-plugin-import-vars',
