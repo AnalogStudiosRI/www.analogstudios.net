@@ -7,7 +7,7 @@ function getEvents(): Promise<[Event]> {
     .then(resp => resp.json());
 }
 
-function getEventById(id): Promise<Event> {
+function getEventById(id: number): Promise<Event> {
   return fetch(`${EVENTS_API_URL}?id=${id}`)
     .then(resp => resp.json())
     .then(resp => resp[0]);

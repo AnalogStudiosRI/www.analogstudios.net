@@ -21,11 +21,11 @@
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rimraf .greenwood/ public/ reports/ storybook-static/",
-    "lint": "eslint && ls-lint \"./src/**/*.js\" && stylelint \"./src/**/*.css\"",
-    "dev": "greenwood develop",
-    "build": "greenwood build",
+    "lint": "eslint && ls-lint \"./src/**/*.js\" && stylelint \"./src/**/*.css\" && tsc --project ./tsconfig.json",
+    "dev": "NODE_OPTIONS='--experimental-strip-types' greenwood develop",
+    "build": "NODE_OPTIONS='--experimental-strip-types' greenwood build",
     "start": "npm run dev",
-    "serve": "npm run clean && npm run build && greenwood serve",
+    "serve": "npm run clean && npm run build && NODE_OPTIONS='--experimental-strip-types' greenwood serve",
     "story:dev": "start-storybook -p 6006",
     "story:build": "build-storybook",
     "story:serve": "npm run clean && npm run story:build && http-server ./storybook-static",
@@ -52,10 +52,9 @@
     "@double-great/stylelint-a11y": "^3.0.2",
     "@eslint/js": "^9.18.0",
     "@esm-bundle/chai": "^4.3.4",
-    "@greenwood/cli": "~0.31.0",
-    "@greenwood/plugin-google-analytics": "~0.31.0",
-    "@greenwood/plugin-postcss": "~0.31.0",
-    "@greenwood/plugin-typescript": "~0.31.0",
+    "@greenwood/cli": "^0.32.0",
+    "@greenwood/plugin-google-analytics": "^0.32.0",
+    "@greenwood/plugin-postcss": "^0.32.0",
     "@ls-lint/ls-lint": "^1.10.0",
     "@rollup/plugin-dynamic-import-vars": "^1.4.1",
     "@storybook/addon-actions": "^6.3.2",
@@ -81,6 +80,7 @@
     "rollup-plugin-visualizer": "^5.5.2",
     "stylelint": "^16.10.0",
     "stylelint-config-recommended": "^14.0.1",
+    "typescript": "^5.8.2",
     "typescript-eslint": "^8.21.0"
   }
 }

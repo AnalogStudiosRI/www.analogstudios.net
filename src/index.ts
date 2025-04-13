@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { connectRouter } from 'lit-redux-router';
 import store from './store.ts';
 
+// @ts-expect-error fix this please
 connectRouter(store);
 
 @customElement('app-router-outlet')
