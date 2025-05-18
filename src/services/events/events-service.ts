@@ -1,6 +1,6 @@
 import './event.model.ts';
 
-const EVENTS_API_URL = '/api/v2/events';
+const EVENTS_API_URL = '/api/events';
 
 function getEvents(): Promise<[Event]> {
   return fetch(EVENTS_API_URL)

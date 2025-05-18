@@ -1,6 +1,6 @@
 import { Artist } from './artist.model.ts';
 
-const ARTISTS_API_URL = '/api/v2/artists';
+const ARTISTS_API_URL = '/api/artists';
 
 // ensure only active artists are shown on the front end
 function isActive(artist: Artist): boolean {
