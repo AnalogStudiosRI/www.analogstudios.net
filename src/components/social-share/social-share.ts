@@ -2,7 +2,7 @@ import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import socialShareSheet from './social-share.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
-import 'web-social-share';
+import { defineCustomElement } from 'web-social-share';
 
 @customElement('app-social-share')
 export class NavigationComponent extends LitElement {
@@ -16,6 +16,7 @@ export class NavigationComponent extends LitElement {
   constructor() {
     super();
 
+    defineCustomElement();
     const socialShareUrl = window.location.href;
 
     this.shareConfig = {

@@ -44,7 +44,7 @@
     "pwa-helpers": "^0.9.1",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
-    "web-social-share": "^8.0.1"
+    "web-social-share": "^10.0.0"
   },
   "devDependencies": {
     "@aws-sdk/client-cloudfront": "^3.47.0",
