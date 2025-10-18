@@ -9,7 +9,10 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": [
-    "./src/**/*.ts"
+  "exclude": [
+    "public/",
+    ".greenwood/",
+    "node_modules/",
+    "reports/"
   ]
 }
