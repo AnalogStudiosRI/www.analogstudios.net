@@ -34,4 +34,9 @@ export default tseslint.config(
   },
   js.configs.recommended,
   tseslint.configs.recommended,
+  {
+    rules: {
+      "@typescript-eslint/no-import-type-side-effects": "error"
+    }
+  }
 );

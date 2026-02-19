@@ -1,22 +1,22 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement } from 'lit';
+import type { TemplateResult } from "lit";
 import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
 import { getArtists } from '../../services/artists/artists-service.ts';
 import { modelArtist } from '../../components/card/card.model.ts';
-import { Artist } from '../../services/artists/artist.model.ts';
+import type { Artist } from '../../services/artists/artist.model.ts';
 import store from '../../store.ts';
 import artistSheet from './artists.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
 import stylesSheet from '../../styles.css' with { type: 'css' };
 import '../../components/card/card.ts';
-
 @customElement('as-route-artists')
 export class ArtistsRouteComponent extends LitElement {
   static styles = [themeSheet, stylesSheet, artistSheet];
 
   private ANALOG_ID = 1;
   private displayArtists: Array<Artist> = [];
-  private analog: Artist;
+  private analog: Artist = { id: this.ANALOG_ID, name: "", bio: "", imageUrl: "", isActive: "true" };
 
   @property()
   accessor artists: Array<Artist> = [];
@@ -27,8 +27,8 @@ export class ArtistsRouteComponent extends LitElement {
     this.artists = await getArtists();
 
     // make sure "newer" artists are at the top
-    // and keep Analog at the top of the list
     this.displayArtists = this.artists.reverse().filter((artist: Artist) => artist.id !== this.ANALOG_ID);
+    // and keep Analog at the top of the list
     this.analog = this.artists.filter((artist: Artist) => artist.id === this.ANALOG_ID)[0];
 
     ga('set', 'page', '/artists');
@@ -36,13 +36,13 @@ export class ArtistsRouteComponent extends LitElement {
   }
 
   private onArtistSelected(): void {
-    const selectedArtistId = this.shadowRoot.querySelector('select').value;
+    const selectedArtistId = this.shadowRoot?.querySelector('select')?.value;
 
     store.dispatch(navigate(`/artists/${selectedArtistId}`));
   }
 
   protected render(): TemplateResult {
-    const { displayArtists = [], analog = {} } = this;
+    const { displayArtists, analog } = this;
 
     return html`
       <div class="container-flex as-route-artists">
@@ -66,7 +66,7 @@ export class ArtistsRouteComponent extends LitElement {
 
           <div class="col-xs-7">
             <div class="artist-cards-list">
-              <app-card .details="${modelArtist(this.analog)}"></app-card>
+              <app-card .details="${modelArtist(analog)}"></app-card>
 
               ${displayArtists.map((artist: Artist) => {
                 return html`

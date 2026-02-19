@@ -1,8 +1,8 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { customElement, property } from 'lit/decorators.js';
 import { getEventById } from '../../services/events/events-service.ts';
-import { Event } from '../../services/events/event.model.ts';
+import type { Event } from '../../services/events/event.model.ts';
 import '../../components/social-share/social-share.ts';
 import eventsSheet from './events.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
@@ -18,12 +18,17 @@ export class EventDetailsRouteComponent extends LitElement {
   accessor id: string;
 
   @property()
-  accessor event: Event;
+  accessor event: Event | undefined;
+
+  constructor() {
+    super();
+    this.id = "";
+    this.event = undefined;
+  }
 
   async connectedCallback() {
     super.connectedCallback();
 
-    // @ts-expect-error fix this please
     this.event = await getEventById(parseInt(this.id, 10));
 
     ga('set', 'page', `/event/${encodeURIComponent(this.event.title)}`);
@@ -60,7 +65,7 @@ export class EventDetailsRouteComponent extends LitElement {
             <i class="cal-icon fa fa-calendar-o" style="font-size: 5rem;width:10%"></i>
             <div id="as-event-info">
               <p>Event Title: ${event.title}</p>
-              <p>Event Date: ${this.formatEventTime(parseInt(event.startTime, 10))}</p>
+              <p>Event Date: ${this.formatEventTime(event.startTime)}</p>
               <p>Event Info:</p>
               <p style="color: var(--color-primary)">${unsafeHTML(event.description)}</p>
             </div>

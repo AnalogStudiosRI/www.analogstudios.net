@@ -1,5 +1,5 @@
-import { Artist } from '../../services/artists/artist.model.ts';
-import { Album } from '../../services/albums/album.model.ts';
+import type { Artist } from '../../services/artists/artist.model.ts';
+import type { Album } from '../../services/albums/album.model.ts';
 
 function modelAlbum(album: Album) {
   return {
@@ -32,5 +32,5 @@ interface Details {
 export {
   modelAlbum,
   modelArtist,
-  Details
+  type Details
 };

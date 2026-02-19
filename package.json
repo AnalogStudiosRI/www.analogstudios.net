@@ -20,7 +20,7 @@
   "author": "Owen Buckley <analogstudiosri@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "lint": "eslint && ls-lint \"./src/**/*.js\" && stylelint \"./src/**/*.css\" && tsc --project ./tsconfig.json",
+    "lint": "eslint && ls-lint \"./src/**/*.js\" && stylelint \"./src/**/*.css\" && tsc",
     "dev": "NODE_OPTIONS='--experimental-strip-types' greenwood develop",
     "build": "NODE_OPTIONS='--experimental-strip-types' greenwood build",
     "start": "npm run dev",

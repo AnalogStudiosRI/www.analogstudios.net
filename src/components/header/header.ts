@@ -1,4 +1,4 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '../navigation/navigation.ts';
 import theme from '../../theme.css' with { type: 'css' };

@@ -1,4 +1,4 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import socialShareSheet from './social-share.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
@@ -40,7 +40,7 @@ export class NavigationComponent extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    this.shadowRoot.addEventListener('closed', () => {
+    this.shadowRoot?.addEventListener('closed', () => {
       this.toggleShowSocialShare();
     });
   }

@@ -1,8 +1,8 @@
-interface Post {
+type Post = {
   id: number,
   title: string,
   summary: string,
   createdTime: number
 }
 
-export { Post };
+export type { Post };

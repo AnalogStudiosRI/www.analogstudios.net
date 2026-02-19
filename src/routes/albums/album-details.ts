@@ -1,28 +1,27 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getAlbumById } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
-import { Album } from '../../services/albums/album.model.ts';
+import type { Album } from '../../services/albums/album.model.ts';
 import themeSheet from '../../theme.css' with { type: 'css' };
 import albumsSheet from './albums.css' with { type: 'css' };
 import '../../components/card/card.ts';
 import '../../components/social-share/social-share.ts';
-
 @customElement('as-route-album-details')
 export class AlbumDetailsRouteComponent extends LitElement {
   static styles = [themeSheet, albumsSheet];
 
   @property()
-  accessor id: string;
+  accessor id: string = '';
 
   @property()
-  accessor album: Album;
+  accessor album: Album | undefined;
 
   async connectedCallback() {
     super.connectedCallback();
 
-    this.album = await getAlbumById(this.id);
+    this.album = await getAlbumById(parseInt(this.id, 10));
 
     ga('set', 'page', `/album/${encodeURIComponent(this.album.title)}`);
     ga('send', 'pageview');
@@ -45,12 +44,9 @@ export class AlbumDetailsRouteComponent extends LitElement {
       return html``;
     } else {
       const formattedTitle = `${album.title} (${album.year})`;
-      const modeledAlbum = modelAlbum(album);
-
-      album.title = formattedTitle;
-
       // don't need links on details pages
-      delete modeledAlbum.link;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { link, ...rest } = modelAlbum(album);
 
       return html`
         <div class="container-flex as-routes-album-details">
@@ -64,7 +60,7 @@ export class AlbumDetailsRouteComponent extends LitElement {
 
               <div class="card-row hidden-sm-down">
                 ${this.getDownloadLink(album)}
-                <app-card .details="${modeledAlbum}"></app-card>
+                <app-card .details="${rest}"></app-card>
               </div>
 
               <div class="card-row hidden-md-up">

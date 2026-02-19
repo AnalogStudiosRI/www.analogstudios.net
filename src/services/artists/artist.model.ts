@@ -1,4 +1,4 @@
-interface Artist {
+type Artist = {
   id: number,
   name: string,
   bio: string,
@@ -11,4 +11,4 @@ interface Artist {
   contactEmail?: string
 }
 
-export { Artist };
+export type { Artist };
