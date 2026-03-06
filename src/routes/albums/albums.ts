@@ -1,9 +1,9 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { navigate } from 'lit-redux-router';
 import { getAlbums } from '../../services/albums/albums-service.ts';
 import { modelAlbum } from '../../components/card/card.model.ts';
-import { Album } from '../../services/albums/album.model.ts';
+import type { Album } from '../../services/albums/album.model.ts';
 import store from '../../store.ts';
 import albumsSheet from './albums.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
@@ -27,7 +27,7 @@ export class AlbumsRouteComponent extends LitElement {
   }
 
   private onAlbumSelected(): void {
-    const selectedAlbumId = this.shadowRoot.querySelector('select').value;
+    const selectedAlbumId = this.shadowRoot?.querySelector('select')?.value;
 
     store.dispatch(navigate(`/albums/${selectedAlbumId}`));
   }

@@ -1,19 +1,23 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { Details } from './card.model.ts';
+import type { Details } from './card.model.ts';
 import cardSheet from './card.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
-
 @customElement('app-card')
 export class CardComponent extends LitElement {
   @property()
-  accessor details: Details;
+  accessor details: Details | undefined;
 
   static styles = [themeSheet, cardSheet];
 
-  protected render():TemplateResult {
+  protected render(): TemplateResult {
     const { details } = this;
+
+    if(!details) {
+      return html``;
+    }
+
     const detailsHeadingLink = !details.link
       ? details.headingText
       : html`

@@ -1,10 +1,18 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getEvents } from '../../services/events/events-service.ts';
 import eventsCalendarSheet from './events-calendar.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
+import type { Event } from '../../services/events/event.model.ts';
 
+type Day = {
+  date: number | null,
+  hasEvents: boolean,
+  events: Event[]
+}
+
+type Week = Day[];
 @customElement('app-events-calendar')
 export class EventsCalendarComponent extends LitElement {
   static styles = [themeSheet, eventsCalendarSheet];
@@ -25,10 +33,10 @@ export class EventsCalendarComponent extends LitElement {
     { NAME: 'November', DAYS: 30 },
     { NAME: 'December', DAYS: 31 }
   ];
-  private currentMonthData = [[Event]];
+  private currentMonthData: Week[] = [];
 
   @property()
-  accessor events = [];
+  accessor events: Event[] = [];
 
   @property()
   accessor currentMonthIndex;
@@ -87,19 +95,19 @@ export class EventsCalendarComponent extends LitElement {
 
   private calculateCurrentMonthData(): void {
     this.currentMonthData = [];
-    let week = [];
+    let week: Week = [];
     let monthDateCounter = 1;
     const startingDayOfMonth = new Date(this.currentYear, this.currentMonthIndex).getDay();
     const daysInMonth = this.CALENDAR[this.currentMonthIndex].DAYS;
 
     for (let i = 0, j = this.MAX_CALENDAR_SPACES; i < j; i += 1) {
-      // use null as date default to block out tiles in our calenader that aren't in the month
+      // use null as date default to block out tiles in our calender that aren't in the month
       // while still keeping the calendar looking "full"
-      const day = {
+      const day: Day = {
         date: null,
         hasEvents: false,
         events: []
-      };
+      }
 
       if (i >= startingDayOfMonth && monthDateCounter <= daysInMonth) {
         day.date = monthDateCounter;
@@ -163,16 +171,11 @@ export class EventsCalendarComponent extends LitElement {
               <div class="as-events-calendar__week">
                 ${
                   week.map((day) => {
-                    // @ts-expect-error fix this please
                     const dayNotInMonthContent = !day.date ? unsafeHTML('<div></div>') : '';
-                    // @ts-expect-error fix this please
                     const dayInMonthContent = day.date && !day.hasEvents
-                      // @ts-expect-error fix this please
                       ? day.date
                       : '';
-                    // @ts-expect-error fix this please
                     const eventsInDayContent = day.hasEvents
-                      // @ts-expect-error fix this please
                       ? day.events.map((event) => {
                         return html`
                           <span class="as-events-calendar__day-event">

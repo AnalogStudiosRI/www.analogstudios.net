@@ -1,4 +1,4 @@
-import { Artist } from './artist.model.ts';
+import type { Artist } from './artist.model.ts';
 
 const ARTISTS_API_URL = '/api/artists';
 
@@ -7,13 +7,13 @@ function isActive(artist: Artist): boolean {
   return parseInt(artist.isActive, 10) === 1;
 }
 
-function getArtists(): Promise<[Artist]> {
+function getArtists(): Promise<Artist[]> {
   return fetch(ARTISTS_API_URL)
     .then(resp => resp.json())
     .then(resp => resp.filter(isActive));
 }
 
-function getArtistById(id): Promise<Artist> {
+function getArtistById(id: number): Promise<Artist> {
   return fetch(`${ARTISTS_API_URL}?id=${id}`)
     .then(resp => resp.json())
     .then(resp => resp[0]);

@@ -2,14 +2,18 @@
   "compilerOptions": {
     "target": "es2022",
     "module": "preserve",
+    "moduleResolution": "bundler",
     "lib": ["es2022", "DOM", "DOM.Iterable", "esnext"],
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noImplicitAny": true,
     "noEmit": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false
   },
-  "include": [
-    "./src/**/*.ts"
+  "exclude": [
+    "./public", "./.greenwood", "./reports", "node_modules"
   ]
 }

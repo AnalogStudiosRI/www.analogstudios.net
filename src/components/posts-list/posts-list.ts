@@ -1,7 +1,8 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getPosts } from '../../services/posts/posts-service.ts';
+import type { Post } from '../../services/posts/post.model.ts';
 import postsListSheet from './posts-list.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
 
@@ -13,7 +14,7 @@ export class PostsListComponent extends LitElement {
   accessor max = 0;
 
   @property()
-  accessor posts = [];
+  accessor posts: Post[] = [];
 
   async connectedCallback() {
     super.connectedCallback();

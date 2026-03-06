@@ -8,4 +8,4 @@ interface Album {
   downloadUrl?: string
 }
 
-export { Album };
+export type { Album };

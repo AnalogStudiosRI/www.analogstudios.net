@@ -1,10 +1,10 @@
-interface Event {
+type Event = {
   id: number,
   title: string,
   description: string,
-  startTime: string,
-  endTime: string,
+  startTime: number,
+  endTime: number,
   createdTime: string
 }
 
-export { Event };
+export type { Event };

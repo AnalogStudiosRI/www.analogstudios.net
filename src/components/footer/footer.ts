@@ -1,4 +1,4 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import footerCss from './footer.css' with { type: 'css' };
 import theme from '../../theme.css' with { type: 'css' };

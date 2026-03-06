@@ -1,8 +1,8 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement } from 'lit';
+import type { TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import contactSheet from './contact.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
-
 @customElement('as-route-contact')
 export class ContactRouteComponent extends LitElement {
   static styles = [themeSheet, contactSheet];

@@ -1,11 +1,12 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { html, LitElement } from 'lit';
+import type { TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { getArtistById } from '../../services/artists/artists-service.ts';
 import { getAlbumsByArtistId } from '../../services/albums/albums-service.ts';
 import { modelArtist, modelAlbum } from '../../components/card/card.model.ts';
-import { Artist } from '../../services/artists/artist.model.ts';
-import { Album } from '../../services/albums/album.model.ts';
+import type  { Artist } from '../../services/artists/artist.model.ts';
+import type { Album } from '../../services/albums/album.model.ts';
 import artistsSheet from './artists.css' with { type: 'css' };
 import themeSheet from '../../theme.css' with { type: 'css' };
 import stylesSheet from '../../styles.css' with { type: 'css' };
@@ -17,19 +18,19 @@ export class ArtistDetailsRouteComponent extends LitElement {
   static styles = [themeSheet, stylesSheet, artistsSheet];
 
   @property()
-  accessor id: string;
+  accessor id: string = '';
 
   @property()
-  accessor artist: Artist;
+  accessor artist: Artist = { id: 0, name: "", bio: "", imageUrl: "", isActive: "true" };;
 
   @property()
-  accessor albums: Array<Album>;
+  accessor albums: Array<Album> = [];
 
   async connectedCallback() {
     super.connectedCallback();
 
-    this.artist = await getArtistById(this.id);
-    this.albums = await getAlbumsByArtistId(this.id);
+    this.artist = await getArtistById(parseInt(this.id, 10));
+    this.albums = await getAlbumsByArtistId(parseInt(this.id, 10));
 
     ga('set', 'page', `/artist/${encodeURIComponent(this.artist.name)}`);
     ga('send', 'pageview');
@@ -57,10 +58,8 @@ export class ArtistDetailsRouteComponent extends LitElement {
     if (!artist) {
       return html``;
     } else {
-      const modeledArtist = modelArtist(artist);
-
-      // don't need links on details pages
-      delete modeledArtist.link;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { link, ...rest } = modelArtist(artist);
 
       return html`
         <div class="container-flex as-route-artist-details">
@@ -73,7 +72,7 @@ export class ArtistDetailsRouteComponent extends LitElement {
             <div class="col-xs-6">
 
               <div class="card-row hidden-sm-down">
-                <app-card .details="${modeledArtist}"></app-card>
+                <app-card .details="${rest}"></app-card>
               </div>
 
               <div class="card-row hidden-md-up" >
