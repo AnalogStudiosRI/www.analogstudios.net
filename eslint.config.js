@@ -36,6 +36,7 @@ export default tseslint.config(
   tseslint.configs.recommended,
   {
     rules: {
+      "@typescript-eslint/consistent-type-definitions": "error",
       "@typescript-eslint/no-import-type-side-effects": "error"
     }
   }
