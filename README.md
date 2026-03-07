@@ -7,13 +7,13 @@
 
 ## Overview
 
-Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io). It is built and deployed using Github Actions to AWS using S3 and Cloudfront.  (The backend uses and API Gateway and EC2)
+Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io). It is built and deployed using Github Actions to AWS using S3 and Cloudfront. (The backend uses and API Gateway and EC2)
 
 ## Contributing
 
 ### Setup
 
-You'll need the latest [NodeJS LTS](https://nodejs.org/) version installed to run and contribute to this project.  Or run `nvm use` if using [nvm**](https://github.com/nvm-sh/nvm).
+You'll need the latest [NodeJS LTS](https://nodejs.org/) version installed to run and contribute to this project. Or run `nvm use` if using [nvm](https://github.com/nvm-sh/nvm).
 
 You can confirm by running the following
 
