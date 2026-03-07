@@ -16,6 +16,9 @@
   "homepage": "https://github.com/AnalogStudiosRI/www.analogstudios.net#readme",
   "author": "Owen Buckley <analogstudiosri@gmail.com>",
   "license": "Apache-2.0",
+  "imports": {
+    "#*": "./src/*"
+  },
   "scripts": {
     "lint": "eslint && ls-lint \"./src/**/*.js\" && stylelint \"./src/**/*.css\" && tsc",
     "dev": "greenwood develop",
