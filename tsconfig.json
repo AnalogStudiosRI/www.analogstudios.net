@@ -4,14 +4,13 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "lib": ["es2022", "DOM", "DOM.Iterable", "esnext"],
-    "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
     "noImplicitAny": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false
+    "strict": true
   },
   "exclude": [
     "./public", "./.greenwood", "./reports", "node_modules"
