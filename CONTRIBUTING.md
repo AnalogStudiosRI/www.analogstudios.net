@@ -9,10 +9,12 @@ To develop for the project, you'll want to follow these steps:
 1. Run `npm ci`
 
 If developing with Node Version Manager:
-  - Windows: [NVM for Windows](https://github.com/coreybutler/nvm-windows/releases)
-  - Linux/MacOS: [Node Version Manager](https://github.com/nvm-sh/nvm)
+
+- Windows: [NVM for Windows](https://github.com/coreybutler/nvm-windows/releases)
+- Linux/MacOS: [Node Version Manager](https://github.com/nvm-sh/nvm)
 
 You can confirm by running the following
+
 ```sh
 $ nvm use
 Found '/Users/<directory_location>/www.analogstudios.net/.nvmrc' with version <14.17.0>
