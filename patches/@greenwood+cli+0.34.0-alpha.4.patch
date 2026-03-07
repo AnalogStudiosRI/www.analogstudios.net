@@ -1,0 +1,43 @@
+diff --git a/node_modules/@greenwood/cli/src/lib/execute-route-module.js b/node_modules/@greenwood/cli/src/lib/execute-route-module.js
+index a7367ac..28b79b4 100644
+--- a/node_modules/@greenwood/cli/src/lib/execute-route-module.js
++++ b/node_modules/@greenwood/cli/src/lib/execute-route-module.js
+@@ -34,6 +34,38 @@ async function executeRouteModule({
+       isolation,
+     } = module;
+ 
++    console.log({ params });
++    if (params) {
++      if (module.getStaticProps || module.getStaticPaths) {
++        const staticPaths = module.getStaticPaths
++          ? await module.getStaticPaths()
++          : [];
++
++        console.log({ staticPaths });
++        console.log(staticPaths[0])
++
++        if (module.getStaticProps) {
++          console.log('has static props?', staticPaths.find(path => path.params.name === params.name));
++          const staticParams = {
++            ...params,
++            ...staticPaths.find(path => path.params.name === params.name),
++          }
++
++          console.log({ staticParams });
++          const staticProps = module.getStaticProps
++            ? await module.getStaticProps(staticParams)
++            : {};
++
++          params = {
++            ...params,
++            ...staticProps,
++          }
++        }
++      }
++    }
++
++    console.log('final params', { params });
++
+     if (body) {
+       if (module.default) {
+         const { html } = await renderToString(new URL(moduleUrl), false, {

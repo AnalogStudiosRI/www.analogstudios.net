@@ -25,7 +25,8 @@
     "build": "greenwood build",
     "serve": "greenwood serve",
     "test": "wtr",
-    "test:tdd": "npm run test --watch"
+    "test:tdd": "npm run test --watch",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@double-great/stylelint-a11y": "^3.0.2",
@@ -40,6 +41,7 @@
     "eslint": "^9.18.0",
     "eslint-plugin-no-only-tests": "^3.3.0",
     "globals": "^15.14.0",
+    "patch-package": "^8.0.1",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-visualizer": "^7.0.1",
     "stylelint": "^16.10.0",
