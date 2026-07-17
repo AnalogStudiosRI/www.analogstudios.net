@@ -11,7 +11,10 @@ ls:
   .woff: lowercase
   .woff2: lowercase
 
-ignore: 
-  - .git 
+ignore:
+  - .git
+  - .aws-output
+  - .greenwood
+  - .sst
   - node_modules
   - public

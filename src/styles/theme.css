@@ -1,0 +1,90 @@
+@import "font-awesome/css/font-awesome.css";
+@import "bootstrap/dist/css/bootstrap.css";
+
+:root,
+:host {
+  /* raw tokens */
+  --white: #efefef;
+  --black: #1a1a1a;
+  --gold: #a48f65;
+  --creme: #f1e7d3;
+  --blue: #316291;
+
+  /* design system - colors */
+  --color-primary: var(--black);
+  --color-secondary: var(--gold);
+  --color-tertiary: var(--creme);
+  --color-light: var(--white);
+  --color-dark: var(--black);
+  --color-font-primary: var(--color-primary);
+  --color-font-secondary: var(--blue);
+
+  /* design system - typography */
+  --font-family-primary: "Montserrat", sans-serif;
+
+  /* misc */
+  --img-width-mobile: 200px;
+}
+
+body {
+  margin: 0;
+  background-image: url("/assets/view-banner.webp");
+  background-size: 100% 377px;
+  background-color: var(--color-secondary);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: 4px;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h2,
+h3,
+h4 {
+  letter-spacing: 2px;
+}
+
+main {
+  color: var(--color-dark);
+  font-family: var(--font-family-primary);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: var(--color-secondary);
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.5);
+  min-height: 1000px;
+  padding: 1rem;
+
+  & a {
+    color: var(--color-tertiary);
+  }
+
+  & .as-link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--color-dark);
+  }
+
+  & .router-outlet {
+    margin-top: 20px;
+    display: block;
+  }
+}
+
+.row {
+  display: flex;
+}

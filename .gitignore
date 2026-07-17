@@ -1,6 +1,10 @@
+.env
 *.log
+.aws-output/
 .greenwood/
+.sst/
 .vscode/
+sst-env.d.ts
 node_modules/
 public/
 reports/

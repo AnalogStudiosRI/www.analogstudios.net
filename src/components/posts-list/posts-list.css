@@ -1,4 +1,4 @@
-:host img {
+:host .image {
   display: block;
   max-width: 100%;
   height: auto;
@@ -22,7 +22,7 @@
 
   & .as-posts-list__heading {
     margin: 0;
-    color: var(--color-tertiary)
+    color: var(--color-tertiary);
   }
 
   & .post {

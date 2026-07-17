@@ -1,0 +1,47 @@
+.as-route-albums {
+  color: var(--color-dark);
+
+  & as-card {
+    margin: 0 auto;
+    width: 90%;
+    display: block;
+    text-align: center;
+  }
+}
+
+.as-routes-album-details {
+  & .download-url {
+    color: var(--color-dark);
+    padding-left: 20px;
+  }
+}
+
+.mobile-container {
+  margin: 0 auto;
+  width: 100%;
+  display: block;
+}
+
+.mobile-image {
+  width: 100%;
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .as-route-albums {
+    & as-card {
+      width: 90%;
+      display: inline-block;
+      text-align: left;
+      margin: 4px auto;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .as-route-albums {
+    & as-card {
+      width: 90%;
+    }
+  }
+}

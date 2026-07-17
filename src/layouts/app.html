@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analog Studio RI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="Analog Studios RI" />
+    <meta name="description" content="Local music studios based in Newport, RI." />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="../styles/theme.css" />
+    <!-- TODO: this one is global to provide support with mixing classname for legacy CSS -->
+    <link rel="stylesheet" href="../components/card/card.css" />
+    <!-- TODO:move page specific styles to individual layout files -->
+    <link rel="stylesheet" href="../styles/albums.css" />
+    <link rel="stylesheet" href="../styles/artists.css" />
+    <link rel="stylesheet" href="../styles/events.css" />
+    <script type="module" src="../components/header/header.tsx" data-gwd-opt="static"></script>
+    <script type="module" src="../components/footer/footer.tsx" data-gwd-opt="static"></script>
+    <script type="module" src="../components/quick-links/quick-links.tsx"></script>
+    <script type="module" src="../components/social-share/social-share.tsx"></script>
+    <style>
+      as-navigation {
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <as-header></as-header>
+
+    <div class="container">
+      <main>
+        <output for="page"></output>
+      </main>
+
+      <as-footer></as-footer>
+    </div>
+  </body>
+</html>

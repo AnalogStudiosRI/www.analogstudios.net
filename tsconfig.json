@@ -4,16 +4,15 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "lib": ["es2022", "DOM", "DOM.Iterable", "esnext"],
-    "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
     "noImplicitAny": true,
     "noEmit": true,
+    "strict": true,
     "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false
+    "jsx": "preserve",
+    "jsxImportSource": "wc-compiler"
   },
-  "exclude": [
-    "./public", "./.greenwood", "./reports", "node_modules"
-  ]
+  "exclude": ["./public", "./.greenwood", "./reports", "./.sst", "node_modules"]
 }

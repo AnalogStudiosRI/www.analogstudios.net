@@ -7,34 +7,31 @@
 
 ## Overview
 
-Frontend website for [www.analogstudios.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io). It is built and deployed using Github Actions to AWS using S3 and Cloudfront.  (The backend uses and API Gateway and EC2)
+Frontend website for [www.analogstudiosri.net](https://www.analogstudios.net) based on [Greenwood](https://www.greenwoodjs.io). It is built and deployed using Github Actions to AWS (S3 / Cloudfront / Lambda) using SST. The [backend](https://github.com/AnalogStudiosRI/api) uses and AWS (API Gateway / Lambda) with [Architect](https://arc.codes/).
 
 ## Contributing
 
 ### Setup
 
-You'll need the latest [NodeJS LTS](https://nodejs.org/) version installed to run and contribute to this project.  Or run `nvm use` if using [nvm**](https://github.com/nvm-sh/nvm).
+You'll need the latest [NodeJS LTS](https://nodejs.org/) version installed to run and contribute to this project. Or run `nvm use` if using [nvm](https://github.com/nvm-sh/nvm).
 
-You can confirm by running the following
+You can confirm by running the following:
 
 ```sh
 $ node -v
-v18.15.0
-
-% npm -v
-8.19.2
+24.4.0
 ```
 
 Then run `npm ci` to install the project's dependencies.
 
 ### Tasks
 
-After installing the above, you can run the following commands:
+After installing the above, you can run the following key development commands:
 
-- `npm run lint` - Lint all files in the project (JS , CSS, naming)
-- `npm run start` - Starts **Greenwood**'s local development server
-- `npm run build` - Runs **Greenwood** to generate a production build
+- `npm run dev` - Starts **Greenwood**'s local development server
 - `npm run story:dev` - Runs [**Storybook**](https://storybook.js.org/) in development mode
 - `npm run test:tdd` - Runs unit tests in `watch` mode using [**@web/test-runner**](https://modern-web.dev/docs/test-runner/overview/)
+- `npm run lint` - Lint all files in the project (TS / JS , CSS)
+- `npm run format` - Format all files
 
 > _See `package.json#scripts` for a full list of available commands._

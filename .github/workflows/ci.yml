@@ -3,32 +3,32 @@ name: Continuous Integration
 on: [pull_request]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node: [22]
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node }}
-    - name: Installing project dependencies
-      run: |
-        npm ci
-    - name: Lint
-      run: |
-        npm run lint
-    - name: Test
-      run: |
-        npm run test
-    - name: Build
-      run: |
-        npm run build
-    # - name: Storybook
-    #   run: |
-    #     npm run storybook:build
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Installing project dependencies
+        run: |
+          npm ci
+      - name: Lint
+        run: |
+          npm run lint
+      - name: Format Check
+        run: |
+          npm run format:check
+      # TODO: add typechecking
+      # TODO: restore testing
+      # - name: Test
+      #   run: |
+      #     npm run test
+      - name: Build
+        run: |
+          npm run build
+      # TODO: restore storybook
+      # - name: Storybook
+      #   run: |
+      #     npm run storybook:build

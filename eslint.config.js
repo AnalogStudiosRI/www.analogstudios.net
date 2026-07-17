@@ -7,10 +7,13 @@ export default tseslint.config(
   {
     // https://github.com/eslint/eslint/discussions/18304#discussioncomment-9069706
     ignores: [
+      ".aws-output/*",
       ".greenwood/*",
+      ".sst/",
       "node_modules/*",
       "public/*",
       "reports/*",
+      "sst-env.d.ts",
       "storybook-static/**",
       "patches/**",
     ],
@@ -36,7 +39,9 @@ export default tseslint.config(
   tseslint.configs.recommended,
   {
     rules: {
-      "@typescript-eslint/no-import-type-side-effects": "error"
-    }
-  }
+      "@typescript-eslint/consistent-type-definitions": "error",
+      "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-import-type-side-effects": "error",
+    },
+  },
 );
